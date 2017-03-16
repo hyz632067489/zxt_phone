@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.zxt.zxt_phone.view.widget.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/shape_driver"
+        android:orientation="vertical"
+        android:showDividers="middle|end"
+        >
+
+        <EditText
+            android:id="@+id/etUserId"
+            style="@style/loginEtStyle"
+            android:inputType="textVisiblePassword"
+            android:hint="@string/login_hint_userid"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:id="@+id/etPwd"
+                style="@style/loginEtStyle"
+                android:hint="@string/login_hint_pwd"
+                android:inputType="textPassword"/>
+
+            <TextView
+                android:id="@+id/forgetPwd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|right"
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:text="@string/login_forget"
+                android:textColor="#3d7ce1"
+                />
+        </FrameLayout>
+
+        <!--<FrameLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+
+            <!--<EditText-->
+                <!--android:id="@+id/etCode"-->
+                <!--style="@style/loginEtStyle"-->
+                <!--android:hint="@string/login_code"-->
+                <!--android:maxLength="6"-->
+                <!--android:inputType="number"/>-->
+
+            <!--<ProgressBar-->
+                <!--style="@style/CustomProgressStyle"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical|right"-->
+                <!--android:layout_marginRight="40dp"-->
+                <!--/>-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/ivCode"-->
+                <!--android:layout_width="60dp"-->
+                <!--android:layout_height="35dp"-->
+                <!--android:layout_gravity="center_vertical|right"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:scaleType="fitXY"-->
+                <!--/>-->
+        <!--</FrameLayout>-->
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/blue"
+        android:text="@string/login_title"
+        android:textColor="#fff"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        />
+
+    <!--<Button-->
+        <!--android:id="@+id/btnRigest"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:background="@drawable/shape_renzheng"-->
+        <!--android:text="@string/login_regist"-->
+        <!--android:textColor="#fff"-->
+        <!--android:textSize="17sp"-->
+        <!--android:textStyle="bold"-->
+        <!--/>-->
+</LinearLayout>

@@ -1,3 +1,40 @@
 <resources>
-    <string name="app_name">zxt_phone</string>
+    <string name="app_name">指讯通</string>
+    <string name="home">首页</string>
+    <string name="back">返回</string>
+    <string name="zczx">政策资讯</string>
+    <string name="wsbs">资源对接</string>
+    <string name="xxjb">信息交办</string>
+    <string name="cxgs">查询公示</string>
+    <string name="bmfw">便民服务</string>
+    <string name="about">关于我们</string>
+    <string name="xtsz">系统设置</string>
+
+    <string name="wggl">网格管理</string>
+    <string name="ltjd">龙塔街道</string>
+    <string name="jcsj">基础数据</string>
+    <string name="tjfx">统计分析</string>
+    <string name="gzgl">工作管理</string>
+    <string name="rkgl">人口管理</string>
+    <string name="txl">通讯录</string>
+
+    <!--登录-->
+    <string name="login_title">管理员登录</string>
+    <string name="login_hint_userid">\t用户名/手机号</string>
+    <string name="login_hint_pwd">\t请输入密码</string>
+    <string name="login_forget">忘记密码？</string>
+    <string name="login_regist">立即注册</string>
+    <string name="login_code">\t验证码</string>
+
+    <!--首页-->
+    <string name="m_main_tab_name">指讯通网格信息化服务群众平台</string>
+    <!--政务服务-->
+    <string name="m_zwfw">政务服务</string>
+    <string name="zwfw_qtfw">群团服务</string>
+
+    <!--社区购物-->
+    <string name="sqgw_tabname">社区购物</string>
+    <!--办事指南-->
+    <string name="bszn_tabname">办事指南</string>
+    <string name="bszn_liebiao">办事指南列表</string>
 </resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.zxt.zxt_phone.view.widget.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <me.militch.widget.bannerholder.BannerHolderView
+        android:id="@+id/banner_holder"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        app:indicatorResId="@drawable/banner_holder_selector"
+        />
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <GridView
+                android:id="@+id/type_grid"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:gravity="center"
+                android:horizontalSpacing="1dp"
+                android:listSelector="#00000000"
+                android:numColumns="auto_fit" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/home_function_border"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_zczx"
+            style="@style/sqgw_caidan_style"
+            android:drawableTop="@drawable/sqgw_zbsj"
+            android:text="周边商家" />
+
+        <TextView
+            android:id="@+id/tv_yjtj"
+            style="@style/sqgw_caidan_style"
+            android:drawableTop="@drawable/sqgw_24bl"
+            android:text="24H便利" />
+
+        <TextView
+            android:id="@+id/tv_gscx"
+            style="@style/sqgw_caidan_style"
+            android:drawableTop="@drawable/sqgw_ptms"
+            android:text="拼团秒杀" />
+
+        <TextView
+            android:id="@+id/tv_bszn"
+            style="@style/sqgw_caidan_style"
+            android:drawableTop="@drawable/sqgw_yjsm"
+            android:text="一键上门" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_sqgw"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zxt.zxt_phone.view.SqgwActivity"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/flComtent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc"
+        />
+
+    <RadioGroup
+        android:id="@+id/rg_sqgw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_sqgw_main"
+            style="@style/mainRg_style"
+            android:drawableTop="@drawable/m_main"
+            android:text="首页"/>
+        <RadioButton
+            android:id="@+id/rb_sqcs"
+            style="@style/mainRg_style"
+            android:drawableTop="@drawable/by_car_main"
+            android:text="社区超市"/>
+        <RadioButton
+            android:id="@+id/rb_scdp"
+            style="@style/mainRg_style"
+            android:drawableTop="@drawable/zxing_main"
+            android:text="收藏店铺"/>
+        <RadioButton
+            android:id="@+id/rb_gwc"
+            style="@style/mainRg_style"
+            android:drawableTop="@drawable/zxing_main"
+            android:text="购物车"/>
+        <RadioButton
+            android:id="@+id/rb_me"
+            style="@style/mainRg_style"
+            android:drawableTop="@drawable/me_main"
+            android:text="个人中心"/>
+
+    </RadioGroup>
+</LinearLayout>

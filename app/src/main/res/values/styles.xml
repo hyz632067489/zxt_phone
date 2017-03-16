@@ -1,11 +1,112 @@
 <resources>
 
     <!-- Base application theme. -->
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <!--Toolbar颜色-->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--状态栏颜色-->
+        <item name="colorPrimaryDark">@color/window_bg</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="android:listDivider">@color/base_color</item>-->
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <!--登录注册EditText的样式-->
+    <style name="loginEtStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColorHint">@color/twogrey</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">20</item>
+        <!--<item name="android:textCursorDrawable">@drawable/shape_cursor_color</item>-->
+    </style>
+
+    <!--主页底部菜单样式-->
+    <style name="mainRg_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:background">@null</item>
+        <!--<item name="android:textColor">@drawable/selector_rb_text_color</item>-->
+    </style>
+
+    <!--首页菜单样式-->
+    <style name="main_caidan_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginRight">@dimen/home_function_border</item>
+        <item name="android:background">@drawable/selector_home_function_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/home_function_text_size</item>
+        <item name="android:textColor">@color/home_function_text_color</item>
+        <item name="android:paddingTop">@dimen/home_function_padding_top</item>
+        <item name="android:paddingBottom">@dimen/home_function_padding_bottom</item>
+    </style>
+    <!--首页菜单样式-->
+    <style name="main_caidan_2_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <!--<item name="android:layout_marginRight">@dimen/home_function_border</item>-->
+        <!--<item name="android:background">@color/new_input_text</item>-->
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/home_function_text_color</item>
+        <item name="android:paddingTop">@dimen/home_function_padding_top</item>
+    </style>
+
+    <!--购物菜单样式-->
+    <style name="sqgw_caidan_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginRight">@dimen/home_function_border</item>
+        <item name="android:background">@drawable/selector_home_function_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/home_function_text_size</item>
+        <item name="android:textColor">@color/home_function_text_color</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
+
+    <!--dialog通用样式-->
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!--边框-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--半透明-->
+        <item name="android:windowNoTitle">true</item>
+        <!--无标题-->
+        <item name="android:windowBackground">@drawable/shape_dialog_rounded</item>
+        <!--背景透明-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--设置是否有模糊背景-->
+    </style>
+
+
+    <!--RadioButton-->
+    <style name="radioButton" >
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/selector_button</item>
+    </style>
 </resources>

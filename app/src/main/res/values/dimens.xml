@@ -2,4 +2,20 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="toolbar_padding_top">0dp</dimen>
+
+    <!-- title高度 -->
+    <dimen name="action_tab_height">48dp</dimen>
+
+    <dimen name="adv_img_height">133dp</dimen>
+
+    <dimen name="home_function_border">0.5dp</dimen>
+    <dimen name="home_function_height">81dp</dimen>
+    <dimen name="home_function_padding_top">15dp</dimen>
+    <dimen name="home_function_padding_bottom">10dp</dimen>
+
+    <dimen name="home_function_text_size">13sp</dimen>
+    <color name="home_function_text_color">#787878</color>
+    <color name="home_bg">#f0f0f0</color>
+    <dimen name="news_size">15sp</dimen>
 </resources>
