@@ -10,22 +10,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.sunfusheng.marqueeview.MarqueeView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.BitmapCallback;
 import com.zhy.http.okhttp.callback.Callback;
+import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseFragment;
 import com.zxt.zxt_phone.bean.model.BannerModel;
+import com.zxt.zxt_phone.bean.model.MarqueeModel;
+import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.BmfwActivity;
 import com.zxt.zxt_phone.view.BsznActivity;
 import com.zxt.zxt_phone.view.CzjfActivity;
+import com.zxt.zxt_phone.view.NewsDetailActivity;
 import com.zxt.zxt_phone.view.SqgwActivity;
 import com.zxt.zxt_phone.view.ZczxActivity;
 import com.zxt.zxt_phone.view.ZwfwActivity;
+import com.zxt.zxt_phone.view.customview.MyMarqueeView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +50,7 @@ import butterknife.OnClick;
 import me.militch.widget.bannerholder.BannerClickListenenr;
 import me.militch.widget.bannerholder.BannerHolderView;
 import me.militch.widget.bannerholder.HolderAttr;
+import okhttp3.Call;
 
 
 /**
@@ -73,15 +87,21 @@ BannerHolderView holder;
     TextView tvSqds;
     @BindView(R.id.tv_gzbx)
     TextView tvGzbx;
+
     @BindView(R.id.tv_zwfw)
-    TextView tvZwfw;
+    LinearLayout tvZwfw;
     @BindView(R.id.tv_bmfw)
-    TextView tvBmfw;
+    LinearLayout tvBmfw;
     @BindView(R.id.tv_wyfw)
-    TextView tvWyfw;
+    LinearLayout tvWyfw;
 
     Intent mIntent;
     private List<BannerModel> mDatas = new ArrayList<>();
+
+    List<MarqueeModel.DataNewsModel> info = new ArrayList<>();
+String url;
+    @BindView(R.id.dynic_marquee)
+    MyMarqueeView marqueeView;
 
     public mMainFragment() {
 
@@ -105,6 +125,7 @@ BannerHolderView holder;
         super.onViewCreated(view, savedInstanceState);
         holder = (BannerHolderView) view.findViewById(R.id.banner_holder);
 
+        getData();
         initView();
     }
 
@@ -133,34 +154,27 @@ BannerHolderView holder;
 
 //设置图片集合
         holder.setHolderBitmaps(mpas);
-    }
 
 
+        marqueeView.setOnItemClickListener(new MyMarqueeView.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, TextView textView) {
 
-    private void getData() {
-        mDatas.clear();
-        BannerModel model = null;
-        model = new BannerModel();
-        model.setImageUrl("https://gma.alicdn.com/simba/img/TB1FS.AJpXXXXc_XpXXSutbFXXX.jpg_q50.jpg");
-        model.setTips("这是页面1");
-        mDatas.add(model);
-        model = new BannerModel();
-        model.setImageUrl("https://gw.alicdn.com/tps/i3/TB1J9GqJXXXXXcZaXXXdIns_XXX-1125-352.jpg_q50.jpg");
-        model.setTips("这是页面2");
-        mDatas.add(model);
-        model = new BannerModel();
-        model.setImageUrl("https://gma.alicdn.com/simba/img/TB1txffHVXXXXayXVXXSutbFXXX.jpg_q50.jpg");
-        model.setTips("这是页面3");
-        mDatas.add(model);
-        model = new BannerModel();
-        model.setImageUrl("https://gw.alicdn.com/tps/TB1fW3ZJpXXXXb_XpXXXXXXXXXX-1125-352.jpg_q50.jpg");
-        model.setTips("这是页面4");
-        mDatas.add(model);
-        model = new BannerModel();
-        model.setImageUrl("https://gw.alicdn.com/tps/i2/TB1ku8oMFXXXXciXpXXdIns_XXX-1125-352.jpg_q50.jpg");
-        model.setTips("这是页面5");
-        mDatas.add(model);
-//        mBanner.notifiDataHasChanged();
+            }
+
+            @Override
+            public void onItemClick(int position, MarqueeModel.DataNewsModel item) {
+//                    toast("点击"+position);
+                String newsUrl = Url.URL+url+"?&TVInfoId="+SharedPrefsUtil.getString(getActivity(),   "TVInfoId")
+                        +"&Key="+SharedPrefsUtil.getString(getActivity(), "Key")
+                        +"&id="+item.getNewsId();
+
+                Log.i("TAG","=================="+item.getNewsId());
+                startActivity(new Intent(getActivity(), NewsDetailActivity.class)
+                        .putExtra("title", info.get(position).getModuName())
+                        .putExtra("url", newsUrl));
+            }
+        });
     }
 
 
@@ -202,5 +216,48 @@ BannerHolderView holder;
             case R.id.tv_wyfw://物业服务
                 break;
         }
+    }
+
+    private void getData() {
+
+//        http://oa.ybqtw.org.cn/api/APP1.0.aspx?
+// &TVInfoId=19&method=IndexNews&PageSize=6&Page=1&Key=21218CCA77804D2BA1922C33E0151105
+        HashMap<String,String> params = new HashMap<>();
+        params.put("TVInfoId",SharedPrefsUtil.getString(getActivity(),"TVInfoId"));
+        params.put("method","IndexNews");
+        params.put("PageSize","6");
+        params.put("Page","1");
+        params.put("Key", SharedPrefsUtil.getString(getActivity(),"Key"));
+        OkHttpUtils.get()
+                .url(Url.URL_PT)
+                .params(params)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+
+
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray array = obj.getJSONArray("Data");
+                            url = obj.getString("NewsShowUrl");
+                            MarqueeModel marqueeModel = new Gson().fromJson(response,MarqueeModel.class);
+
+                            info.addAll(marqueeModel.getData());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        marqueeView.startWithList(info);
+                    }
+                });
+
+
     }
 }

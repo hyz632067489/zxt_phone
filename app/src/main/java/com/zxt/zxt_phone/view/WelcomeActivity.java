@@ -34,6 +34,7 @@ public class WelcomeActivity extends BaseActivity {
                         startActivity(new Intent(mActivity, MainActivity.class));
                     }
 
+                    finish();
                 break;
             }
             return true;

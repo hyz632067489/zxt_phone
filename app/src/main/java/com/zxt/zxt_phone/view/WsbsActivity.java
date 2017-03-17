@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
+import com.zxt.zxt_phone.constant.Url;
 
 import org.json.JSONObject;
 
@@ -18,6 +21,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 /**
  * Created by hyz on 2017/3/7.
@@ -59,8 +63,30 @@ public class WsbsActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wsbs_activity);
-        ButterKnife.bind(this);
+
+        getData();
         initView();
+
+
+    }
+
+    private void getData() {
+        OkHttpUtils.get()
+                .url(Url.URL_WG+"echarts-barData.html")
+//                .addParams()
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+
+                        Log.i(TAG,"response===="+response);
+                    }
+                });
     }
 
     private void initView() {

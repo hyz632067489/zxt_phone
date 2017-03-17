@@ -16,4 +16,9 @@ public class Url {
     public static final String URL_PT = "http://oa.ybqtw.org.cn/api/APP1.0.aspx?";
     //html url
    public static final String URL_HTML= "http://oa.ybqtw.org.cn/api/Html/ApiReso.aspx?" ;
+
+    //url
+    public static final String URL = "http://oa.ybqtw.org.cn";
+    //网格url
+    public static final  String URL_WG="http://192.168.1.220:8080/grid/pop/";
 }

@@ -14,6 +14,7 @@
         <color name="black">#ff000000</color>
         <color name="white">#ffffffff</color>
         <color name="cyan">#ff00ffff</color>
+    <color name="act_title_font">#333333</color>
         <color name="gainsboro">#ffdcdcdc</color>
         <color name="seashell">#ff8b8682</color>
         <color name="purple">#ffa020f0</color>
@@ -70,4 +71,6 @@
     <!--主界面底部按钮未选中字体颜色-->
     <color name="mainTextHuise2">#606060</color>
     <color name="home_function_bg_pressed_color">#e6e6e6</color>
+    <color name="grey_dark_press">#c3c4cb</color>
+    <color name="background_grey">#f4f4f4</color>
 </resources>

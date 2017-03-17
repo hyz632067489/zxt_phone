@@ -16,6 +16,10 @@
 
     <dimen name="home_function_text_size">13sp</dimen>
     <color name="home_function_text_color">#787878</color>
-    <color name="home_bg">#f0f0f0</color>
+    <color name="home_bg1">#f0f0f0</color>
+    <color name="home_bg">#ffffff</color>
     <dimen name="news_size">15sp</dimen>
+
+    <dimen name="dp_14">14dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
 </resources>

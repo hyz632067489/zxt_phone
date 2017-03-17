@@ -40,7 +40,7 @@ public class ZwfwActivity extends BaseActivity {
     private List<ZwfwModel> mDatas;
 
       private String[] titles = {"社区概况", "党群风采", "诉求提交", "结果查询", "网格管理", "预约办事",
-            "网上办事", "满意度查询", "群团服务", "群工平台", "政策资讯"};
+            "办事指南", "满意度查询", "群团服务", "群工平台", "政策信息"};
 
     Intent mIntent;
 
@@ -91,7 +91,7 @@ public class ZwfwActivity extends BaseActivity {
     public void OnItemClick(AdapterView<?> parent, View view, int position, long id) {
        int i =  parent.getSelectedItemPosition();
 //        {"社区概况", "党群风采", "诉求提交", "结果查询", "网格管理", "预约办事",
-//                "网上办事", "满意度查询", "群团服务", "群工平台", "政策资讯"};
+//                "办事指南", "满意度查询", "群团服务", "群工平台", "政策资讯"};
         switch (position) {
             case 0:
                 toast("社区概况");
@@ -114,7 +114,9 @@ public class ZwfwActivity extends BaseActivity {
                 toast("预约办事");
                 break;
             case 6:
-                toast("网上办事");
+//                toast("办事指南");
+                mIntent = new Intent(mActivity,BsznActivity.class);
+                startActivity(mIntent);
                 break;
             case 7:
                 toast("满意度查询");

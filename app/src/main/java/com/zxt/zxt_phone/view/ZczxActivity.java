@@ -24,6 +24,7 @@ import com.zxt.zxt_phone.bean.model.NewsModel;
 import com.zxt.zxt_phone.bean.model.TitleModel;
 import com.zxt.zxt_phone.bean.model.ZczxModel;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.customview.HorizontalListView;
 import com.zxt.zxt_phone.view.customview.PullToRefreshView;
 
@@ -73,12 +74,13 @@ public class ZczxActivity extends BaseActivity {
     @BindView(R.id.newList)
     ListView newsList;
     @BindView(R.id.refreshView)
-    PullToRefreshView refreshView;
+    PullToRefreshView mRefreshView;
 
     private List<NewsModel.DataNewsModel> list = new ArrayList<>();
     private List<TitleModel.DataNewsTitleModel> listTitle = new ArrayList<>();
     TitleAdapter titleAdapter;
     CommonAdapter<NewsModel.DataNewsModel> myAdapter;
+    NewsModel newsModel = null;
 
     private int page = 1; //页数
     private int CountNum = 1; //总条数
@@ -117,6 +119,7 @@ public class ZczxActivity extends BaseActivity {
         holder.setHolderBitmaps(mpas);
 
 
+        //3个功能块 列表
         gvList.setAdapter(new CommonAdapter<ZczxModel>(getApplication(), mDatas, R.layout.grid_item_layout) {
             @Override
             public void convert(ViewHolder holder, ZczxModel item) {
@@ -126,6 +129,7 @@ public class ZczxActivity extends BaseActivity {
             }
         });
 
+        //title加载
         titleAdapter = new TitleAdapter(mActivity, listTitle);
         hlistview.setAdapter(titleAdapter);
         hlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -141,21 +145,53 @@ public class ZczxActivity extends BaseActivity {
             }
         });
 
+        //新闻列表
         myAdapter = new CommonAdapter<NewsModel.DataNewsModel>(mActivity, list, R.layout.news_list_item) {
             @Override
             public void convert(ViewHolder holder, NewsModel.DataNewsModel item) {
-                holder.setText(R.id.Title, "· ["+item.getDeptName()+"]"+item.getTitle());
+                holder.setText(R.id.Title, "· [" + item.getDeptName() + "]" + item.getTitle());
                 holder.setText(R.id.EditDate, item.getEditDate());
 
             }
         };
         newsList.setAdapter(myAdapter);
+        newsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String newsUrl = Url.URL + newsModel.getNewsShowUrl() + "?&TVInfoId=" + SharedPrefsUtil.getString(mActivity, "TVInfoId")
+                        + "&Key=" + SharedPrefsUtil.getString(mActivity, "Key")
+                        + "&id=" + list.get(position).getNewsId();
+
+                Log.i("TAG", "==================" + newsUrl);
+                startActivity(new Intent(mActivity, NewsDetailActivity.class)
+                        .putExtra("title", list.get(position).getModuName())
+                        .putExtra("url", newsUrl));
+            }
+        });
+
+        //下来刷新，上啦加载跟多
+        mRefreshView.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
+            @Override
+            public void onHeaderRefresh(PullToRefreshView view) {
+                page = 1;
+                list.clear();
+                NewsDatas(page, Deptid);
+            }
+        });
+        mRefreshView.setOnFooterLoadListener(new PullToRefreshView.OnFooterLoadListener() {
+            @Override
+            public void onFooterLoad(PullToRefreshView view) {
+                page++;
+                NewsDatas(page, Deptid);
+            }
+        });
+
     }
 
     @OnItemClick(R.id.gv_list)
     public void OnItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        switch (position){
+        switch (position) {
             case 0:
                 startActivity(new Intent(this, NewsListActivity.class).putExtra("title", "国际视野").putExtra("numberId", "1"));
                 break;
@@ -166,26 +202,8 @@ public class ZczxActivity extends BaseActivity {
                 startActivity(new Intent(this, NewsListActivity.class).putExtra("title", "渝北资讯").putExtra("numberId", "4"));
                 break;
         }
-
-        //下来刷新，上啦加载跟多
-        refreshView.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
-            @Override
-            public void onHeaderRefresh(PullToRefreshView view) {
-                Log.i(TAG,"执行没有");
-                page = 1;
-                list.clear();
-                NewsDatas(page, Deptid);
-            }
-        });
-        refreshView.setOnFooterLoadListener(new PullToRefreshView.OnFooterLoadListener() {
-            @Override
-            public void onFooterLoad(PullToRefreshView view) {
-                page++;
-                NewsDatas(page, Deptid);
-            }
-        });
-
     }
+
 
     /**
      * 初始化数据源
@@ -274,11 +292,12 @@ public class ZczxActivity extends BaseActivity {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         e.printStackTrace();
-                        if(null != refreshView){
-                            refreshView.onHeaderRefreshFinish();
-                            refreshView.onFooterLoadFinish();
+                        if (null != mRefreshView) {
+                            mRefreshView.onFooterLoadFinish();
+                            mRefreshView.onHeaderRefreshFinish();
                         }
                     }
+
                     @Override
                     public void onResponse(String response, int id) {
                         Log.i(TAG, "response======" + response);
@@ -286,16 +305,16 @@ public class ZczxActivity extends BaseActivity {
 
                             JSONObject jsonObject = new JSONObject(response);
                             if (!"0".equals(jsonObject.getString("Status"))) {
-                                NewsModel newsModel = new Gson().fromJson(response, NewsModel.class);
-                                list.clear();
-                                list.addAll(newsModel.getData());
-                                Log.i(TAG, "list=1=" + list.get(0).getDeptName().toString());
+                                newsModel = new Gson().fromJson(response, NewsModel.class);
+                                if (newsModel.getData() != null || newsModel.getData().size() != 0) {
+//                                    list.clear();
+                                    list.addAll(newsModel.getData());
+                                }
                             }
-
                             myAdapter.notifyDataSetChanged();
 
-                            refreshView.onFooterLoadFinish();
-                            refreshView.onHeaderRefreshFinish();
+                            mRefreshView.onFooterLoadFinish();
+                            mRefreshView.onHeaderRefreshFinish();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
