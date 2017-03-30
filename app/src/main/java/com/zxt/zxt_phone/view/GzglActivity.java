@@ -120,8 +120,8 @@ public class GzglActivity extends BaseActivity {
 //                    }
                     myAdapter.notifyDataSetChanged();
 
-//                    mRefreshView.onFooterLoadFinish();
-//                    mRefreshView.onHeaderRefreshFinish();
+                    mRefreshView.onFooterLoadFinish();
+                    mRefreshView.onHeaderRefreshFinish();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
