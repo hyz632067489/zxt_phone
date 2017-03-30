@@ -38,8 +38,8 @@
         android:gravity="center"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="提交"
+        android:text="登录"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:visibility="gone" />
 </RelativeLayout>

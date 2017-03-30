@@ -2,14 +2,14 @@
 
     <!-- Base application theme. -->
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <!--Toolbar颜色-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <!--状态栏颜色-->
         <item name="colorPrimaryDark">@color/window_bg</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <!--<item name="android:listDivider">@color/base_color</item>-->
+        <item name="colorAccent">@color/base_color</item>
+        <item name="android:listDivider">@color/base_color</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -122,4 +122,17 @@
             <enum name="right" value="2" />
         </attr>
     </declare-styleable>
+
+
+    <!--dialogActivity-->
+    <style name="Theme.Transparent" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>              <!-- 设置title -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>               <!-- 设置边框 -->
+        <item name="android:windowIsTranslucent">true</item>        <!-- 设置半透明 -->
+        <item name="android:windowFullscreen">true</item>           <!-- 设置全屏 -->
+    </style>
+    <style name="Theme.CustomDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@drawable/filled_box</item>
+    </style>
 </resources>

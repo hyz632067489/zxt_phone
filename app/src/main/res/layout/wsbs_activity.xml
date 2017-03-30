@@ -37,6 +37,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1.0"
                     android:gravity="center"
+                    android:visibility="gone"
+                    android:background="@drawable/selector_home_function_bg"
                     android:orientation="vertical">
 
                     <ImageView
@@ -59,14 +61,76 @@
                     android:background="@color/gainsboro" />
 
                 <LinearLayout
+                    android:id="@+id/kqdk_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:background="@drawable/selector_home_function_bg"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/zydj_wgryxx_ico" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip"
+                        android:text="@string/kqdk"
+                        android:textColor="@color/maop_text_color"
+                        android:textSize="15.0sp" />
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="1.0dip"
+                    android:layout_height="fill_parent"
+                    android:background="@color/gainsboro" />
+                <LinearLayout
+                    android:id="@+id/kqqj_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:background="@drawable/selector_home_function_bg"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/zydj_wgryxx_ico" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip"
+                        android:text="@string/kqqj"
+                        android:textColor="@color/maop_text_color"
+                        android:textSize="15.0sp" />
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="1.0dip"
+                    android:layout_height="fill_parent"
+                    android:background="@color/gainsboro" />
+                <LinearLayout
                     android:id="@+id/jcsu_Layout"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1.0"
                     android:gravity="center"
+                    android:visibility="gone"
+                    android:background="@drawable/selector_home_function_bg"
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/imageView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/zydj_qgxt_ico" />
@@ -80,32 +144,6 @@
                         android:textSize="15.0sp" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="1.0dip"
-                    android:layout_height="fill_parent"
-                    android:background="@color/gainsboro" />
-
-                <LinearLayout
-                    android:id="@+id/tjfx_Layout"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1.0"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/zydj_qtxt_ico" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5.0dip"
-                        android:text="@string/tjfx"
-                        android:textColor="@color/maop_text_color"
-                        android:textSize="15.0sp" />
-                </LinearLayout>
             </LinearLayout>
 
             <View
@@ -124,6 +162,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1.0"
                     android:gravity="center"
+                    android:visibility="gone"
+                    android:background="@drawable/selector_home_function_bg"
                     android:orientation="vertical">
 
                     <ImageView
@@ -151,6 +191,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1.0"
                     android:gravity="center"
+                    android:visibility="gone"
+                    android:background="@drawable/selector_home_function_bg"
                     android:orientation="vertical">
 
                     <ImageView
@@ -173,26 +215,29 @@
                     android:background="@color/gainsboro" />
 
                 <LinearLayout
-                    android:id="@+id/txl_Layout"
+                    android:id="@+id/tjfx_Layout"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1.0"
                     android:gravity="center"
+                    android:visibility="gone"
+                    android:background="@drawable/selector_home_function_bg"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/zydj_lgy_ico" />
+                        android:src="@drawable/zydj_qtxt_ico" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5.0dip"
-                        android:text="@string/txl"
+                        android:text="@string/tjfx"
                         android:textColor="@color/maop_text_color"
                         android:textSize="15.0sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <View
@@ -206,11 +251,28 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/wgry_layout"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:orientation="vertical"></LinearLayout>
+                    android:visibility="gone"
+                    android:background="@drawable/selector_home_function_bg"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/zydj_wgryxx_ico" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip"
+                        android:text="@string/wgryxx"
+                        android:textColor="@color/maop_text_color"
+                        android:textSize="15.0sp" />
+                </LinearLayout>
 
                 <View
                     android:layout_width="1.0dip"
@@ -223,6 +285,8 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1.0"
                     android:gravity="center"
+                    android:visibility="gone"
+                    android:background="@drawable/selector_home_function_bg"
                     android:orientation="vertical">
 
                     <ImageView
@@ -245,11 +309,29 @@
                     android:background="@color/gainsboro" />
 
                 <LinearLayout
+                    android:id="@+id/txl_Layout"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:orientation="vertical"></LinearLayout>
+                    android:visibility="gone"
+                    android:background="@drawable/selector_home_function_bg"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/zydj_lgy_ico"
+                        android:id="@+id/imageView3" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip"
+                        android:text="@string/txl"
+                        android:textColor="@color/maop_text_color"
+                        android:textSize="15.0sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <View

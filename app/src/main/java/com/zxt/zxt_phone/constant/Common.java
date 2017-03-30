@@ -9,4 +9,7 @@ public class Common {
 
     //数据完全返回成功的标志
     public static final String SUCCEED = "1";
+
+    //网格员登录成功后
+    public  static boolean IS_LOGIN = false;
 }

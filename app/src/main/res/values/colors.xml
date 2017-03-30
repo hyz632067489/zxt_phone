@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="base_color">#29a0fc</color>
 
         <color name="littleGray">#ffd5d5d5</color>
         <color name="red">#ffff0000</color>
@@ -73,4 +74,5 @@
     <color name="home_function_bg_pressed_color">#e6e6e6</color>
     <color name="grey_dark_press">#c3c4cb</color>
     <color name="background_grey">#f4f4f4</color>
+    <color name="froget">#00b4fd</color>
 </resources>

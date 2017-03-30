@@ -1,9 +1,16 @@
 package com.zxt.zxt_phone.view;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.zxt.zxt_phone.R;

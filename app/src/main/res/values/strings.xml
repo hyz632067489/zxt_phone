@@ -18,21 +18,34 @@
     <string name="rkgl">人口管理</string>
     <string name="txl">通讯录</string>
     <string name="jzbf">精准帮扶</string>
+    <string name="kqdk">考勤打卡</string>
+    <string name="kqqj">请   假</string>
+    <string name="qjtx">请假调休</string>
+    <string name="wgryxx">网格人员信息</string>
+
 
     <!--登录-->
     <string name="login_title">管理员登录</string>
     <string name="login_hint_userid">\t用户名/手机号</string>
     <string name="login_hint_pwd">\t请输入密码</string>
-    <string name="login_forget">忘记密码？</string>
+    <string name="login_forget">忘记密码>></string>
     <string name="login_regist">立即注册</string>
     <string name="login_code">\t验证码</string>
+    <string name="login_wgy">\t网格人员</string>
 
     <!--首页-->
     <string name="m_main_tab_name">指讯通网格信息化服务群众平台</string>
     <!--政务服务-->
     <string name="m_zwfw">政务服务</string>
     <string name="zwfw_qtfw">群团服务</string>
+    <string name="zwfw_qtpt">群工平台</string>
+    <string name="zwfw_jgcx">结果查询</string>
+    <string name="zwfw_jgcxxq">结果查询详情</string>
+    <string name="zwfw_yybs">预约办事</string>
+    <string name="zwfw_yybsinfo">预约办事时间</string>
 
+    <string name="zwfw_sqtjxy">诉求提交协议</string>
+    <string name="zwfw_sqtj">诉求提交</string>
     <!--社区购物-->
     <string name="sqgw_tabname">社区购物</string>
     <!--办事指南-->

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_yybs"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/maop_bgcolor"
+    tools:context="com.zxt.zxt_phone.view.YybsInfoActivity">
+
+    <com.zxt.zxt_phone.view.widget.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_tab_height" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/topcolor"
+                    android:paddingLeft="20dp"
+                    android:text="预约日期"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="#ffeeeeee">
+
+                <ImageView
+                    android:id="@+id/igv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/left1"/>
+                <TextView
+                    android:id="@+id/time_sign"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:text="shijian"
+                    android:textColor="#aa564b4b"
+                    android:textSize="20sp" />
+                <ImageView
+                    android:id="@+id/igv_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="40dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/right2"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <com.zxt.zxt_phone.view.customview.KCalendar
+                android:id="@+id/popupwindow_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/topcolor">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:paddingLeft="20dp"
+                    android:text="预约时段"/>
+            </RelativeLayout>
+
+            <com.zxt.zxt_phone.view.customview.HomeGridView
+                android:id="@+id/gv_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:horizontalSpacing="@dimen/dp_14"
+                android:verticalSpacing="@dimen/dp_14"
+                android:scrollbars="none"
+                android:numColumns="2"/>
+
+
+            <Button
+                android:id="@+id/submit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                android:text="提  交"
+                android:background="@drawable/selector_button_blue"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

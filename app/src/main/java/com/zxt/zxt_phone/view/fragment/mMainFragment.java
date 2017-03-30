@@ -32,6 +32,7 @@ import com.zxt.zxt_phone.view.BsznActivity;
 import com.zxt.zxt_phone.view.CzjfActivity;
 import com.zxt.zxt_phone.view.NewsDetailActivity;
 import com.zxt.zxt_phone.view.SqgwActivity;
+import com.zxt.zxt_phone.view.SqtjActivity;
 import com.zxt.zxt_phone.view.ZczxActivity;
 import com.zxt.zxt_phone.view.ZwfwActivity;
 import com.zxt.zxt_phone.view.customview.MyMarqueeView;
@@ -73,7 +74,7 @@ BannerHolderView holder;
     int num = 1;
     @BindView(R.id.tv_zczx)
     TextView tvZczx;
-    @BindView(R.id.tv_yjtj)
+    @BindView(R.id.tv_sqtj)
     TextView tvYjtj;
     @BindView(R.id.tv_gscx)
     TextView tvGscx;
@@ -178,14 +179,16 @@ String url;
     }
 
 
-    @OnClick({R.id.tv_zczx, R.id.tv_yjtj, R.id.tv_gscx, R.id.tv_bszn, R.id.tv_sqhd, R.id.tv_czjf, R.id.tv_sqds, R.id.tv_gzbx, R.id.tv_zwfw, R.id.tv_bmfw, R.id.tv_wyfw})
+    @OnClick({R.id.tv_zczx, R.id.tv_sqtj, R.id.tv_gscx, R.id.tv_bszn, R.id.tv_sqhd, R.id.tv_czjf, R.id.tv_sqds, R.id.tv_gzbx, R.id.tv_zwfw, R.id.tv_bmfw, R.id.tv_wyfw})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_zczx://政策信息
                 mIntent = new Intent(getActivity(), ZczxActivity.class);
                 startActivity(mIntent);
                 break;
-            case R.id.tv_yjtj://意见提交
+            case R.id.tv_sqtj://诉求提交
+                mIntent = new Intent(getActivity(), SqtjActivity.class);
+                startActivity(mIntent);
                 break;
             case R.id.tv_gscx://查询公示
                 break;

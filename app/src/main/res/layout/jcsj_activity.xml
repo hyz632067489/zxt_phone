@@ -6,4 +6,10 @@
     <com.zxt.zxt_phone.view.widget.TitleLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <GridView
+        android:id="@+id/gv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="2"/>
 </LinearLayout>

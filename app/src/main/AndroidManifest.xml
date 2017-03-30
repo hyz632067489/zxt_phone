@@ -10,8 +10,29 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- 百度权限 -->
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- SD卡读取权限，用户写入离线定位数据 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".MyApplication"
@@ -20,6 +41,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="SOKUqP83MuVkVMny8L4757hHZ7UPUBNa" />
 
         <activity android:name=".view.WelcomeActivity">
             <intent-filter>
@@ -28,13 +52,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-         <activity android:name=".view.MainActivity"/>
+        <activity android:name=".view.MainActivity" />
         <activity android:name=".base.BaseActivity" />
         <activity android:name=".view.LoginActivity" />
+
         <!-- //网格 -->
         <activity android:name=".view.WsbsActivity" />
         <activity android:name=".view.LtjdActivity" />
+        <activity android:name=".view.JcsjActivity" />
+
         <!-- 首页 -->
         <activity android:name=".view.ZczxActivity" />
         <activity android:name=".view.BsznActivity" />
@@ -46,7 +72,42 @@
         <activity android:name=".view.BmfwActivity" />
         <activity android:name=".view.NewsDetailActivity" />
         <activity android:name=".view.CheckActivity" />
-        <activity android:name=".view.QtfwActivity"></activity>
+        <activity android:name=".view.QtfwActivity" />
+        <activity android:name=".view.JgcxActivity" />
+        <activity android:name=".view.YjfkcxDetailActivity" />
+        <activity android:name=".view.JgcxDetailActivity" />
+        <activity android:name=".view.WebViewActivity" />
+        <activity android:name=".view.SqtjActivity" />
+        <activity android:name=".view.YjtjInfoActivity" />
+        <activity android:name=".view.YjtjSuccessActivity" />
+        <activity android:name=".view.KqdkActivity" />
+        <activity android:name=".view.KqdkActivityCopy" />
+        <activity android:name=".view.photo.ClipImageActivity" />
+        <activity android:name=".view.YybsInfoActivity" />
+        <activity android:name=".view.YybsActivity" />
+        <activity android:name=".view.GzglActivity" />
+        <activity
+            android:name=".view.LevelActivity"
+            android:theme="@style/android:Theme.Holo.Light.NoActionBar" />
+        <activity
+            android:name=".view.TimeDialogActivity"
+            android:theme="@style/Theme.Transparent" />
+
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <receiver android:name=".receiver.MyReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_BROADCAST" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+
     </application>
 
 </manifest>

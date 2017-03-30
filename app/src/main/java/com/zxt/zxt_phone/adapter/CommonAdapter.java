@@ -46,6 +46,7 @@ public abstract class CommonAdapter<T> extends BaseAdapter
         return position;
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {

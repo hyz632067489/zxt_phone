@@ -85,10 +85,10 @@
 
 
         <TextView
-            android:id="@+id/tv_yjtj"
+            android:id="@+id/tv_sqtj"
             style="@style/main_caidan_style"
             android:drawableTop="@drawable/m_yjtj"
-            android:text="意见提交" />
+            android:text="诉求提交" />
 
         <TextView
             android:id="@+id/tv_gscx"

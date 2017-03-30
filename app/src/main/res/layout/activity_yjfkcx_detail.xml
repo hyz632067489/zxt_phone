@@ -1,0 +1,236 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/maop_bgcolor"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/topcolor"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:onClick="doBack"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back_selector"
+                android:visibility="visible"
+                >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="意见反馈查询"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                />
+
+        </RelativeLayout>
+
+        <ScrollView android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/go_out_record_listbg"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/OpinionId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/maop_text_color"
+                        android:textSize="13sp"
+                        android:text="受理编号："
+                        />
+                    <TextView
+                        android:id="@+id/OpinionClassName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:textColor="@color/maop_text_color"
+                        android:textSize="13sp"
+                        android:text="分类性质："
+                        />
+                    <TextView
+                        android:id="@+id/EditDate"
+                        android:layout_marginTop="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/maop_text_color"
+                        android:textSize="13sp"
+                        android:text="诉求时间："
+                        />
+                    <TextView
+                        android:id="@+id/ReDate"
+                        android:layout_marginTop="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/maop_text_color"
+                        android:textSize="13sp"
+                        android:text="办结时间："
+                        />
+                    <TextView
+                        android:id="@+id/AuditState"
+                        android:layout_marginTop="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/maop_text_color"
+                        android:textSize="13sp"
+                        android:text="办理状态："
+                        />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@color/gainsboro"
+                    android:textColor="@color/maop_text_color"
+                    android:textSize="15sp"
+                    android:text="诉求内容"
+                    />
+
+                <TextView
+                    android:id="@+id/Content"
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/maop_right_text_color"
+                    android:textSize="13sp"
+                    android:text=""
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@color/gainsboro"
+                    android:textColor="@color/maop_text_color"
+                    android:textSize="15sp"
+                    android:text="办理跟踪信息"
+                    />
+
+                <com.zxt.zxt_phone.view.customview.MyListView
+                    android:id="@+id/listview"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:dividerHeight="1dp"
+                    android:scrollbars="none"
+                    android:divider="@color/transparent"
+                    android:cacheColorHint="@android:color/transparent"
+                    />
+
+
+                <TextView
+                    android:id="@+id/noText"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="left"
+                    android:layout_margin="10dp"
+                    android:text="暂无数据"
+                    android:textSize="13sp"
+                    android:textColor="@color/maop_text_color"
+                    />
+
+                <TextView
+                    android:id="@+id/deptName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@color/gainsboro"
+                    android:textColor="@color/maop_text_color"
+                    android:textSize="15sp"
+                    android:text="回复单位"
+                    />
+
+                <TextView
+                    android:id="@+id/ReContent"
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/maop_right_text_color"
+                    android:textSize="13sp"
+                    android:text=""
+                    />
+
+                <LinearLayout
+                    android:id="@+id/pjLayout"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    >
+
+
+                    <TextView
+                        android:id="@+id/btn1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="我要评价"
+                        android:gravity="center"
+                        android:background="@drawable/btn_agreed"
+                        android:textSize="@dimen/news_size"
+                        android:textColor="@color/white"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_marginRight="20dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/btn2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
+                        android:text="查看评价"
+                        android:gravity="center"
+                        android:background="@drawable/btn_agreed"
+                        android:textSize="@dimen/news_size"
+                        android:textColor="@color/white"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

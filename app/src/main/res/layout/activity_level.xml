@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_level"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.zxt.zxt_phone.view.LevelActivity">
+
+    <com.zxt.zxt_phone.view.widget.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_tab_height" />
+
+    <LinearLayout
+        android:id="@+id/type_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="请假类型："
+            android:textSize="14sp"
+            android:id="@+id/textView" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="请选择请假类型"
+            android:gravity="center"
+            android:drawableRight="@drawable/right"
+            android:layout_marginRight="15dp"
+            android:id="@+id/tv_type" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.0dip"
+        android:background="@color/gainsboro" />
+    <LinearLayout
+        android:id="@+id/lindao_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textSize="14sp"
+            android:text="审批领导："/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="选择审批领导"
+            android:gravity="center"
+            android:layout_marginRight="15dp"
+            android:drawableRight="@drawable/right"
+            android:id="@+id/tv_lindao" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.0dip"
+        android:background="@color/gainsboro" />
+    <LinearLayout
+        android:id="@+id/start_time_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textSize="14sp"
+            android:text="开始时间："/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="选择开始时间"
+            android:gravity="center"
+            android:layout_marginRight="15dp"
+            android:drawableRight="@drawable/right"
+            android:id="@+id/tv_start_time" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.0dip"
+        android:background="@color/gainsboro" />
+    <LinearLayout
+        android:id="@+id/end_time_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textSize="14sp"
+            android:text="结束时间："/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="选择结束时间"
+            android:gravity="center"
+            android:layout_marginRight="15dp"
+            android:drawableRight="@drawable/right"
+            android:id="@+id/tv_end_time" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.0dip"
+        android:background="@color/gainsboro" />
+
+    <EditText
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/go_out_record_listbg"
+        android:gravity="top"
+        android:hint="详情内容。。。"
+        android:padding="5dp"
+        android:textColor="@color/maop_text_color"
+        android:textSize="13sp" />
+
+    <Button
+        android:id="@+id/submit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="20dp"
+        android:text="提  交"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+</LinearLayout>
