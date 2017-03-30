@@ -54,7 +54,7 @@ public class GzglActivity extends BaseActivity {
         setContentView(R.layout.activity_gzgl);
 
         initView();
-        getData();
+        getData(page);
     }
 
 
@@ -70,9 +70,27 @@ public class GzglActivity extends BaseActivity {
             }
         };
         newsList.setAdapter(myAdapter);
+
+        //下来刷新，上啦加载跟多
+        mRefreshView.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
+            @Override
+            public void onHeaderRefresh(PullToRefreshView view) {
+                page = 1;
+                list.clear();
+                getData(page);
+            }
+        });
+        mRefreshView.setOnFooterLoadListener(new PullToRefreshView.OnFooterLoadListener() {
+            @Override
+            public void onFooterLoad(PullToRefreshView view) {
+                page++;
+                getData(page);
+            }
+        });
+
     }
 
-    private void getData() {
+    private void getData(int page) {
 //        http://192.168.1.220:8080/grid/app/blog/getOneStaffBlogById.do?pageSize=30&pageCurrent=1
         OkHttpUtils.get()
                 .url(Url.URL_WG+"blog/getOneStaffBlogById.do?")
