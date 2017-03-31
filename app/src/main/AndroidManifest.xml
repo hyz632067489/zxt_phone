@@ -95,6 +95,7 @@
             android:name=".view.TimeDialogActivity"
             android:theme="@style/Theme.Transparent" />
 
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"

@@ -212,26 +212,26 @@ public class ZwfwActivity extends BaseActivity {
         switch (view.getId()) {
 
             case R.id.sign_in:
-//                mIntent = new Intent(mActivity, WsbsActivity.class);
-//                startActivity(mIntent);
-                AlertDialog.Builder dialog = new AlertDialog.Builder(mActivity);
-                dialog.setTitle("管理员登录");
-                dialog.setMessage("您是否确定登录网格管理页面");
-                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        mIntent = new Intent(mActivity, LoginActivity.class);
-                        startActivity(mIntent);
-                    }
-                });
-                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
+                mIntent = new Intent(mActivity, WsbsActivity.class);
+                startActivity(mIntent);
+//                AlertDialog.Builder dialog = new AlertDialog.Builder(mActivity);
+//                dialog.setTitle("管理员登录");
+//                dialog.setMessage("您是否确定登录网格管理页面");
+//                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        mIntent = new Intent(mActivity, LoginActivity.class);
+//                        startActivity(mIntent);
+//                    }
+//                });
+//                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//                dialog.show();
                 break;
         }
     }
