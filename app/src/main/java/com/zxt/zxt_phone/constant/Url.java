@@ -20,8 +20,8 @@ public class Url {
     //url
     public static final String URL = "http://oa.ybqtw.org.cn";
     //网格url
-    public static final String URL_WG = "http://192.168.1.220:8080/grid/app/";
-    //网格url
-    public static final String URL_WG_LI = "http://192.168.1.104:8080/grid/app/";
+    public static final String URL_WG = "http://192.168.1.223:8080/grid/app/";
+    //网格图片url
+    public static final String URL_TU_PIAN = "http://192.168.1.104:8080/grid";
 
 }

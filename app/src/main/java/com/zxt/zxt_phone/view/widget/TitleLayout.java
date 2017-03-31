@@ -16,9 +16,9 @@ import com.zxt.zxt_phone.R;
  */
 
 public class TitleLayout extends LinearLayout {
-    public TitleLayout(Context context , AttributeSet attrs) {
-        super(context,attrs);
-        LayoutInflater.from(context).inflate(R.layout.top_navigat,this);
+    public TitleLayout(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        LayoutInflater.from(context).inflate(R.layout.top_navigat, this);
 
         TextView return_back = (TextView) findViewById(R.id.return_back);
 
@@ -26,7 +26,7 @@ public class TitleLayout extends LinearLayout {
             @Override
             public void onClick(View v) {
 
-                ((Activity)getContext()).finish();
+                ((Activity) getContext()).finish();
             }
         });
     }

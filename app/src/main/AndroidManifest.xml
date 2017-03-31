@@ -86,13 +86,14 @@
         <activity android:name=".view.YybsInfoActivity" />
         <activity android:name=".view.YybsActivity" />
         <activity android:name=".view.GzglActivity" />
+        <activity android:name=".view.zwfw.GzrzActivity" />
+        <activity android:name=".view.zwfw.AddGzrzActivity" />
         <activity
             android:name=".view.LevelActivity"
             android:theme="@style/android:Theme.Holo.Light.NoActionBar" />
         <activity
             android:name=".view.TimeDialogActivity"
             android:theme="@style/Theme.Transparent" />
-
 
         <service
             android:name="com.baidu.location.f"
@@ -107,7 +108,7 @@
             </intent-filter>
         </receiver>
 
-
+        <activity android:name=".view.zwfw.GzrzInfoActivity"></activity>
     </application>
 
 </manifest>

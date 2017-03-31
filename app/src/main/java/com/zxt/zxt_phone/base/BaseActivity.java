@@ -20,6 +20,9 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.ActivityManager;
 import com.zxt.zxt_phone.view.widget.LoadingDialog;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import okhttp3.Call;
@@ -40,6 +43,8 @@ public class BaseActivity extends FragmentActivity {
     protected Activity mActivity;
     protected Context mContext;
 
+    public String initEndDateTime;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -57,6 +62,14 @@ public class BaseActivity extends FragmentActivity {
         super.setContentView(layoutResID);
         //绑定
         mUnbinder = ButterKnife.bind(this);
+        initView();
+    }
+
+    private void initView() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+//        SimpleDateFormat formatter = new SimpleDateFormat(" HH:mm:ss  ");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        initEndDateTime = formatter.format(curDate);
     }
 
     public void toast(String message) {

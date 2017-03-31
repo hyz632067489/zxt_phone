@@ -79,7 +79,7 @@ public class WsbsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wsbs_activity);
 
-        getData();
+//        getData();
         initView();
 
 

@@ -15,6 +15,10 @@
     <string name="jcsj">基础数据</string>
     <string name="tjfx">统计分析</string>
     <string name="gzgl">工作管理</string>
+    <string name="sjcl">事件处理</string>
+    <string name="gzrz">工作日志</string>
+    <string name="gzrz_info">日志详情</string>
+    <string name="add_gzrz">添加工作日志</string>
     <string name="rkgl">人口管理</string>
     <string name="txl">通讯录</string>
     <string name="jzbf">精准帮扶</string>

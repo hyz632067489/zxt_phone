@@ -71,7 +71,7 @@ public class LtjdActivity extends BaseActivity {
         mWebView.setBackgroundColor(0);
         settings.setDisplayZoomControls(false);
         //WebView加载web资源
-        newsUrl = "http://192.168.1.220:8080/grid/app/info/getOneAreaIntrInfo.do";
+        newsUrl = Url.URL_WG+"info/getOneAreaIntrInfo.do";
         mWebView.loadUrl(newsUrl);
 //        mWebView.loadUrl("http://oa.ybqtw.org.cn/api/MobileHtmlShow.ashx?method=newshtml&userid=1&Key=21218CCA77804D2BA1922C33E0151105&typeVer=&id=1267");
 

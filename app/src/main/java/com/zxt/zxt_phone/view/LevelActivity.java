@@ -1,6 +1,6 @@
 package com.zxt.zxt_phone.view;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -15,8 +15,6 @@ import com.zxt.zxt_phone.bean.PopBean;
 import com.zxt.zxt_phone.utils.DateTimePickDialogUtil;
 import com.zxt.zxt_phone.view.widget.ListPopwindow;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +47,7 @@ public class LevelActivity extends BaseActivity implements ListPopwindow.OnPopIt
 
 
     public static final int QING_JIA = 51;
-    public String initEndDateTime;
+
 
 
     ListPopwindow popWindow;
@@ -65,10 +63,7 @@ public class LevelActivity extends BaseActivity implements ListPopwindow.OnPopIt
 
     private void initView() {
         tabName.setText(R.string.qjtx);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
-//        SimpleDateFormat formatter = new SimpleDateFormat(" HH:mm:ss  ");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        initEndDateTime = formatter.format(curDate);
+
     }
 
     public void show(){
