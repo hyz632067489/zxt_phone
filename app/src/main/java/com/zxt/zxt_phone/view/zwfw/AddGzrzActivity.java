@@ -5,40 +5,48 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 import com.lzy.imagepicker.view.CropImageView;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.adapter.ImagePickerAdapter;
 import com.zxt.zxt_phone.base.BaseActivity;
+import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.GlideImageLoader;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 /**
  * Created by Administrator on 2017/3/31.
  */
 
-public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.OnRecyclerViewItemClickListener{
+public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.OnRecyclerViewItemClickListener {
 
 
     private String TAG = AddGzrzActivity.class.getCanonicalName();
@@ -47,49 +55,28 @@ public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.
     TextView tabName;
 
 
-
     @BindView(R.id.tv_biaoti)
     TextView tvBiaoti;
 
-    @BindView(R.id.rb_1)
-    RadioButton rb1;
-    @BindView(R.id.rb_2)
-    RadioButton rb2;
-    @BindView(R.id.rb_3)
-    RadioButton rb3;
-    @BindView(R.id.rb_4)
-    RadioButton rb4;
-    @BindView(R.id.rd_g)
-    RadioGroup rdG;
+    @BindViews({R.id.chb_1, R.id.chb_2, R.id.chb_3, R.id.chb_4})
+    List<CheckBox> chBox;
+
+    String chb1, chb2, chb3, chb4, myType, picString;
+
     @BindView(R.id.content)
     EditText content;
 
     @BindView(R.id.recyclerView)
-    RecyclerView mRecyclerView ;
+    RecyclerView mRecyclerView;
 
     private ArrayList<ImageItem> imageItems;//当前选择的所有图片
     private ImagePickerAdapter adapter;
     private int maxImgCount = 8;               //允许选择图片最大数
-    private final int NEED_CAMERA = 200;
 
     public static final int IMAGE_ITEM_ADD = -1;
     public static final int REQUEST_CODE_SELECT = 100;
     public static final int REQUEST_CODE_PREVIEW = 101;
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        switch (requestCode) {
-//
-//            case NEED_CAMERA:
-//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    selectImage();
-//                } else {
-//                    toast("请打开相机权限");
-//                }
-//                break;
-//        }
-//    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +89,7 @@ public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.
     private void initView() {
         tabName.setText(R.string.add_gzrz);
 
+        myType = chb1 + chb2 + chb3 + chb4;
 
         imageItems = new ArrayList<>();
         adapter = new ImagePickerAdapter(this, imageItems, maxImgCount);
@@ -146,25 +134,46 @@ public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.
     }
 
 
-    @OnClick({  R.id.submit_btn})
+    @OnClick({R.id.submit_btn, R.id.chb_1, R.id.chb_2, R.id.chb_3, R.id.chb_4})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
+            case R.id.chb_1:
+                if (chBox.get(1).isChecked()) {
+                    chb1 = "1";
+                } else {
+                    chb1 = "";
+                }
+                break;
+            case R.id.chb_2:
+                if (chBox.get(2).isChecked()) {
+                    chb2 = "2";
+                }
+                break;
+            case R.id.chb_3:
+                if (chBox.get(3).isChecked()) {
+                    chb3 = "3";
+                }
+                break;
+            case R.id.chb_4:
+                if (chBox.get(4).isChecked()) {
+                    chb4 = "4";
+                }
+                break;
             case R.id.submit_btn://提交日志
+                if ("".equals(content.getText().toString())) {
+                    toast("请输入内容");
+                    return;
+                } else if ("".equals(myType.toString()) || myType.length() == 0) {
+                    toast("请选择类型");
+                    return;
+                } else if (0 == imageItems.size()) {
+                    toast("请添加图片");
+                    return;
+                }
                 formUpload();
                 break;
         }
-    }
-
-    public void selectImage( ) {
-        ImagePicker imagePicker = ImagePicker.getInstance();
-        imagePicker.setImageLoader(new GlideImageLoader());
-        imagePicker.setMultiMode(true);   //多选
-        imagePicker.setShowCamera(true);  //显示拍照按钮
-        imagePicker.setSelectLimit(9);    //最多选择9张
-        imagePicker.setCrop(false);       //不进行裁剪
-        Intent intent = new Intent(this, ImageGridActivity.class);
-        startActivityForResult(intent, 100);
     }
 
 //    @Override
@@ -195,17 +204,19 @@ public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
             //添加图片返回
-            if (data != null && requestCode == 100) {
+            if (data != null && requestCode == REQUEST_CODE_SELECT) {
                 imageItems = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 if (imageItems != null && imageItems.size() > 0) {
                     StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < imageItems.size(); i++) {
-                        if (i == imageItems.size() - 1) sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path);
-                        else sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path).append("\n");
+                        if (i == imageItems.size() - 1)
+                            sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path);
+                        else
+                            sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path).append("\n");
                     }
 //                    imageItems.addAll(imageItems);
                     adapter.setImages(imageItems);
-                    Log.i(TAG,"files.size======"+imageItems.size());
+                    Log.i(TAG, "files.size======" + imageItems.size());
 //                    tvImages.setText(sb.toString());
                 } else {
 //                    tvImages.setText("--");
@@ -225,14 +236,86 @@ public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.
             }
         }
     }
-    public void formUpload( ) {
-        ArrayList<File> files = new ArrayList<>();
+
+    /**
+     * 先上传图片，在传参数
+     */
+    public void formUpload() {
+
+        HashMap<String, File> fileList = new HashMap<>();
         if (imageItems != null && imageItems.size() > 0) {
             for (int i = 0; i < imageItems.size(); i++) {
-                files.add(new File(imageItems.get(i).path));
+                fileList.put(imageItems.get(i).name, new File(imageItems.get(i).path));
             }
         }
+        //上传多张图片 表头
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "multipart/form-data");
+        OkHttpUtils.post()
+                .url(Url.URL_WG + "blog/uploadBlogImg.do?")
+                .headers(headers)
+                .files("mFile", fileList)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                    }
 
-        Log.i(TAG,"files.size======"+files.size());
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.i(TAG, "response======" + response);
+
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            if ("200".equals(obj.getString("status"))) {
+                                picString = obj.getString("path");
+                                if (!"".equals(picString)) {
+                                    sentData();
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                });
     }
+
+    private void sentData() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("blogName", tvBiaoti.getText().toString());
+        params.put("blogType", myType);
+        params.put("blogContent", content.getText().toString());
+        params.put("blogPic", picString);
+        OkHttpUtils.get()
+                .url(Url.URL_WG + "blog/addOneBlog.do?")
+                .params(params)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.i(TAG, "response===" + response);
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            if ("200".equals(obj.getString("status"))) {
+                                toast(obj.getString("message"));
+                                Intent intent = new Intent();
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            } else {
+                                toast(obj.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+
 }

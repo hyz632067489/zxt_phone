@@ -333,7 +333,7 @@ public class KqdkActivityCopy extends BaseActivity {
         @Override
         public void onBefore(Request request, int id) {
 
-            showLoading("正在加载...");
+//            showLoading("正在加载...");
             Log.e(TAG, "loading.....======");
         }
 

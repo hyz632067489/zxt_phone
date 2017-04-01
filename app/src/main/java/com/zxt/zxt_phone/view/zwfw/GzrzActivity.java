@@ -55,6 +55,17 @@ public class GzrzActivity extends BaseActivity {
 
     Intent mIntent;
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode) {
+
+            case RESULT_OK:
+                getData(page);
+                break;
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +86,7 @@ public class GzrzActivity extends BaseActivity {
             }
         });
 
-        myAdapter = new CommonAdapter<GzrzListModel.ListBean>(mActivity, list, R.layout.news_list_item) {
+        myAdapter = new CommonAdapter<GzrzListModel.ListBean>(mActivity, list, R.layout.gzrz_list_item) {
             @Override
             public void convert(ViewHolder holder, GzrzListModel.ListBean item) {
                 holder.setText(R.id.Title, "· [" + item.getBlogName() + "]");
