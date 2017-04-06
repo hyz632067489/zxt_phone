@@ -73,6 +73,7 @@
             android:text="@string/login_wgy"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:visibility="gone"
             android:textStyle="normal" />
 
         <TextView

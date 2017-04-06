@@ -90,9 +90,26 @@ public class GzrzActivity extends BaseActivity {
             @Override
             public void convert(ViewHolder holder, GzrzListModel.ListBean item) {
                 holder.setText(R.id.Title, "· [" + item.getBlogName() + "]");
-                holder.setText(R.id.EditDate, item.getEditBlogDate());
-
+//                holder.setText(R.id.EditDate, item.getEditBlogDate());
+                TextView tvEditDate = holder.getView(R.id.EditDate);
+                tvEditDate.setText("编辑时间："+item.getEditBlogDate().substring(10,item.getEditBlogDate().length()));
+                String myType = item.getBlogType();
+                if (myType.length() != 0) {
+                    if(myType.contains("1")){
+                        holder.getView(R.id.tv_xuncha).setVisibility(View.VISIBLE);
+                    }
+                    if(myType.contains("2")){
+                        holder.getView(R.id.tv_xuanchuan).setVisibility(View.VISIBLE);
+                    }
+                    if(myType.contains("3")){
+                        holder.getView(R.id.tv_zoufang).setVisibility(View.VISIBLE);
+                    }
+                    if(myType.contains("4")){
+                        holder.getView(R.id.tv_chuli).setVisibility(View.VISIBLE);
+                    }
+                }
             }
+
         };
         newsList.setAdapter(myAdapter);
 

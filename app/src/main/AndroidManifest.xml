@@ -88,6 +88,7 @@
         <activity android:name=".view.GzglActivity" />
         <activity android:name=".view.zwfw.GzrzActivity" />
         <activity android:name=".view.zwfw.AddGzrzActivity" />
+        <activity android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"/>
         <activity
             android:name=".view.LevelActivity"
             android:theme="@style/android:Theme.Holo.Light.NoActionBar" />

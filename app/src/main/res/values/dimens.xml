@@ -20,6 +20,8 @@
     <color name="home_bg">#ffffff</color>
     <dimen name="news_size">15sp</dimen>
 
+    <dimen name="title_name">18sp</dimen>
+
     <dimen name="dp_14">14dp</dimen>
     <dimen name="dp_4">4dp</dimen>
     <dimen name="historyscore_tb">10dp</dimen>

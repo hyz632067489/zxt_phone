@@ -11,12 +11,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
-import com.zxt.zxt_phone.bean.UserBean;
 import com.zxt.zxt_phone.constant.Common;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
@@ -103,11 +101,11 @@ public class LoginActivity extends BaseActivity {
             toast("用户名或密码不能为空");
             return false;
         }
-        if(checkBox.isChecked()){
-           Common.IS_LOGIN = true;
-        }else {
-            Common.IS_LOGIN = false;
-        }
+//        if(checkBox.isChecked()){
+//           Common.IS_LOGIN = true;
+//        }else {
+//            Common.IS_LOGIN = false;
+//        }
         return true;
     }
 
@@ -116,7 +114,7 @@ public class LoginActivity extends BaseActivity {
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", mUserId);
         params.put("password", mPwd);
-        params.put("gridStaff", Common.IS_LOGIN+"");
+//        params.put("gridStaff", Common.IS_LOGIN+"");
         OkHttpUtils.post()
                 .url(Url.URL_WG+"user/login.do?")
 //                .url("http://192.168.1.220:8080/grid/app/user/login.do?")
@@ -148,50 +146,5 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
-
-//    private void login() {
-//        HashMap<String, String> params = new HashMap<>();
-//        params.put("userName", mUserId);
-//        params.put("password", mPwd);
-////        http://192.168.1.125:8080/grid/user/validatesUser.do?userName=admin&password=123
-//        String url = Url.BASE_URL + Url.login + "userName=" + mUserId + "&" + "password=" + mPwd;
-//        HttpUtil.sendOkHttpRequest(url, new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                dismissLoading();
-//                String responseText = response.body().string();
-//                UserBean stu;
-//                String data;
-//                try {
-//                    JSONObject jsonObject = new JSONObject(responseText);
-//                    status =  jsonObject.getString("status");
-//                    if(Common.SUCCEED.equals(status)){
-//                        Gson gson = new Gson();
-//                        // 将json 转化成 java 对象
-//                        //fromJson方法。参数一是json字符串。参数二是要转换的javabean
-//                        //该javabean的字段名必须与json的key名字完全对应才能被正确解析。
-//                          data = jsonObject.getString("data");
-//                        Log.i(TAG, "userName="+data.getClass().toString());
-//                          stu = gson.fromJson(data, UserBean.class);
-//
-//
-//                        Log.i(TAG, "======================"+stu.toString());
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//                Log.i(TAG, responseText.toString());
-//
-//            }
-//        });
-//    }
-
 
 }

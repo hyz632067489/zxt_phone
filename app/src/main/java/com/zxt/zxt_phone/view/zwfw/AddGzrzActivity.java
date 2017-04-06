@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,6 +27,7 @@ import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.adapter.ImagePickerAdapter;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.DateUtil;
 import com.zxt.zxt_phone.utils.GlideImageLoader;
 
 import org.json.JSONException;
@@ -46,7 +48,7 @@ import okhttp3.Call;
  * Created by Administrator on 2017/3/31.
  */
 
-public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.OnRecyclerViewItemClickListener {
+public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.OnRecyclerViewItemClickListener, CompoundButton.OnCheckedChangeListener {
 
 
     private String TAG = AddGzrzActivity.class.getCanonicalName();
@@ -61,8 +63,9 @@ public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.
     @BindViews({R.id.chb_1, R.id.chb_2, R.id.chb_3, R.id.chb_4})
     List<CheckBox> chBox;
 
-    String chb1, chb2, chb3, chb4, myType, picString;
+    String chb1, chb2, chb3, chb4, picString;
 
+    StringBuilder myType;
     @BindView(R.id.content)
     EditText content;
 
@@ -85,11 +88,10 @@ public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.
         initView();
     }
 
-
     private void initView() {
         tabName.setText(R.string.add_gzrz);
 
-        myType = chb1 + chb2 + chb3 + chb4;
+        tvBiaoti.setText(DateUtil.getCurDateDay());
 
         imageItems = new ArrayList<>();
         adapter = new ImagePickerAdapter(this, imageItems, maxImgCount);
@@ -99,6 +101,40 @@ public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(adapter);
     }
+
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()) {
+            case R.id.chb_1:
+                if (isChecked) {
+                    toast("选择：" + "巡查");
+                } else {
+                    toast("取消：" + "巡查");
+                }
+                break;
+            case R.id.chb_2:
+                if (isChecked) {
+                    toast("选择：" + "宣传");
+                } else {
+                    toast("取消：" + "宣传");
+                }
+                break;
+            case R.id.chb_3:
+                if (isChecked) {
+                    toast("选择：" + "走访");
+                } else {
+                    toast("取消：" + "走访");
+                }
+                break;
+            case R.id.chb_4:
+                if (isChecked) {
+                    toast("选择：" + "处理");
+                } else {
+                    toast("取消：" + "处理");
+                }
+                break;
+        }
+    }
+
 
     private void initImagePicker() {
         ImagePicker imagePicker = ImagePicker.getInstance();
@@ -134,38 +170,29 @@ public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.
     }
 
 
-    @OnClick({R.id.submit_btn, R.id.chb_1, R.id.chb_2, R.id.chb_3, R.id.chb_4})
+    @OnClick({R.id.submit_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-
-            case R.id.chb_1:
-                if (chBox.get(1).isChecked()) {
-                    chb1 = "1";
-                } else {
-                    chb1 = "";
-                }
-                break;
-            case R.id.chb_2:
-                if (chBox.get(2).isChecked()) {
-                    chb2 = "2";
-                }
-                break;
-            case R.id.chb_3:
-                if (chBox.get(3).isChecked()) {
-                    chb3 = "3";
-                }
-                break;
-            case R.id.chb_4:
-                if (chBox.get(4).isChecked()) {
-                    chb4 = "4";
-                }
-                break;
             case R.id.submit_btn://提交日志
-                if ("".equals(content.getText().toString())) {
-                    toast("请输入内容");
-                    return;
-                } else if ("".equals(myType.toString()) || myType.length() == 0) {
+                myType = new StringBuilder();
+                if (chBox.get(0).isChecked()) {
+                    myType.append("1,");
+                }
+                if (chBox.get(1).isChecked()) {
+                    myType.append("2,");
+                }
+                if (chBox.get(2).isChecked()) {
+                    myType.append("3,");
+                }
+                if (chBox.get(3).isChecked()) {
+                    myType.append("4");
+                }
+                Log.i(TAG, "myType===" + myType);
+                if ("".equals(myType.toString()) || myType.length() == 0) {
                     toast("请选择类型");
+                    return;
+                } else if ("".equals(content.getText().toString())) {
+                    toast("请输入内容");
                     return;
                 } else if (0 == imageItems.size()) {
                     toast("请添加图片");
@@ -284,7 +311,7 @@ public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.
     private void sentData() {
         HashMap<String, String> params = new HashMap<>();
         params.put("blogName", tvBiaoti.getText().toString());
-        params.put("blogType", myType);
+        params.put("blogType", String.valueOf(myType));
         params.put("blogContent", content.getText().toString());
         params.put("blogPic", picString);
         OkHttpUtils.get()

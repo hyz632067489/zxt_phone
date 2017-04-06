@@ -11,236 +11,255 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <me.militch.widget.bannerholder.BannerHolderView
-        android:id="@+id/banner_holder"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        app:indicatorResId="@drawable/banner_holder_selector" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="#ccc" />
-
-    <LinearLayout
-        android:id="@+id/dt_ly"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-         >
-
-        <ImageView
-            android:id="@+id/dynamic_icon_ig"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_white_grey_on_off"
-            android:padding="@dimen/dp_4"
-            android:src="@drawable/dynamic_icon" />
-
-        <View
-            android:layout_width="0.66dp"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_marginRight="2dp"
-            android:background="@color/background_grey"
-            android:padding="6dp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@id/dynamic_icon_ig"
-            android:orientation="vertical">
-
-            <com.zxt.zxt_phone.view.customview.MyMarqueeView
-                android:id="@+id/dynic_marquee"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:mvAnimDuration="400"
-                app:mvInterval="5000"
-                app:mvTextColor="@color/act_title_font"
-                app:mvTextSize="14sp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="#ccc" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/home_function_height"
-        android:layout_marginBottom="@dimen/home_function_border"
-        android:background="#ccc"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_zczx"
-            style="@style/main_caidan_style"
-            android:drawableTop="@drawable/m_zczx"
-            android:text="@string/zczx" />
-
-
-        <TextView
-            android:id="@+id/tv_sqtj"
-            style="@style/main_caidan_style"
-            android:drawableTop="@drawable/m_yjtj"
-            android:text="诉求提交" />
-
-        <TextView
-            android:id="@+id/tv_gscx"
-            style="@style/main_caidan_style"
-            android:drawableTop="@drawable/m_gscx"
-            android:text="查询公示" />
-
-        <TextView
-            android:id="@+id/tv_bszn"
-            style="@style/main_caidan_style"
-            android:drawableTop="@drawable/m_bszn"
-            android:text="办事指南" />
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.66dp"
-        android:background="#ccc" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/home_function_height"
-        android:layout_marginBottom="@dimen/home_function_border"
-        android:background="#ccc"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_sqhd"
-            style="@style/main_caidan_style"
-            android:drawableTop="@drawable/m_sqhd"
-            android:text="社区活动" />
-
-        <TextView
-            android:id="@+id/tv_czjf"
-            style="@style/main_caidan_style"
-            android:drawableTop="@drawable/m_czjf"
-            android:text="充值缴费" />
-
-        <TextView
-            android:id="@+id/tv_sqds"
-            style="@style/main_caidan_style"
-            android:drawableTop="@drawable/m_sqds"
-            android:text="社区电商" />
-
-        <TextView
-            android:id="@+id/tv_gzbx"
-            style="@style/main_caidan_style"
-            android:drawableTop="@drawable/m_bsbx"
-            android:text="故障报修" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="#ccc" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/home_function_border"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/tv_zwfw"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/m_zwfw"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/m_zwfw"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/tv_bmfw"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/m_bmfw"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="便民服务"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/tv_wyfw"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/m_wyfw"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="物业服务"/>
-        </LinearLayout>
-        <!--<TextView-->
-            <!--android:id="@+id/tv_zwfw"-->
-            <!--style="@style/main_caidan_2_style"-->
-            <!--android:drawableTop="@drawable/m_zwfw"-->
-            <!--android:text="@string/m_zwfw" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/tv_bmfw"-->
-            <!--style="@style/main_caidan_2_style"-->
-            <!--android:drawableTop="@drawable/m_bmfw"-->
-            <!--android:text="便民服务" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/tv_wyfw"-->
-            <!--style="@style/main_caidan_2_style"-->
-            <!--android:drawableTop="@drawable/m_wyfw"-->
-            <!--android:text="物业服务" />-->
-
-    </LinearLayout>
-
-    <com.zxt.zxt_phone.view.customview.PullToRefreshView
-        android:id="@+id/refreshView"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/listview"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:descendantFocusability="afterDescendants"
-            android:divider="@color/white"
-            android:dividerHeight="1dp"
-            android:listSelector="@android:color/transparent" />
-    </com.zxt.zxt_phone.view.customview.PullToRefreshView>
+            android:orientation="vertical">
+
+            <me.militch.widget.bannerholder.BannerHolderView
+                android:id="@+id/banner_holder"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:indicatorResId="@drawable/banner_holder_selector" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="#ccc" />
+
+            <LinearLayout
+                android:id="@+id/dt_ly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/dynamic_icon_ig"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_white_grey_on_off"
+                    android:padding="@dimen/dp_4"
+                    android:src="@drawable/dynamic_icon" />
+
+                <View
+                    android:layout_width="0.66dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/background_grey"
+                    android:padding="6dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/dynamic_icon_ig"
+                    android:orientation="vertical">
+
+                    <com.zxt.zxt_phone.view.customview.MyMarqueeView
+                        android:id="@+id/dynic_marquee"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        app:mvAnimDuration="400"
+                        app:mvInterval="5000"
+                        app:mvTextColor="@color/act_title_font"
+                        app:mvTextSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="#ccc" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/home_function_height"
+                android:layout_marginBottom="@dimen/home_function_border"
+                android:background="#ccc"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_zczx"
+                    style="@style/main_caidan_style"
+                    android:drawableTop="@drawable/m_zczx"
+                    android:text="@string/zczx" />
 
 
+                <TextView
+                    android:id="@+id/tv_sqtj"
+                    style="@style/main_caidan_style"
+                    android:drawableTop="@drawable/m_yjtj"
+                    android:text="诉求提交" />
+
+                <TextView
+                    android:id="@+id/tv_gscx"
+                    style="@style/main_caidan_style"
+                    android:drawableTop="@drawable/m_gscx"
+                    android:text="查询公示" />
+
+                <TextView
+                    android:id="@+id/tv_bszn"
+                    style="@style/main_caidan_style"
+                    android:drawableTop="@drawable/m_bszn"
+                    android:text="办事指南" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.66dp"
+                android:background="#ccc" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/home_function_height"
+                android:layout_marginBottom="@dimen/home_function_border"
+                android:background="#ccc"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_sqhd"
+                    style="@style/main_caidan_style"
+                    android:drawableTop="@drawable/m_sqhd"
+                    android:text="社区活动" />
+
+                <TextView
+                    android:id="@+id/tv_czjf"
+                    style="@style/main_caidan_style"
+                    android:drawableTop="@drawable/m_czjf"
+                    android:text="充值缴费" />
+
+                <TextView
+                    android:id="@+id/tv_sqds"
+                    style="@style/main_caidan_style"
+                    android:drawableTop="@drawable/m_sqds"
+                    android:text="社区电商" />
+
+                <TextView
+                    android:id="@+id/tv_gzbx"
+                    style="@style/main_caidan_style"
+                    android:drawableTop="@drawable/m_bsbx"
+                    android:text="故障报修" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="#ccc" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/home_function_border"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/tv_zwfw"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/m_zwfw" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/m_zwfw" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tv_bmfw"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/m_bmfw" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="便民服务" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tv_wyfw"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/m_wyfw" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="物业服务" />
+                </LinearLayout>
+                <!--<TextView-->
+                <!--android:id="@+id/tv_zwfw"-->
+                <!--style="@style/main_caidan_2_style"-->
+                <!--android:drawableTop="@drawable/m_zwfw"-->
+                <!--android:text="@string/m_zwfw" />-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_bmfw"-->
+                <!--style="@style/main_caidan_2_style"-->
+                <!--android:drawableTop="@drawable/m_bmfw"-->
+                <!--android:text="便民服务" />-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_wyfw"-->
+                <!--style="@style/main_caidan_2_style"-->
+                <!--android:drawableTop="@drawable/m_wyfw"-->
+                <!--android:text="物业服务" />-->
+
+            </LinearLayout>
+
+            <com.zxt.zxt_phone.view.customview.PullToRefreshView
+                android:id="@+id/refreshView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ListView
+                    android:id="@+id/listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:descendantFocusability="afterDescendants"
+                    android:divider="@color/white"
+                    android:dividerHeight="1dp"
+                    android:listSelector="@android:color/transparent" />
+            </com.zxt.zxt_phone.view.customview.PullToRefreshView>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
 
 

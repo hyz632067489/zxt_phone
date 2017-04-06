@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -131,7 +132,7 @@ public class KqdkActivityCopy extends BaseActivity {
         SDKInitializer.initialize(getApplicationContext());
 
         setContentView(R.layout.activity_kqdk);
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 //        positionText = (TextView) findViewById(R.id.position_tv);
         //检测是否有定位权限
         if (ContextCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -231,7 +232,7 @@ public class KqdkActivityCopy extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.take_photo, R.id.btn_tjkq })
+    @OnClick({R.id.take_photo, R.id.btn_tjkq})
     public void OnClick(View view) {
         switch (view.getId()) {
 

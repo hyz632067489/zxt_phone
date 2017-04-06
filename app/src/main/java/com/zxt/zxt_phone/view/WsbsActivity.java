@@ -93,7 +93,7 @@ public class WsbsActivity extends BaseActivity {
         signLogin.setVisibility(View.VISIBLE);
         signLogin.setText("注销");
 
-        if ("网格员".equals(Dept)) {
+        if ("社区网格员".equals(Dept)) {
             ltjdLayout.setVisibility(View.VISIBLE);
             kqdkLayout.setVisibility(View.VISIBLE);
             kqqjLayout.setVisibility(View.VISIBLE);

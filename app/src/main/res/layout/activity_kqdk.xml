@@ -4,174 +4,191 @@
     android:id="@+id/activity_kqdk"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context="com.zxt.zxt_phone.view.KqdkActivity">
 
     <com.zxt.zxt_phone.view.widget.TitleLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/action_tab_height" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/tv_day"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="13"
-        android:textColor="@color/black"
-        android:textSize="25sp" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_hour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.2"
-                android:gravity="center"
-                android:text="13"
-                android:textColor="@color/red"
-                android:textSize="50sp" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_minute"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="13"
-                android:textColor="@color/red"
-                android:textSize="50sp" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_second"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.2"
-                android:gravity="center"
-                android:text="13"
-                android:textColor="@color/red"
-                android:textSize="50sp" />
-        </LinearLayout>
-</LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/maop_bgcolor"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:background="@drawable/selector_home_function_bg"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/weizhi"/>
-        <TextView
-            android:id="@+id/position_tv"
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:gravity="center"
-            android:text="渝北区"/>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/maop_bgcolor"/>
-    <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
-            <com.zxt.zxt_phone.view.customview.WrapHeightGridView
-                android:id="@+id/photo_img_layout"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:horizontalSpacing="8dp"
-                android:listSelector="@color/transparent"
-                android:numColumns="4"
-                android:scrollbars="none"
-                android:verticalSpacing="8dp" />
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp"
-            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="13"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
 
-            <ImageView
-                android:id="@+id/take_photo"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_hour"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:gravity="center"
+                        android:text="13"
+                        android:textColor="@color/red"
+                        android:textSize="50sp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_minute"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="13"
+                        android:textColor="@color/red"
+                        android:textSize="50sp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_second"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:gravity="center"
+                        android:text="13"
+                        android:textColor="@color/red"
+                        android:textSize="50sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/maop_bgcolor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/photo_pic" />
-            <ImageView
-                android:id="@+id/image_pic"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:scaleType="fitXY"
-                 />
+                android:background="@drawable/selector_home_function_bg"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/weizhi" />
+
+                <TextView
+                    android:id="@+id/position_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="渝北区" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/maop_bgcolor" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <com.zxt.zxt_phone.view.customview.WrapHeightGridView
+                    android:id="@+id/photo_img_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:horizontalSpacing="8dp"
+                    android:listSelector="@color/transparent"
+                    android:numColumns="4"
+                    android:scrollbars="none"
+                    android:verticalSpacing="8dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp">
+
+                    <ImageView
+                        android:id="@+id/take_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/photo_pic" />
+
+                    <ImageView
+                        android:id="@+id/image_pic"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:scaleType="fitXY" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/maop_bgcolor" />
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/go_out_record_listbg"
+                android:gravity="top"
+                android:hint="请输入考勤备注"
+                android:padding="5dp"
+                android:textColor="@color/maop_text_color"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/maop_bgcolor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_tjkq"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:text="提交考勤" />
+            </LinearLayout>
         </LinearLayout>
-
-        </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/maop_bgcolor"/>
-    <EditText
-        android:id="@+id/et_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/go_out_record_listbg"
-        android:gravity="top"
-        android:hint="请输入考勤备注"
-        android:padding="5dp"
-        android:textColor="@color/maop_text_color"
-        android:textSize="13sp" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/maop_bgcolor"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <Button
-            android:id="@+id/btn_tjkq"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:text="提交考勤"/>
-    </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>
