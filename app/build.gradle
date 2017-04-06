@@ -2,6 +2,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
 android {
+
+//    signingConfigs {
+//        releaseSign {
+//            storeFile file('../lilang_key')
+//            keyAlias 'lilang'
+//            keyPassword '62489608'
+//            storePassword '62489608'
+//        }
+//    }
+
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {

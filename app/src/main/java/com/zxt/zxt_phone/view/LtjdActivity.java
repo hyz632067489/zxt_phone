@@ -3,7 +3,6 @@ package com.zxt.zxt_phone.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -11,17 +10,22 @@ import android.widget.TextView;
 
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.http.okhttp.cookie.store.CookieStore;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.LogUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import okhttp3.Call;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 
 /**
  * Created by hyz on 2017/3/7.
@@ -53,9 +57,14 @@ public class LtjdActivity extends BaseActivity {
         initView();
     }
 
+//    private void setCookies(String url){
+//        CookieManager cookieManager = CookieManager.getInstance();
+//        cookieManager.setAcceptCookie(true);
+//        cookieManager.setCookie(url, AppData.Cookie);
+//    }
+
     private void initView() {
         tabName.setText(R.string.ltjd);
-
 
         mWebView = (WebView) findViewById(R.id.webview);
 //        mWebView.setInitialScale(100);
@@ -70,8 +79,13 @@ public class LtjdActivity extends BaseActivity {
         settings.setDomStorageEnabled(true);
         mWebView.setBackgroundColor(0);
         settings.setDisplayZoomControls(false);
-        //WebView加载web资源
+
+
         newsUrl = Url.URL_WG+"info/getOneAreaIntrInfo.do";
+//        if(AppData.isLogin)
+//            setCookies(newsUrl);
+        //WebView加载web资源
+
         mWebView.loadUrl(newsUrl);
 //        mWebView.loadUrl("http://oa.ybqtw.org.cn/api/MobileHtmlShow.ashx?method=newshtml&userid=1&Key=21218CCA77804D2BA1922C33E0151105&typeVer=&id=1267");
 

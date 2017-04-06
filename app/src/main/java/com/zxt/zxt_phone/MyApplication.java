@@ -2,6 +2,7 @@ package com.zxt.zxt_phone;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -29,16 +30,17 @@ public class MyApplication extends Application {
         mContext = this;
 
         CookieJarImpl cookieJar = new CookieJarImpl(new PersistentCookieStore(getApplicationContext()));
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//                .addInterceptor(new LoggerInterceptor("TAG"))
-                .cookieJar(cookieJar)
                 .addInterceptor(new LoggerInterceptor("TAG"))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                .cookieJar(cookieJar)
                 //其他配置
                 .build();
 
-
         OkHttpUtils.initClient(okHttpClient);
+
+        Log.i("MyApplication","cookieJar====="+cookieJar.toString());
     }
 }
