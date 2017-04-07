@@ -12,22 +12,29 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
-import com.zxt.zxt_phone.constant.Common;
+import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.LogUtil;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by miliang on 2017/3/6/0006.
@@ -58,6 +65,7 @@ public class LoginActivity extends BaseActivity {
     String mUserId, mPwd, mCode;
 
     String status;
+    CookieJar cookieJar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,50 +109,110 @@ public class LoginActivity extends BaseActivity {
             toast("用户名或密码不能为空");
             return false;
         }
-//        if(checkBox.isChecked()){
-//           Common.IS_LOGIN = true;
-//        }else {
-//            Common.IS_LOGIN = false;
-//        }
         return true;
     }
 
     private void login() {
+
 //        http://192.168.1.220:8080/grid/app/user/login.do?userName=WGY&password=123
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", mUserId);
         params.put("password", mPwd);
 //        params.put("gridStaff", Common.IS_LOGIN+"");
+
         OkHttpUtils.post()
-                .url(Url.URL_WG+"user/login.do?")
+                .url(Url.URL_WG + "user/login.do?")
 //                .url("http://192.168.1.220:8080/grid/app/user/login.do?")
                 .params(params)
-                .build().execute(new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-
-                Log.i(TAG,"onError==="+e);
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                Log.i(TAG,"onResponse==="+response);
-                try {
-                    JSONObject obj = new JSONObject(response);
-                    if("200".equals(obj.getString("status"))){
-                        toast(obj.getString("message"));
-                        SharedPrefsUtil.putString(mActivity,"dept",obj.getString("dept"));
-                        startActivity(new Intent(mActivity,WsbsActivity.class)
-                                .putExtra("dept",obj.getString("dept")));
-                        finish();
-                    }else {
-                        toast(obj.getString("message"));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+                .build()
+                .execute(new MyStringCallback());
+//        {
+//            @Override
+//            public void onError(Call call, Exception e, int id) {
+//
+//                Log.i(TAG,"onError==="+e);
+//            }
+//
+//            @Override
+//            public void onResponse(String response, int id) {
+//                Log.i(TAG,"onResponse==="+response);
+//                AppData.isLogin = true;
+//                try {
+//                    JSONObject obj = new JSONObject(response);
+//                    if("200".equals(obj.getString("status"))){
+//                        toast(obj.getString("message"));
+//                        SharedPrefsUtil.putString(mActivity,"dept",obj.getString("dept"));
+//
+//                        String cookie ="";
+//                        HttpCookie httpCookie = new HttpCookie("Cookie",cookie);
+//                        PersistentCookieStore cookieStore = new PersistentCookieStore(getApplicationContext());
+//
+//
+//                        AppData.Cookie=obj.getString("sessionId");
+//                        Log.i(TAG,"cookie=="+AppData.Cookie+"====");
+//
+//                        startActivity(new Intent(mActivity,WsbsActivity.class)
+//                                .putExtra("dept",obj.getString("dept")));
+//                        finish();
+//                    }else {
+//                        toast(obj.getString("message"));
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
+    public class MyStringCallback extends StringCallback {
+        @Override
+        public void onBefore(Request request, int id) {
+        }
+
+        @Override
+        public void onAfter(int id) {
+        }
+
+        @Override
+        public void onError(Call call, Exception e, int id) {
+            e.printStackTrace();
+//            mTv.setText("onError:" + e.getMessage());
+        }
+
+        @Override
+        public void onResponse(String response, int id) {
+            Log.e(TAG, "onResponse：complete");
+            Log.i(TAG, "onResponse===" + response);
+            AppData.isLogin = true;
+            try {
+                JSONObject obj = new JSONObject(response);
+                if ("200".equals(obj.getString("status"))) {
+                    toast(obj.getString("message"));
+                    SharedPrefsUtil.putString(mActivity, "dept", obj.getString("dept"));
+
+                    //获取cookie中的sessionId值 用于注入webView
+//                    CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
+//                    HttpUrl httpUrl = HttpUrl.parse(Url.URL_WG + "user/login.do?");
+//                    List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
+//                    AppData.Cookie=cookies.get(0).toString();
+//                    Log.i("TAG","--------------"+httpUrl.host() + "对应的cookie如下：" + cookies.toString());
+
+                    startActivity(new Intent(mActivity, WsbsActivity.class)
+                            .putExtra("dept", obj.getString("dept")));
+                    finish();
+                } else {
+                    toast(obj.getString("message"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @Override
+        public void inProgress(float progress, long total, int id) {
+            Log.e(TAG, "inProgress:" + progress);
+//            mProgressBar.setProgress((int) (100 * progress));
+        }
+    }
 }

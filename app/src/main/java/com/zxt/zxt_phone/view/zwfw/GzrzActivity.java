@@ -15,6 +15,7 @@ import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.adapter.CommonAdapter;
 import com.zxt.zxt_phone.adapter.ViewHolder;
 import com.zxt.zxt_phone.base.BaseActivity;
+import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.bean.model.GzrzListModel;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.view.customview.PullToRefreshView;
@@ -156,6 +157,7 @@ public class GzrzActivity extends BaseActivity {
                 .url(Url.URL_WG + "blog/getOneStaffBlogById.do?")
                 .addParams("pageSize", pageSize + "")
                 .addParams("pageCurrent", page + "")
+//                .addHeader("cookie", AppData.Cookie)
                 .build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
