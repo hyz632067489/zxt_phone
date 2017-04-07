@@ -102,6 +102,7 @@ public class AddGzrzActivity extends BaseActivity implements ImagePickerAdapter.
         mRecyclerView.setAdapter(adapter);
     }
 
+
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
             case R.id.chb_1:
