@@ -2,6 +2,8 @@ package com.zxt.zxt_phone.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -126,47 +128,12 @@ public class LoginActivity extends BaseActivity {
                 .params(params)
                 .build()
                 .execute(new MyStringCallback());
-//        {
-//            @Override
-//            public void onError(Call call, Exception e, int id) {
-//
-//                Log.i(TAG,"onError==="+e);
-//            }
-//
-//            @Override
-//            public void onResponse(String response, int id) {
-//                Log.i(TAG,"onResponse==="+response);
-//                AppData.isLogin = true;
-//                try {
-//                    JSONObject obj = new JSONObject(response);
-//                    if("200".equals(obj.getString("status"))){
-//                        toast(obj.getString("message"));
-//                        SharedPrefsUtil.putString(mActivity,"dept",obj.getString("dept"));
-//
-//                        String cookie ="";
-//                        HttpCookie httpCookie = new HttpCookie("Cookie",cookie);
-//                        PersistentCookieStore cookieStore = new PersistentCookieStore(getApplicationContext());
-//
-//
-//                        AppData.Cookie=obj.getString("sessionId");
-//                        Log.i(TAG,"cookie=="+AppData.Cookie+"====");
-//
-//                        startActivity(new Intent(mActivity,WsbsActivity.class)
-//                                .putExtra("dept",obj.getString("dept")));
-//                        finish();
-//                    }else {
-//                        toast(obj.getString("message"));
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
     }
 
     public class MyStringCallback extends StringCallback {
         @Override
         public void onBefore(Request request, int id) {
+//            showLoading("正在登录中...");
         }
 
         @Override
@@ -181,24 +148,30 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public void onResponse(String response, int id) {
+//            dismissLoading();
             Log.e(TAG, "onResponse：complete");
             Log.i(TAG, "onResponse===" + response);
             AppData.isLogin = true;
             try {
                 JSONObject obj = new JSONObject(response);
                 if ("200".equals(obj.getString("status"))) {
+                    //请求区域session
+                    runnable.run();
+
                     toast(obj.getString("message"));
                     SharedPrefsUtil.putString(mActivity, "dept", obj.getString("dept"));
 
                     //获取cookie中的sessionId值 用于注入webView
-//                    CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
-//                    HttpUrl httpUrl = HttpUrl.parse(Url.URL_WG + "user/login.do?");
-//                    List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
+                    CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
+                    HttpUrl httpUrl = HttpUrl.parse(Url.URL_WG + "user/login.do?");
+                    List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
 //                    AppData.Cookie=cookies.get(0).toString();
-//                    Log.i("TAG","--------------"+httpUrl.host() + "对应的cookie如下：" + cookies.toString());
+                    Log.i("TAG","--------------"+httpUrl.host() + "对应的cookie如下：" + cookies.toString());
 
                     startActivity(new Intent(mActivity, WsbsActivity.class)
                             .putExtra("dept", obj.getString("dept")));
+
+
                     finish();
                 } else {
                     toast(obj.getString("message"));
@@ -215,4 +188,30 @@ public class LoginActivity extends BaseActivity {
 //            mProgressBar.setProgress((int) (100 * progress));
         }
     }
+
+    private final int SEND_TIME = 99;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SEND_TIME:
+                   //请求
+                    getAirId();
+                    break;
+
+            }
+        }
+    };
+
+    private void getAirId() {
+        OkHttpUtils.get().url(Url.URL_WG+"user/saveUserAreaSession.do?").build().execute(null);
+    }
+
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            mHandler.sendEmptyMessage(SEND_TIME);
+        }
+    };
+
 }
