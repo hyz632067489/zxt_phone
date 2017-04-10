@@ -47,6 +47,7 @@
     <string name="zwfw_jgcxxq">结果查询详情</string>
     <string name="zwfw_yybs">预约办事</string>
     <string name="zwfw_yybsinfo">预约办事时间</string>
+    <string name="zwfw_dqfc">党群风采</string>
 
     <string name="zwfw_sqtjxy">诉求提交协议</string>
     <string name="zwfw_sqtj">诉求提交</string>
@@ -55,4 +56,7 @@
     <!--办事指南-->
     <string name="bszn_tabname">办事指南</string>
     <string name="bszn_liebiao">办事指南列表</string>
+
+
+    <string name="no_data">没有查询到数据</string>
 </resources>

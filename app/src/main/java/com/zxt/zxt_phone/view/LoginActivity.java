@@ -165,7 +165,8 @@ public class LoginActivity extends BaseActivity {
                     CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
                     HttpUrl httpUrl = HttpUrl.parse(Url.URL_WG + "user/login.do?");
                     List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
-//                    AppData.Cookie=cookies.get(0).toString();
+
+                    AppData.Cookie=cookies.get(0).toString();
                     Log.i("TAG","--------------"+httpUrl.host() + "对应的cookie如下：" + cookies.toString());
 
                     startActivity(new Intent(mActivity, WsbsActivity.class)

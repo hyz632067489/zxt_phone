@@ -13,7 +13,9 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.cookie.store.CookieStore;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
+import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.CookieUtil;
 import com.zxt.zxt_phone.utils.LogUtil;
 
 import org.json.JSONException;
@@ -80,10 +82,12 @@ public class LtjdActivity extends BaseActivity {
         mWebView.setBackgroundColor(0);
         settings.setDisplayZoomControls(false);
 
-
         newsUrl = Url.URL_WG+"info/getOneAreaIntrInfo.do";
-//        if(AppData.isLogin)
-//            setCookies(newsUrl);
+
+
+
+        if(AppData.isLogin)
+            CookieUtil.setCookies(newsUrl);
         //WebView加载web资源
 
         mWebView.loadUrl(newsUrl);

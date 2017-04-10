@@ -22,6 +22,6 @@ public class Url {
     //网格url
     public static final String URL_WG = "http://192.168.1.223:8080/grid/app/";
     //网格图片url
-    public static final String URL_TU_PIAN = "http://192.168.1.104:8080/grid";
+    public static final String URL_TU_PIAN = "http://192.168.1.223:8080/grid/";
 
 }

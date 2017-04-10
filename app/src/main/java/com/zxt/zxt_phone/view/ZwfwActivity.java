@@ -18,6 +18,7 @@ import com.zxt.zxt_phone.adapter.ViewHolder;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.model.ZwfwModel;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
+import com.zxt.zxt_phone.view.zwfw.DqfcActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +124,9 @@ public class ZwfwActivity extends BaseActivity {
                 toast("社区概况");
                 break;
             case 1:
-                toast("党群风采");
+//                toast("党群风采");
+                mIntent = new Intent(mActivity, DqfcActivity.class);
+                startActivity(mIntent);
                 break;
             case 2:
 //                toast("诉求提交");

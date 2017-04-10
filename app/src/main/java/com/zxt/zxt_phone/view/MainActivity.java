@@ -3,6 +3,7 @@ package com.zxt.zxt_phone.view;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.RadioButton;
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
  * powered by company
  */
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
 
 
     private mMainFragment mainFragment;
@@ -49,6 +50,7 @@ public class MainActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         //解决软件盘弹出
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mainFragment = mMainFragment.newInstance();
