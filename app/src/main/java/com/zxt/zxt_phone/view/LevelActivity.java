@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.PopBean;
@@ -16,11 +18,13 @@ import com.zxt.zxt_phone.utils.DateTimePickDialogUtil;
 import com.zxt.zxt_phone.view.widget.ListPopwindow;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 /**
  * 请假页面
@@ -64,6 +68,48 @@ public class LevelActivity extends BaseActivity implements ListPopwindow.OnPopIt
     private void initView() {
         tabName.setText(R.string.qjtx);
 
+        KdniaoTrackQueryAPI api = new KdniaoTrackQueryAPI();
+		try {
+			String result = api.getOrderTracesByJson("ANE", "210001633605");
+			Log.i(TAG,"========="+result);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        getData();
+    }
+
+
+    //电商ID
+    private String EBusinessID="1284237";
+    //电商加密私钥，快递鸟提供，注意保管，不要泄漏
+    private String AppKey="0fa7dd2f-dec3-4071-ab7f-20fad7b11a62";
+    //请求url
+    private String ReqURL="http://api.kdniao.cc/Ebusiness/EbusinessOrderHandle.aspx";
+
+
+
+
+    private void getData() {
+
+        HashMap<String,String > header = new HashMap<>();
+        header.put("Content-Type","application/x-www-form-urlencoded;charset=utf-8");
+        OkHttpUtils.post()
+                .url("http://api.kdniao.cc/Ebusiness/EbusinessOrderHandle.aspx")
+                .headers(header)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.i(TAG,"===="+response);
+                    }
+                });
     }
 
     public void show(){

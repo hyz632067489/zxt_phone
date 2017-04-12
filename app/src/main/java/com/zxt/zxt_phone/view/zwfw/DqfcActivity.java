@@ -30,6 +30,9 @@ import java.util.List;
 import butterknife.BindView;
 import okhttp3.Call;
 
+/**
+ * 党群风采
+ */
 public class DqfcActivity extends BaseActivity {
 
     private String TAG = DqfcActivity.class.getCanonicalName();
