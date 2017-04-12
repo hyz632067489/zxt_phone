@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+import com.zxt.zxt_phone.ActivityManager;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.adapter.CommonAdapter;
 import com.zxt.zxt_phone.adapter.ViewHolder;
@@ -18,6 +20,9 @@ import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.bean.model.GzrzListModel;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.MLog;
+import com.zxt.zxt_phone.utils.SharedPrefsUtil;
+import com.zxt.zxt_phone.view.ZwfwActivity;
 import com.zxt.zxt_phone.view.customview.PullToRefreshView;
 
 import org.json.JSONException;
@@ -29,6 +34,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnItemClick;
 import okhttp3.Call;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 
 /**
  * Created by Administrator on 2017/3/31.
@@ -43,6 +51,9 @@ public class GzrzActivity extends BaseActivity {
     @BindView(R.id.sign_in)
     TextView addText;
 
+    @BindView(R.id.search_lay)
+    LinearLayout searchLay;
+
     @BindView(R.id.newList)
     ListView newsList;
     @BindView(R.id.refreshView)
@@ -50,18 +61,21 @@ public class GzrzActivity extends BaseActivity {
 
     private int pageSize = 30;
     private int page = 1;
-    CommonAdapter<GzrzListModel.ListBean> myAdapter;
-    private List<GzrzListModel.ListBean> list = new ArrayList<>();
+    CommonAdapter<GzrzListModel.ListNewsModel> myAdapter;
+    private List<GzrzListModel.ListNewsModel> list = new ArrayList<>();
     GzrzListModel newsModel = null;
 
     Intent mIntent;
 
+    int tag;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (resultCode) {
 
             case RESULT_OK:
+                page = 1;
+                list.clear();
                 getData(page);
                 break;
         }
@@ -78,34 +92,54 @@ public class GzrzActivity extends BaseActivity {
 
     private void initView() {
         tabName.setText(R.string.gzrz);
-        addText.setText(R.string.add_gzrz);
-        addText.setVisibility(View.VISIBLE);
+        if (SharedPrefsUtil.getString(mContext, "dept").equals("社区网格员") ||
+                SharedPrefsUtil.getString(mContext, "Dept").equals("社区网格长")) {
+            addText.setText(R.string.add_gzrz);
+            addText.setVisibility(View.VISIBLE);
+            tag = 1;
+        } else {
+            addText.setText("搜索");
+            addText.setVisibility(View.VISIBLE);
+//            addText.setBackgroundResource(R.drawable.search);
+            tag = 2;
+        }
+
         addText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(mActivity, AddGzrzActivity.class), 1);
+                if (tag == 1) {
+                    startActivityForResult(new Intent(mActivity, AddGzrzActivity.class), 1);
+                } else if (tag == 2) {
+                    toast("弹出搜索框");
+                    searchLay.setVisibility(View.VISIBLE);
+
+                }
+
             }
         });
 
-        myAdapter = new CommonAdapter<GzrzListModel.ListBean>(mActivity, list, R.layout.gzrz_list_item) {
+        myAdapter = new CommonAdapter<GzrzListModel.ListNewsModel>(mActivity, list, R.layout.gzrz_list_item) {
             @Override
-            public void convert(ViewHolder holder, GzrzListModel.ListBean item) {
+            public void convert(ViewHolder holder, GzrzListModel.ListNewsModel item) {
                 holder.setText(R.id.Title, "· [" + item.getBlogName() + "]");
 //                holder.setText(R.id.EditDate, item.getEditBlogDate());
                 TextView tvEditDate = holder.getView(R.id.EditDate);
-                tvEditDate.setText("编辑时间："+item.getEditBlogDate().substring(10,item.getEditBlogDate().length()));
+                tvEditDate.setText("编辑时间：" + item.getEditBlogDate().substring(10, item.getEditBlogDate().length()));
+
+                holder.setText(R.id.tv_title, item.getGridStaffApp().getGridStaffName());
+
                 String myType = item.getBlogType();
                 if (myType.length() != 0) {
-                    if(myType.contains("1")){
+                    if (myType.contains("1")) {
                         holder.getView(R.id.tv_xuncha).setVisibility(View.VISIBLE);
                     }
-                    if(myType.contains("2")){
+                    if (myType.contains("2")) {
                         holder.getView(R.id.tv_xuanchuan).setVisibility(View.VISIBLE);
                     }
-                    if(myType.contains("3")){
+                    if (myType.contains("3")) {
                         holder.getView(R.id.tv_zoufang).setVisibility(View.VISIBLE);
                     }
-                    if(myType.contains("4")){
+                    if (myType.contains("4")) {
                         holder.getView(R.id.tv_chuli).setVisibility(View.VISIBLE);
                     }
                 }
@@ -136,13 +170,16 @@ public class GzrzActivity extends BaseActivity {
     @OnItemClick(R.id.newList)
     public void OnItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        GzrzListModel.ListBean model = new GzrzListModel.ListBean();
+        GzrzListModel.ListNewsModel model = new GzrzListModel.ListNewsModel();
+        int count = newsModel.getList().size();
         model.setBlogContent(newsModel.getList().get(position).getBlogContent());
         model.setBlogName(newsModel.getList().get(position).getBlogName());
         model.setBlogPic(newsModel.getList().get(position).getBlogPic());
         model.setBlogType(newsModel.getList().get(position).getBlogType());
+
         mIntent = new Intent(mActivity, GzrzInfoActivity.class);
         mIntent.putExtra("list", model);
+        mIntent.putExtra("GridStaffName", list.get(position).getGridStaffApp().getGridStaffName());
         startActivity(mIntent);
     }
 
@@ -152,7 +189,6 @@ public class GzrzActivity extends BaseActivity {
      * @param page
      */
     private void getData(int page) {
-//        http://192.168.1.220:8080/grid/app/blog/getOneStaffBlogById.do?pageSize=30&pageCurrent=1
         OkHttpUtils.get()
                 .url(Url.URL_WG + "blog/getOneStaffBlogById.do?")
                 .addParams("pageSize", pageSize + "")
@@ -166,27 +202,30 @@ public class GzrzActivity extends BaseActivity {
 
             @Override
             public void onResponse(String response, int id) {
-
                 Log.i(TAG, "response==" + response);
-                try {
-
-                    JSONObject jsonObject = new JSONObject(response);
-//                    if (!"0".equals(jsonObject.getString("Status"))) {
-                    newsModel = new Gson().fromJson(response, GzrzListModel.class);
-                    if (newsModel.getList() != null || newsModel.getList().size() != 0) {
+                if (response.length() > 0) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                    if (!"0".equals(jsonObject.getString("Status"))) {
+                        newsModel = new Gson().fromJson(response, GzrzListModel.class);
+                        if (newsModel.getList().size() != 0) {
 //                                    list.clear();
-                        list.addAll(newsModel.getList());
-                    } else {
+                            list.addAll(newsModel.getList());
 
+                        }
+                    }else if("304".equals(jsonObject.getString("Status"))){
+                            toast("登录过期，请重新登录");
+                        ActivityManager.getActivityManager().popAllActivityExceptOne(getClass());
+                        startActivity(new Intent(mActivity, ZwfwActivity.class));
                     }
-//                    }
-                    myAdapter.notifyDataSetChanged();
+                        myAdapter.notifyDataSetChanged();
 
-                    mRefreshView.onFooterLoadFinish();
-                    mRefreshView.onHeaderRefreshFinish();
+                        mRefreshView.onFooterLoadFinish();
+                        mRefreshView.onHeaderRefreshFinish();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

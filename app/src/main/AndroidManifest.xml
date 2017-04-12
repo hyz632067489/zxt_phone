@@ -88,14 +88,13 @@
         <activity android:name=".view.GzglActivity" />
         <activity android:name=".view.zwfw.GzrzActivity" />
         <activity android:name=".view.zwfw.AddGzrzActivity" />
-        <activity android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"/>
+        <activity android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity" />
         <activity
             android:name=".view.LevelActivity"
             android:theme="@style/android:Theme.Holo.Light.NoActionBar" />
         <activity
             android:name=".view.TimeDialogActivity"
             android:theme="@style/Theme.Transparent" />
-
 
         <service
             android:name="com.baidu.location.f"
@@ -110,7 +109,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".view.zwfw.GzrzInfoActivity"></activity>
+        <activity android:name=".view.zwfw.GzrzInfoActivity" />
+        <activity android:name=".view.zwfw.WxDemoActivity" />
+        <activity android:name=".view.zwfw.DqfcActivity"></activity>
     </application>
 
 </manifest>

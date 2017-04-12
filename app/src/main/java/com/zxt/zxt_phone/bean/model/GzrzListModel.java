@@ -10,14 +10,16 @@ import java.util.List;
 
 public class GzrzListModel  {
 
+
     /**
-     * totalRow : 2
+     * totalRow : 4
      * pageCurrent : 1
-     * list : [{"areaId":22,"blogContent":"各位德克士的铁粉们，\r\n这可不是一个简单的倒计时！\r\n只要能够玩转这个口诀，\r\n那么一大波不可思议的福利，\r\n就都是你的了！","blogId":2,"blogName":"207/3/31","blogPic":"images/user/default.png","blogType":"2,3","editBlogDate":"2017-03-31 16:42:00","gridId":7,"gridStaffId":16},{"areaId":22,"blogContent":"到intel的官方网站下载windows 7 x64的F6驱动，也就是在Windows  7安装的过程中可以提前加入的驱动，到安装程序选择或管理分区的步骤时可以加入","blogId":1,"blogName":"2017/3/30","blogPic":"images/user/default.png","blogType":"1,2,3","editBlogDate":"2017-03-30 09:00:00","gridId":7,"gridStaffId":16}]
+     * list : [{"areaId":22,"blogContent":"ceshi neirong","blogId":23,"blogName":"2017-4-5","blogPic":"images/app/blog/20170405133122280.jpg;images/app/blog/20170405133122369.jpg;","blogType":"1,4","editBlogDate":"2017-04-05 13:35:54","gridId":7,"gridStaffApp":{"gridStaffId":8,"gridStaffName":"张海峰"}},{"areaId":22,"blogContent":"ceshi neirong","blogId":22,"blogName":"2017-4-5","blogPic":"images/app/blog/20170405133122280.jpg;images/app/blog/20170405133122369.jpg;","blogType":"1,4","editBlogDate":"2017-04-05 13:34:42","gridId":7,"gridStaffApp":{"gridStaffId":16,"gridStaffName":"zs"}},{"areaId":22,"blogContent":"各位德克士的铁粉们，\r\n这可不是一个简单的倒计时！\r\n只要能够玩转这个口诀，\r\n那么一大波不可思议的福利，\r\n就都是你的了！","blogId":2,"blogName":"207-3-31","blogPic":"images/user/default.png","blogType":"2,3","editBlogDate":"2017-03-31 16:42:00","gridId":7,"gridStaffApp":{"gridStaffId":16,"gridStaffName":"zs"}},{"areaId":22,"blogContent":"到intel的官方网站下载windows 7 x64的F6驱动，也就是在Windows  7安装的过程中可以提前加入的驱动，到安装程序选择或管理分区的步骤时可以加入","blogId":1,"blogName":"2017-3-30","blogPic":"images/user/default.png","blogType":"1,2,3","editBlogDate":"2017-03-30 09:00:00","gridId":7,"gridStaffApp":{"gridStaffId":16,"gridStaffName":"zs"}}]
      */
+
     private int totalRow;
     private int pageCurrent;
-    private List<ListBean> list;
+    private List<ListNewsModel> list;
 
     public int getTotalRow() {
         return totalRow;
@@ -35,31 +37,28 @@ public class GzrzListModel  {
         this.pageCurrent = pageCurrent;
     }
 
-    public List<ListBean> getList() {
+    public List<ListNewsModel> getList() {
         return list;
     }
 
-    public void setList(List<ListBean> list) {
+    public void setList(List<ListNewsModel> list) {
         this.list = list;
     }
 
-    public static class ListBean implements Serializable{
+    public static class ListNewsModel implements Serializable{
+
+
         /**
          * areaId : 22
-         * blogContent : 各位德克士的铁粉们，
-         这可不是一个简单的倒计时！
-         只要能够玩转这个口诀，
-         那么一大波不可思议的福利，
-         就都是你的了！
-         * blogId : 2
-         * blogName : 207/3/31
-         * blogPic : images/user/default.png
-         * blogType : 2,3
-         * editBlogDate : 2017-03-31 16:42:00
+         * blogContent : ceshi neirong
+         * blogId : 23
+         * blogName : 2017-4-5
+         * blogPic : images/app/blog/20170405133122280.jpg;images/app/blog/20170405133122369.jpg;
+         * blogType : 1,4
+         * editBlogDate : 2017-04-05 13:35:54
          * gridId : 7
-         * gridStaffId : 16
+         * gridStaffApp : {"gridStaffId":8,"gridStaffName":"张海峰"}
          */
-        private static final long serialVersionUID = -7060210544600464481L;
 
         private int areaId;
         private String blogContent;
@@ -69,7 +68,7 @@ public class GzrzListModel  {
         private String blogType;
         private String editBlogDate;
         private int gridId;
-        private int gridStaffId;
+        private GridStaffAppNewsModel gridStaffApp;
 
         public int getAreaId() {
             return areaId;
@@ -135,12 +134,38 @@ public class GzrzListModel  {
             this.gridId = gridId;
         }
 
-        public int getGridStaffId() {
-            return gridStaffId;
+        public GridStaffAppNewsModel getGridStaffApp() {
+            return gridStaffApp;
         }
 
-        public void setGridStaffId(int gridStaffId) {
-            this.gridStaffId = gridStaffId;
+        public void setGridStaffApp(GridStaffAppNewsModel gridStaffApp) {
+            this.gridStaffApp = gridStaffApp;
+        }
+
+        public static class GridStaffAppNewsModel {
+            /**
+             * gridStaffId : 8
+             * gridStaffName : 张海峰
+             */
+
+            private int gridStaffId;
+            private String gridStaffName;
+
+            public int getGridStaffId() {
+                return gridStaffId;
+            }
+
+            public void setGridStaffId(int gridStaffId) {
+                this.gridStaffId = gridStaffId;
+            }
+
+            public String getGridStaffName() {
+                return gridStaffName;
+            }
+
+            public void setGridStaffName(String gridStaffName) {
+                this.gridStaffName = gridStaffName;
+            }
         }
     }
 }

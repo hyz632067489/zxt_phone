@@ -14,10 +14,12 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
+import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.zwfw.AddGzrzActivity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -134,7 +136,7 @@ public class WsbsActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.sign_in, R.id.ltjd_Layout,R.id.kqqj_layout, R.id.kqdk_layout, R.id.jcsu_Layout, R.id.tjfx_Layout, R.id.gzgl_Layout, R.id.wgry_layout, R.id.rkgl_Layout, R.id.jzbf_Layout, R.id.txl_Layout})
+    @OnClick({R.id.sign_in, R.id.ltjd_Layout, R.id.kqqj_layout, R.id.kqdk_layout, R.id.jcsu_Layout, R.id.tjfx_Layout, R.id.gzgl_Layout, R.id.wgry_layout, R.id.rkgl_Layout, R.id.jzbf_Layout, R.id.txl_Layout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.sign_in:
@@ -146,8 +148,10 @@ public class WsbsActivity extends BaseActivity {
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        SharedPrefsUtil.putString(mActivity, "dept", " ");
-                                        finish();
+
+                                        Logout();
+
+                                        dialog.dismiss();
                                     }
                                 })
                         .setNegativeButton("取消",
@@ -200,6 +204,40 @@ public class WsbsActivity extends BaseActivity {
                 startActivity(mIntent);
                 break;
         }
+    }
+
+    /**
+     * 注销
+     */
+    private void Logout() {
+        OkHttpUtils.post()
+                .url(Url.URL_WG + "user/loginOut.do")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.i(TAG, "response===" + response);
+                        if (response.length()>0) {
+                            try {
+                                JSONObject obj = new JSONObject(response);
+                                if("200".equals(obj.getString("status"))){
+                                    SharedPrefsUtil.putString(mActivity, "dept", " ");
+                                    toast("注销成功");
+                                    AppData.isLogin = false;
+                                    finish();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+                });
     }
 }
 

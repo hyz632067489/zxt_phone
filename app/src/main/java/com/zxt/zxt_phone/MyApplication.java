@@ -9,6 +9,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
 import com.zhy.http.okhttp.cookie.store.PersistentCookieStore;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
+import com.zxt.zxt_phone.utils.CookieInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +34,7 @@ public class MyApplication extends Application {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new LoggerInterceptor("TAG"))
+// 过滤 session过期                .addInterceptor(new CookieInterceptor(mContext))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .cookieJar(cookieJar)

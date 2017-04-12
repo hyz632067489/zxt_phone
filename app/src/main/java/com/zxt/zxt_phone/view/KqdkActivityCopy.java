@@ -187,7 +187,7 @@ public class KqdkActivityCopy extends BaseActivity {
     public class MyLocationListener implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
-            Log.i(TAG, "000000000000" + "市：" + location.getCity() + "\n" + "区：" + location.getDistrict() + "\n" + "街道：" + location.getStreet());
+            Log.i(TAG, "000000000000" + "市：" + location.getLongitude() + "\n" + "区：" + location.getLatitude() + "\n" + "街道：" + location.getStreet());
             //获取定位结果
             address = location.getAddrStr();
             mHandler.sendEmptyMessage(ADDRESS);
@@ -374,7 +374,7 @@ public class KqdkActivityCopy extends BaseActivity {
 
     private void sendData() {
         OkHttpUtils.get()
-                .url("http://192.168.1.220:8080/grid/app/work/addStaffClockInInfo.do?")
+                .url(Url.URL_WG+"work/addStaffClockInInfo.do?")
                 .addParams("start_time", newTime)
                 .addParams("start_site", positionText.getText().toString())
                 .addParams("start_memo", etContent.getText().toString())

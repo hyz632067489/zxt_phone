@@ -12,4 +12,7 @@ public class Common {
 
     //网格员登录成功后
     public  static boolean IS_LOGIN = false;
+
+    public  static final String USERNAME = "";
+    public  static final String PWD = "";
 }
