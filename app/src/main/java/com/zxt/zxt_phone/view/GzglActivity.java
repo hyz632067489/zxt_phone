@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
-import com.zxt.zxt_phone.view.zwfw.GzrzActivity;
+import com.zxt.zxt_phone.view.zwfw.wggl.GzrzActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -1,10 +1,15 @@
-package com.zxt.zxt_phone.view.zwfw;
+package com.zxt.zxt_phone.view.zwfw.wggl;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,10 +22,8 @@ import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.adapter.CommonAdapter;
 import com.zxt.zxt_phone.adapter.ViewHolder;
 import com.zxt.zxt_phone.base.BaseActivity;
-import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.bean.model.GzrzListModel;
 import com.zxt.zxt_phone.constant.Url;
-import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.ZwfwActivity;
 import com.zxt.zxt_phone.view.customview.PullToRefreshView;
@@ -32,17 +35,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import okhttp3.Call;
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 
 /**
  * Created by Administrator on 2017/3/31.
  */
 
 public class GzrzActivity extends BaseActivity {
+
 
     private String TAG = GzrzActivity.class.getCanonicalName();
 
@@ -54,6 +56,17 @@ public class GzrzActivity extends BaseActivity {
     @BindView(R.id.search_lay)
     LinearLayout searchLay;
 
+
+    @BindView(R.id.search_layout)
+    LinearLayout searchLayout;
+    @BindView(R.id.UserName)
+    EditText UserName;
+    @BindView(R.id.MobileNo)
+    EditText MobileNo;
+    @BindView(R.id.search)
+    TextView tvSearch;
+
+
     @BindView(R.id.newList)
     ListView newsList;
     @BindView(R.id.refreshView)
@@ -61,13 +74,40 @@ public class GzrzActivity extends BaseActivity {
 
     private int pageSize = 30;
     private int page = 1;
-    CommonAdapter<GzrzListModel.ListNewsModel> myAdapter;
-    private List<GzrzListModel.ListNewsModel> list = new ArrayList<>();
+    CommonAdapter<GzrzListModel.DataBean.ListBean> myAdapter;
+    private List<GzrzListModel.DataBean.ListBean> list = new ArrayList<>();
     GzrzListModel newsModel = null;
 
     Intent mIntent;
 
-    int tag;
+    int tag, roleLevel;
+    String data = "";
+    private boolean isButton = true;
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+
+            }
+
+        }
+    };
+
+    Runnable eChanged = new Runnable() {
+
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            data = UserName.getText().toString();
+
+            page = 1;
+            list.clear();
+            getData(page);
+            myAdapter.notifyDataSetChanged();
+
+        }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -85,6 +125,7 @@ public class GzrzActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gzrz);
+        ButterKnife.bind(this);
 
         getData(page);
         initView();
@@ -92,8 +133,10 @@ public class GzrzActivity extends BaseActivity {
 
     private void initView() {
         tabName.setText(R.string.gzrz);
-        if (SharedPrefsUtil.getString(mContext, "dept").equals("社区网格员") ||
-                SharedPrefsUtil.getString(mContext, "Dept").equals("社区网格长")) {
+
+        roleLevel = Integer.parseInt(SharedPrefsUtil.getString(mActivity, "roleLevel"));
+        //根据权限角色，判断添加或者收索
+        if (roleLevel >= 6) {
             addText.setText(R.string.add_gzrz);
             addText.setVisibility(View.VISIBLE);
             tag = 1;
@@ -110,17 +153,56 @@ public class GzrzActivity extends BaseActivity {
                 if (tag == 1) {
                     startActivityForResult(new Intent(mActivity, AddGzrzActivity.class), 1);
                 } else if (tag == 2) {
-                    toast("弹出搜索框");
-                    searchLay.setVisibility(View.VISIBLE);
-
+//                    toast("弹出搜索框");
+//                    searchLay.setVisibility(View.VISIBLE);
+                    if(isButton){
+                        searchLayout.setVisibility(View.VISIBLE);
+                        isButton = false;
+                    }else {
+                        searchLayout.setVisibility(View.GONE);
+                        isButton = true;
+                    }
                 }
-
             }
         });
 
-        myAdapter = new CommonAdapter<GzrzListModel.ListNewsModel>(mActivity, list, R.layout.gzrz_list_item) {
+        //
+        UserName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void convert(ViewHolder holder, GzrzListModel.ListNewsModel item) {
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
+                //这个应该是在改变的时候会做的动作吧，具体还没用到过。
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
+                //这是文本框改变之前会执行的动作
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+                /**这是文本框改变之后 会执行的动作
+                 * 因为我们要做的就是，在文本框改变的同时，我们的listview的数据也进行相应的变动，并且如一的显示在界面上。
+                 * 所以这里我们就需要加上数据的修改的动作了。
+                 */
+
+//                data = UserName.getText().toString();
+//                if(s.length() == 0){
+//                    ivDeleteText.setVisibility(View.GONE);//当文本框为空时，则叉叉消失
+//                }
+//                else {
+//                    ivDeleteText.setVisibility(View.VISIBLE);//当文本框不为空时，出现叉叉
+                mHandler.post(eChanged);
+//                }
+            }
+        });
+
+
+        myAdapter = new CommonAdapter<GzrzListModel.DataBean.ListBean>(mActivity, list, R.layout.gzrz_list_item) {
+            @Override
+            public void convert(ViewHolder holder, GzrzListModel.DataBean.ListBean item) {
                 holder.setText(R.id.Title, "· [" + item.getBlogName() + "]");
 //                holder.setText(R.id.EditDate, item.getEditBlogDate());
                 TextView tvEditDate = holder.getView(R.id.EditDate);
@@ -170,12 +252,12 @@ public class GzrzActivity extends BaseActivity {
     @OnItemClick(R.id.newList)
     public void OnItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        GzrzListModel.ListNewsModel model = new GzrzListModel.ListNewsModel();
-        int count = newsModel.getList().size();
-        model.setBlogContent(newsModel.getList().get(position).getBlogContent());
-        model.setBlogName(newsModel.getList().get(position).getBlogName());
-        model.setBlogPic(newsModel.getList().get(position).getBlogPic());
-        model.setBlogType(newsModel.getList().get(position).getBlogType());
+        GzrzListModel.DataBean.ListBean model = new GzrzListModel.DataBean.ListBean();
+        int count = newsModel.getData().getList().size();
+        model.setBlogContent(newsModel.getData().getList().get(position).getBlogContent());
+        model.setBlogName(newsModel.getData().getList().get(position).getBlogName());
+        model.setBlogPic(newsModel.getData().getList().get(position).getBlogPic());
+        model.setBlogType(newsModel.getData().getList().get(position).getBlogType());
 
         mIntent = new Intent(mActivity, GzrzInfoActivity.class);
         mIntent.putExtra("list", model);
@@ -193,6 +275,7 @@ public class GzrzActivity extends BaseActivity {
                 .url(Url.URL_WG + "blog/getOneStaffBlogById.do?")
                 .addParams("pageSize", pageSize + "")
                 .addParams("pageCurrent", page + "")
+                .addParams("field", data)
 //                .addHeader("cookie", AppData.Cookie)
                 .build().execute(new StringCallback() {
             @Override
@@ -206,18 +289,19 @@ public class GzrzActivity extends BaseActivity {
                 if (response.length() > 0) {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                    if (!"0".equals(jsonObject.getString("Status"))) {
-                        newsModel = new Gson().fromJson(response, GzrzListModel.class);
-                        if (newsModel.getList().size() != 0) {
+                        if ("200".equals(jsonObject.getString("statusCode"))) {
+                            newsModel = new Gson().fromJson(response, GzrzListModel.class);
+                            if (newsModel.getData().getList().size() > 0) {
 //                                    list.clear();
-                            list.addAll(newsModel.getList());
+                                list.addAll(newsModel.getData().getList());
 
+                            }
                         }
-                    }else if("304".equals(jsonObject.getString("Status"))){
-                            toast("登录过期，请重新登录");
-                        ActivityManager.getActivityManager().popAllActivityExceptOne(getClass());
-                        startActivity(new Intent(mActivity, ZwfwActivity.class));
-                    }
+//                        else if ("403".equals(jsonObject.getString("statusCode"))) {
+//                            toast("登录过期，请重新登录");
+//                            ActivityManager.getActivityManager().popAllActivityExceptOne(getClass());
+//                            startActivity(new Intent(mActivity, ZwfwActivity.class));
+//                        }
                         myAdapter.notifyDataSetChanged();
 
                         mRefreshView.onFooterLoadFinish();

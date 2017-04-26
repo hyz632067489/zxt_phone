@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 import com.zxt.zxt_phone.R;
-import com.zxt.zxt_phone.view.zwfw.AddGzrzActivity;
+import com.zxt.zxt_phone.view.zwfw.wggl.AddGzrzActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
 
     public List<ImageItem> getImages() {
         //由于图片未选满时，最后一张显示添加图片，因此这个方法返回真正的已选图片
+        Log.i("TAG","adapter======"+mData.size());
         if (isAdded) return new ArrayList<>(mData.subList(0, mData.size() - 1));
         else return mData;
     }

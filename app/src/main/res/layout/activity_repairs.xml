@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_repairs"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zxt.zxt_phone.view.shfw.wyfw.RepairsActivity">
+    <View
+        android:id="@+id/top_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:background="#ff44aacc" />
+
+    <View
+        android:id="@+id/top_right"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/top_left"
+        android:background="#ffe40000"  />
+
+
+    <View
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/top_left"
+        android:background="#ff00ff22" />
+
+</RelativeLayout>

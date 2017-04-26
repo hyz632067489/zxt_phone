@@ -17,12 +17,10 @@ import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
-import com.zxt.zxt_phone.view.zwfw.AddGzrzActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,7 +64,7 @@ public class WsbsActivity extends BaseActivity {
     LinearLayout txlLayout;
 
 
-    private String Dept;
+    private int roleLevel;
     private Intent mIntent;
 
     public static void actionStart(Context context) {
@@ -90,12 +88,12 @@ public class WsbsActivity extends BaseActivity {
 
     private void initView() {
         tabName.setText(R.string.wggl);
-        Dept = SharedPrefsUtil.getString(mActivity, "dept");
+        roleLevel = Integer.parseInt(SharedPrefsUtil.getString(mActivity, "roleLevel"));
 
         signLogin.setVisibility(View.VISIBLE);
         signLogin.setText("注销");
 
-        if ("社区网格员".equals(Dept)) {
+        if (roleLevel>=6) {
             ltjdLayout.setVisibility(View.VISIBLE);
             kqdkLayout.setVisibility(View.VISIBLE);
             kqqjLayout.setVisibility(View.VISIBLE);
@@ -216,7 +214,8 @@ public class WsbsActivity extends BaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        call.request();
+                        Log.i("TAG", "--------------" + "对应的cookie如下：" + call.request());
                     }
 
                     @Override
@@ -225,8 +224,16 @@ public class WsbsActivity extends BaseActivity {
                         if (response.length()>0) {
                             try {
                                 JSONObject obj = new JSONObject(response);
-                                if("200".equals(obj.getString("status"))){
-                                    SharedPrefsUtil.putString(mActivity, "dept", " ");
+                                if("200".equals(obj.getString("statusCode"))){
+
+                                    //获取cookie中的sessionId值 用于注入webView
+//                        CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
+//                        HttpUrl httpUrl = HttpUrl.parse(Url.URL_WG + "user/login.do?");
+//                        List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
+//
+//                        AppData.Cookie = cookies.get(0).toString();
+//                        Log.i("TAG", "--------------" + httpUrl.host() + "对应的cookie如下：" + cookies.toString());
+                                    SharedPrefsUtil.putString(mActivity, "roleLevel", " ");
                                     toast("注销成功");
                                     AppData.isLogin = false;
                                     finish();

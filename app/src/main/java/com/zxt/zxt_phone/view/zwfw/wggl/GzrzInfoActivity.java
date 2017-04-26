@@ -1,4 +1,4 @@
-package com.zxt.zxt_phone.view.zwfw;
+package com.zxt.zxt_phone.view.zwfw.wggl;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +26,7 @@ public class GzrzInfoActivity extends BaseActivity {
     @BindView(R.id.tab_name)
     TextView tabName;
 
-    GzrzListModel.ListNewsModel model;
+    GzrzListModel.DataBean.ListBean model;
     Intent mIntent;
     private String mBlogId;
 
@@ -34,8 +34,8 @@ public class GzrzInfoActivity extends BaseActivity {
     TextView myBiaoti;
     @BindView(R.id.tv_content)
     TextView mContent;
-@BindView(R.id.tv_name)
-TextView tvName;
+    @BindView(R.id.tv_name)
+    TextView tvName;
     @BindView(R.id.nineGrid)
     NineGridView myPicView;
 
@@ -48,7 +48,7 @@ TextView tvName;
         setContentView(R.layout.activity_gzrz_info);
 
         mIntent = getIntent();
-        model = (GzrzListModel.ListNewsModel) mIntent.getSerializableExtra("list");
+        model = (GzrzListModel.DataBean.ListBean) mIntent.getSerializableExtra("list");
         initView();
     }
 
@@ -61,16 +61,16 @@ TextView tvName;
         mContent.setText(model.getBlogContent());
 
         if (myType.length() != 0) {
-            if(myType.contains("1")){
-               findViewById(R.id.tv_xuncha).setVisibility(View.VISIBLE);
+            if (myType.contains("1")) {
+                findViewById(R.id.tv_xuncha).setVisibility(View.VISIBLE);
             }
-            if(myType.contains("2")){
+            if (myType.contains("2")) {
                 findViewById(R.id.tv_xuanchuan).setVisibility(View.VISIBLE);
             }
-            if(myType.contains("3")){
+            if (myType.contains("3")) {
                 findViewById(R.id.tv_zoufang).setVisibility(View.VISIBLE);
             }
-            if(myType.contains("4")){
+            if (myType.contains("4")) {
                 findViewById(R.id.tv_chuli).setVisibility(View.VISIBLE);
             }
         }
@@ -81,22 +81,21 @@ TextView tvName;
             String[] pics = picString.split(";");
             EvaluationPic picModel;
             for (int i = 0; i < pics.length; i++) {
-                picModel =new EvaluationPic();
-                picModel.setImageUrl(Url.URL_TU_PIAN+pics[i]);
+                picModel = new EvaluationPic();
+                picModel.setImageUrl(Url.URL_TU_PIAN + pics[i]);
                 imageItems.add(picModel);
-                MLog.i(TAG,"=1===="+Url.URL_TU_PIAN+pics[i]);
+                MLog.i(TAG, "=1====" + Url.URL_TU_PIAN + pics[i]);
             }
         }
 
         ArrayList<ImageInfo> imageInfo = new ArrayList<>();
-//        List<EvaluationPic> imageDetails = imageItems;
         if (imageItems != null) {
             for (EvaluationPic imageDetail : imageItems) {
                 ImageInfo info = new ImageInfo();
                 info.setThumbnailUrl(imageDetail.imageUrl);
                 info.setBigImageUrl(imageDetail.imageUrl);
-                MLog.i(TAG,"=2===="+info.getBigImageUrl());
-                MLog.i(TAG,"==3==="+info.getThumbnailUrl());
+                MLog.i(TAG, "=2====" + info.getBigImageUrl());
+                MLog.i(TAG, "==3===" + info.getThumbnailUrl());
                 imageInfo.add(info);
             }
         }

@@ -10,12 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/action_tab_height" />
     <LinearLayout
+        android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/search_bg_color"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:visibility="gone"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/cxgs_yjfk_search_input"
-                android:hint="请输入姓名"
+                android:hint="请输入姓名或者电话"
                 android:paddingLeft="5dp"
                 android:singleLine="true"
                 android:textColor="@color/maop_text_color"
@@ -47,7 +50,8 @@
                 android:paddingLeft="5dp"
                 android:singleLine="true"
                 android:textColor="@color/maop_text_color"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:visibility="gone"/>
 
 
         </LinearLayout>
@@ -57,9 +61,9 @@
             android:id="@+id/search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/cxgs_yjfk_search_btn"
             android:drawableTop="@drawable/cxgs_yjfk_search_ico"
             android:gravity="center_horizontal"
+            android:padding="@dimen/dp_4"
             android:paddingTop="10dp"
             android:text="搜索"
             android:textColor="@color/white"

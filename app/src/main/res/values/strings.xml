@@ -34,8 +34,9 @@
     <string name="login_hint_pwd">\t请输入密码</string>
     <string name="login_forget">忘记密码>></string>
     <string name="login_regist">立即注册</string>
-    <string name="login_code">\t验证码</string>
+    <string name="login_code">\t获取验证码</string>
     <string name="login_wgy">\t网格人员</string>
+
 
     <!--首页-->
     <string name="m_main_tab_name">指讯通网格信息化服务群众平台</string>

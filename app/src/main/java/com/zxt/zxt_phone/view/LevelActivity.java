@@ -68,14 +68,7 @@ public class LevelActivity extends BaseActivity implements ListPopwindow.OnPopIt
     private void initView() {
         tabName.setText(R.string.qjtx);
 
-        KdniaoTrackQueryAPI api = new KdniaoTrackQueryAPI();
-		try {
-			String result = api.getOrderTracesByJson("ANE", "210001633605");
-			Log.i(TAG,"========="+result);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
         getData();
     }

@@ -20,6 +20,7 @@ import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.CountDownTimerUtils;
 import com.zxt.zxt_phone.utils.LogUtil;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 
@@ -61,13 +62,16 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.forget_password)
     TextView forgetPassword;
 
-    @BindView(R.id.chb_tv)
-    CheckBox checkBox;
+    @BindView(R.id.et_code)
+    TextView mEtCode;
 
-    String mUserId, mPwd, mCode;
+    String mUserId, mPwd, mCode,getCode;
 
     String status;
     CookieJar cookieJar;
+
+    private int LOGIN_ID = 100;
+    private int CODE_ID = 200;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,8 +87,9 @@ public class LoginActivity extends BaseActivity {
         etUserId.setHintTextColor(getResources().getColor(R.color.seashell));
         etPwd.setHintTextColor(getResources().getColor(R.color.seashell));
 
+//        forgetPassword.setText("获取验证码");
         returnBack.setVisibility(View.GONE);
-        forgetPassword.setText(Html.fromHtml("<u>" + getResources().getString(R.string.login_forget) + "</u>"));
+        forgetPassword.setText(Html.fromHtml("<u>" + getResources().getString(R.string.login_code) + "</u>"));
     }
 
     @OnClick({R.id.forget_password, R.id.btnLogin})
@@ -92,39 +97,91 @@ public class LoginActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.forget_password:
                 //忘记密码
+                if (verification(CODE_ID)) {
+                    CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(forgetPassword, 60000, 1000);
+                    mCountDownTimerUtils.start();
+                    getCode( );
+                }
+
                 break;
             case R.id.btnLogin:
                 //登录按钮
-                if (verification()) {
-                    login();
+                if (verification(CODE_ID)) {
+                    login( );
                 }
                 break;
         }
     }
 
+    private void getCode() {
 
-    private boolean verification() {
-        mUserId = etUserId.getText().toString().trim();
-        mPwd = etPwd.getText().toString().trim();
-        if (TextUtils.isEmpty(mUserId)
-                || TextUtils.isEmpty(mPwd)) {
-            toast("用户名或密码不能为空");
-            return false;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("userName", mUserId);
+        params.put("password", mPwd);
+
+        OkHttpUtils.post()
+                .url(Url.URL_WG + "user/getPhoneCaptcha.do?")
+                .params(params)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.i(TAG,"response==="+response);
+                        JSONObject obj = null;
+                        try {
+                            obj = new JSONObject(response);
+                            if (200 == Integer.parseInt(obj.getString("statusCode"))) {
+                                getCode=obj.getString("captcha");
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+    }
+
+
+    private boolean verification(int checkId) {
+
+        if(checkId==CODE_ID){
+            mUserId = etUserId.getText().toString().trim();
+            mPwd = etPwd.getText().toString().trim();
+            if (TextUtils.isEmpty(mUserId)
+                    || TextUtils.isEmpty(mPwd)) {
+                toast("用户名或密码不能为空");
+                return false;
+            }
+        }else if(checkId == LOGIN_ID){
+            verification(CODE_ID);
+            mCode = mEtCode.getText().toString().trim();
+            if(TextUtils.isEmpty(mCode)){
+                toast("请输入验证码");
+                return false;
+            }
+            if(getCode ==mCode){
+                toast("请输入正确的验证码");
+                return false;
+            }
         }
         return true;
     }
 
-    private void login() {
+    private void login( ) {
 
-//        http://192.168.1.220:8080/grid/app/user/login.do?userName=WGY&password=123
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", mUserId);
         params.put("password", mPwd);
-//        params.put("gridStaff", Common.IS_LOGIN+"");
+//        params.put("code", mCode);
 
         OkHttpUtils.post()
                 .url(Url.URL_WG + "user/login.do?")
-//                .url("http://192.168.1.220:8080/grid/app/user/login.do?")
                 .params(params)
                 .build()
                 .execute(new MyStringCallback());
@@ -149,31 +206,32 @@ public class LoginActivity extends BaseActivity {
         @Override
         public void onResponse(String response, int id) {
 //            dismissLoading();
-            Log.e(TAG, "onResponse：complete");
             Log.i(TAG, "onResponse===" + response);
-            AppData.isLogin = true;
+
             try {
                 JSONObject obj = new JSONObject(response);
-                if ("200".equals(obj.getString("status"))) {
-                    //请求区域session
-                    runnable.run();
+                if (200 == Integer.parseInt(obj.getString("statusCode"))) {
 
-                    toast(obj.getString("message"));
-                    SharedPrefsUtil.putString(mActivity, "dept", obj.getString("dept"));
+                        AppData.isLogin = true;
+                        //请求区域session
+                        runnable.run();
+                        toast(obj.getString("message"));
+                        SharedPrefsUtil.putString(mActivity, "roleLevel", obj.getString("roleLevel"));
+//                    SharedPrefsUtil.putString(mActivity, "userName", obj.getString("userName"));
+//                    SharedPrefsUtil.putString(mActivity, "password", obj.getString("password"));
 
-                    //获取cookie中的sessionId值 用于注入webView
-                    CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
-                    HttpUrl httpUrl = HttpUrl.parse(Url.URL_WG + "user/login.do?");
-                    List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
+                        //获取cookie中的sessionId值 用于注入webView
+//                        CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
+//                        HttpUrl httpUrl = HttpUrl.parse(Url.URL_WG + "user/login.do?");
+//                        List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
+//
+//                        AppData.Cookie = cookies.get(0).toString();
+//                        Log.i("TAG", "--------------" + httpUrl.host() + "对应的cookie如下：" + cookies.toString());
 
-                    AppData.Cookie=cookies.get(0).toString();
-                    Log.i("TAG","--------------"+httpUrl.host() + "对应的cookie如下：" + cookies.toString());
+                        startActivity(new Intent(mActivity, WsbsActivity.class)
+                                .putExtra("roleLevel", obj.getString("roleLevel")));
+                        finish();
 
-                    startActivity(new Intent(mActivity, WsbsActivity.class)
-                            .putExtra("dept", obj.getString("dept")));
-
-
-                    finish();
                 } else {
                     toast(obj.getString("message"));
                 }
@@ -196,7 +254,7 @@ public class LoginActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case SEND_TIME:
-                   //请求
+                    //请求
                     getAirId();
                     break;
 
@@ -205,7 +263,7 @@ public class LoginActivity extends BaseActivity {
     };
 
     private void getAirId() {
-        OkHttpUtils.get().url(Url.URL_WG+"user/saveUserAreaSession.do?").build().execute(null);
+        OkHttpUtils.get().url(Url.URL_WG + "user/saveUserAreaSession.do?").build().execute(null);
     }
 
     Runnable runnable = new Runnable() {

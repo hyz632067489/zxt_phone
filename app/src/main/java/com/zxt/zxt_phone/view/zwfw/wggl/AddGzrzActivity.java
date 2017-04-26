@@ -1,4 +1,5 @@
-package com.zxt.zxt_phone.view.zwfw;
+package com.zxt.zxt_phone.view.zwfw.wggl;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +16,6 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
-import com.lzy.imagepicker.view.CropImageView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
@@ -23,7 +23,6 @@ import com.zxt.zxt_phone.adapter.ImagePickerAdapter;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.DateUtil;
-import com.zxt.zxt_phone.utils.GlideImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,10 +44,12 @@ import okhttp3.Call;
 
 public class AddGzrzActivity extends BaseActivity  implements ImagePickerAdapter.OnRecyclerViewItemClickListener, CompoundButton.OnCheckedChangeListener {
 
-    private String TAG = AddGzrzActivity.class.getCanonicalName();
+
+    private String TAG =  AddGzrzActivity.class.getCanonicalName();
 
     @BindView(R.id.tab_name)
     TextView tabName;
+
 
     @BindView(R.id.tv_biaoti)
     TextView tvBiaoti;
@@ -65,13 +66,13 @@ public class AddGzrzActivity extends BaseActivity  implements ImagePickerAdapter
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
+    private ArrayList<ImageItem> selImageList;//当前选择的所有图片
+    private ImagePickerAdapter adapter;
+    private int maxImgCount = 8;               //允许选择图片最大数
+
     public static final int IMAGE_ITEM_ADD = -1;
     public static final int REQUEST_CODE_SELECT = 100;
     public static final int REQUEST_CODE_PREVIEW = 101;
-
-    private ImagePickerAdapter adapter;
-    private ArrayList<ImageItem> selImageList; //当前选择的所有图片
-    private int maxImgCount = 8;               //允许选择图片最大数
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,22 +80,10 @@ public class AddGzrzActivity extends BaseActivity  implements ImagePickerAdapter
         setContentView(R.layout.activity_add_gzrz);
 
         //最好放到 Application oncreate执行
-        initImagePicker();
+//        initImagePicker();
         initView();
     }
-    private void initImagePicker() {
-        ImagePicker imagePicker = ImagePicker.getInstance();
-        imagePicker.setImageLoader(new GlideImageLoader());   //设置图片加载器
-        imagePicker.setShowCamera(true);                      //显示拍照按钮
-        imagePicker.setCrop(false);                           //允许裁剪（单选才有效）
-        imagePicker.setSaveRectangle(true);                   //是否按矩形区域保存
-        imagePicker.setSelectLimit(maxImgCount);              //选中数量限制
-        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
-        imagePicker.setFocusWidth(800);                       //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setFocusHeight(800);                      //裁剪框的高度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setOutPutX(1000);                         //保存文件的宽度。单位像素
-        imagePicker.setOutPutY(1000);                         //保存文件的高度。单位像素
-    }
+
     private void initView() {
         tabName.setText(R.string.add_gzrz);
 
@@ -107,9 +96,7 @@ public class AddGzrzActivity extends BaseActivity  implements ImagePickerAdapter
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(adapter);
-
     }
-
     @Override
     public void onItemClick(View view, int position) {
         switch (position) {
@@ -149,6 +136,7 @@ public class AddGzrzActivity extends BaseActivity  implements ImagePickerAdapter
             }
         }
     }
+
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
             case R.id.chb_1:
@@ -181,7 +169,6 @@ public class AddGzrzActivity extends BaseActivity  implements ImagePickerAdapter
                 break;
         }
     }
-
 
 
 
@@ -231,11 +218,13 @@ public class AddGzrzActivity extends BaseActivity  implements ImagePickerAdapter
                 fileList.put(selImageList.get(i).name, new File(selImageList.get(i).path));
             }
         }
+//        http://192.168.1.222:8099/api/APP1.0.aspx?method=tp
         //上传多张图片 表头
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "multipart/form-data");
         OkHttpUtils.post()
                 .url(Url.URL_WG + "blog/uploadBlogImg.do?")
+//                .url("http://192.168.1.222:8099/api/APP1.0.aspx?method=tp")
                 .headers(headers)
                 .files("mFile", fileList)
                 .build()
@@ -250,7 +239,8 @@ public class AddGzrzActivity extends BaseActivity  implements ImagePickerAdapter
 
                         try {
                             JSONObject obj = new JSONObject(response);
-                            if ("200".equals(obj.getString("status"))) {
+                            if ("200".equals(obj.getString("statusCode"))) {
+
                                 picString = obj.getString("path");
                                 if (!"".equals(picString)) {
                                     sentData();
@@ -285,7 +275,7 @@ public class AddGzrzActivity extends BaseActivity  implements ImagePickerAdapter
                         Log.i(TAG, "response===" + response);
                         try {
                             JSONObject obj = new JSONObject(response);
-                            if ("200".equals(obj.getString("status"))) {
+                            if ("200".equals(obj.getString("statusCode"))) {
                                 toast(obj.getString("message"));
                                 Intent intent = new Intent();
                                 setResult(RESULT_OK, intent);
@@ -302,3 +292,4 @@ public class AddGzrzActivity extends BaseActivity  implements ImagePickerAdapter
 
 
 }
+

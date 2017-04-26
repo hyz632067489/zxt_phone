@@ -46,7 +46,7 @@ public class BaseActivity extends FragmentActivity {
     public String initEndDateTime;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         ActivityManager.getActivityManager().pushActivity(this);
@@ -62,10 +62,10 @@ public class BaseActivity extends FragmentActivity {
         super.setContentView(layoutResID);
         //绑定
         mUnbinder = ButterKnife.bind(this);
-        initView();
+        initView1();
     }
 
-    private void initView() {
+    private void initView1() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
 //        SimpleDateFormat formatter = new SimpleDateFormat(" HH:mm:ss  ");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间

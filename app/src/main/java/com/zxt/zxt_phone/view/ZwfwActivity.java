@@ -72,7 +72,7 @@ public class ZwfwActivity extends BaseActivity {
     private void initView() {
 
         tabName.setText(R.string.m_zwfw);
-        Dept = SharedPrefsUtil.getString(mActivity, "dept");
+        Dept = SharedPrefsUtil.getString(mActivity, "roleLevel");
         Log.i(TAG, "Dept============" + Dept);
         if (" ".equals(Dept)) {
             singLogin.setVisibility(View.VISIBLE);

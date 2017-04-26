@@ -9,17 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.sunfusheng.marqueeview.MarqueeView;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.BitmapCallback;
-import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseFragment;
@@ -36,6 +29,7 @@ import com.zxt.zxt_phone.view.SqtjActivity;
 import com.zxt.zxt_phone.view.ZczxActivity;
 import com.zxt.zxt_phone.view.ZwfwActivity;
 import com.zxt.zxt_phone.view.customview.MyMarqueeView;
+import com.zxt.zxt_phone.view.shfw.wyfw.RepairsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -207,6 +201,8 @@ String url;
                 startActivity(mIntent);
                 break;
             case R.id.tv_gzbx://故障报修
+                mIntent = new Intent(getActivity(),RepairsActivity.class);
+                startActivity(mIntent);
                 break;
             case R.id.tv_zwfw://政务服务
                 mIntent = new Intent(getActivity(), ZwfwActivity.class);

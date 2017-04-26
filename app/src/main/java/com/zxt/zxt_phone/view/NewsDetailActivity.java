@@ -46,9 +46,7 @@ public class NewsDetailActivity extends BaseActivity {
         settings.setSupportZoom(false);
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
-
         mWebView.setBackgroundColor(0);
-
         settings.setDisplayZoomControls(false);
         //WebView加载web资源
         mWebView.loadUrl( mIntent.getStringExtra("url"));
