@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_repairs"
+    android:id="@+id/activity_add_sjcl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zxt.zxt_phone.view.wyfw.RepairsActivity">
+    tools:context="com.zxt.zxt_phone.view.zwfw.wggl.AddSjclActivity">
 
     <com.zxt.zxt_phone.view.widget.TitleLayout
         android:layout_width="match_parent"
@@ -35,135 +33,6 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="报  修  人:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/et_name"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/px_30"
-                    android:layout_marginRight="@dimen/px_30"
-                    android:layout_weight="4"
-                    android:background="@drawable/shape_gary_input_bg"
-                    android:hint="请输入姓名"
-                    android:paddingLeft="@dimen/px_30"
-                    android:paddingRight="@dimen/px_30"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/px_80"
-                android:layout_marginTop="@dimen/px_30"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="@dimen/px_200"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="电         话:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/et_phone"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/px_30"
-                    android:layout_marginRight="@dimen/px_30"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_gary_input_bg"
-                    android:hint="请输入电话"
-                    android:paddingLeft="@dimen/px_30"
-                    android:paddingRight="@dimen/px_30"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/px_80"
-                android:layout_marginTop="@dimen/px_30"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="@dimen/px_200"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="地         址:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/et_adress"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/px_30"
-                    android:layout_marginRight="@dimen/px_30"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_gary_input_bg"
-                    android:hint="请输入地址"
-                    android:paddingLeft="@dimen/px_30"
-                    android:paddingRight="@dimen/px_30"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_dept"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/px_80"
-                android:layout_marginTop="@dimen/px_30"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="紧急程度:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_dept"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/px_30"
-                    android:layout_marginRight="@dimen/px_30"
-                    android:layout_weight="4"
-                    android:background="@drawable/shape_gary_input_bg"
-                    android:drawableRight="@drawable/to_bottom"
-                    android:gravity="center_vertical"
-                    android:hint="请选择紧急程度"
-                    android:paddingLeft="@dimen/px_30"
-                    android:paddingRight="@dimen/px_10"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/px_80"
-                android:layout_marginTop="@dimen/px_30"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="@dimen/px_200"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:text="标         题:"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -174,15 +43,158 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/px_30"
                     android:layout_marginRight="@dimen/px_30"
-                    android:layout_weight="1"
+                    android:layout_weight="4"
                     android:background="@drawable/shape_gary_input_bg"
-                    android:hint="请对故障大致描述"
+                    android:hint="请输入标题"
                     android:paddingLeft="@dimen/px_30"
                     android:paddingRight="@dimen/px_30"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
 
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout_type"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_80"
+                android:layout_marginTop="@dimen/px_30"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="事件类型:"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/px_30"
+                    android:layout_marginRight="@dimen/px_30"
+                    android:layout_weight="4"
+                    android:background="@drawable/shape_gary_input_bg"
+                    android:drawableRight="@drawable/to_bottom"
+                    android:gravity="center_vertical"
+                    android:hint="请选择类型"
+                    android:paddingLeft="@dimen/px_30"
+                    android:paddingRight="@dimen/px_10"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_scale"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_80"
+                android:layout_marginTop="@dimen/px_30"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="事件等级:"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_scale"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/px_30"
+                    android:layout_marginRight="@dimen/px_30"
+                    android:layout_weight="4"
+                    android:background="@drawable/shape_gary_input_bg"
+                    android:drawableRight="@drawable/to_bottom"
+                    android:gravity="center_vertical"
+                    android:hint="请选择等级"
+                    android:paddingLeft="@dimen/px_30"
+                    android:paddingRight="@dimen/px_10"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_come"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_80"
+                android:layout_marginTop="@dimen/px_30"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="事件来源:"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_come"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/px_30"
+                    android:layout_marginRight="@dimen/px_30"
+                    android:layout_weight="4"
+                    android:background="@drawable/shape_gary_input_bg"
+                    android:drawableRight="@drawable/to_bottom"
+                    android:gravity="center_vertical"
+                    android:hint="请选择来源"
+                    android:paddingLeft="@dimen/px_30"
+                    android:paddingRight="@dimen/px_10"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_80"
+                android:layout_marginTop="@dimen/px_30"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="@dimen/px_200"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="重点督办:"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/px_30"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/chb_1"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:text="是"/>
+                    <CheckBox
+                        android:id="@+id/chb_2"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:text="否"/>
+
+
+                    </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -237,7 +249,7 @@
                     android:layout_width="@dimen/px_200"
                     android:layout_height="wrap_content"
 
-                    android:text="详         情:"
+                    android:text="内         容:"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -275,11 +287,12 @@
                     android:layout_marginLeft="@dimen/px_300"
                     android:layout_marginRight="@dimen/px_300"
                     android:layout_weight="1"
-                    android:text="报\t\t\t\t修"
+                    android:text="提\t\t\t\t交"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

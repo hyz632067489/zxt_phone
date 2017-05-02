@@ -24,6 +24,7 @@ import com.zxt.zxt_phone.adapter.ViewHolder;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.model.GzrzListModel;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.ZwfwActivity;
 import com.zxt.zxt_phone.view.customview.PullToRefreshView;
@@ -285,7 +286,7 @@ public class GzrzActivity extends BaseActivity {
 
             @Override
             public void onResponse(String response, int id) {
-                Log.i(TAG, "response==" + response);
+                MLog.i(TAG, "response==" + response);
                 if (response.length() > 0) {
                     try {
                         JSONObject jsonObject = new JSONObject(response);

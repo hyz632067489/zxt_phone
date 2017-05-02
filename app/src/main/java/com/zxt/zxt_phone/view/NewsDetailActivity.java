@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
+import com.zxt.zxt_phone.utils.MLog;
 
 import butterknife.BindView;
 
@@ -23,6 +24,8 @@ public class NewsDetailActivity extends BaseActivity {
 
 
     WebView mWebView;
+    WebSettings settings;
+
 
     Intent mIntent;
     @Override
@@ -31,7 +34,7 @@ public class NewsDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_news_detail);
 
         mIntent = getIntent();
-        Log.i(TAG,mIntent.getStringExtra("url"));
+        MLog.i(TAG,mIntent.getStringExtra("url"));
         initView();
     }
 
@@ -41,7 +44,13 @@ public class NewsDetailActivity extends BaseActivity {
         mWebView = (WebView) findViewById(R.id.webView);
 
         //启用支持javascript
-        WebSettings settings = mWebView.getSettings();
+         settings = mWebView.getSettings();
+
+        LoadUrl(mIntent.getStringExtra("url"));
+
+    }
+    private void LoadUrl(String url) {
+        //启用支持javascript
         settings.setBuiltInZoomControls(true);
         settings.setSupportZoom(false);
         settings.setJavaScriptEnabled(true);
@@ -49,9 +58,7 @@ public class NewsDetailActivity extends BaseActivity {
         mWebView.setBackgroundColor(0);
         settings.setDisplayZoomControls(false);
         //WebView加载web资源
-        mWebView.loadUrl( mIntent.getStringExtra("url"));
-//        mWebView.loadUrl("http://oa.ybqtw.org.cn/api/MobileHtmlShow.ashx?method=newshtml&userid=1&Key=21218CCA77804D2BA1922C33E0151105&typeVer=&id=1267");
-
+        mWebView.loadUrl(url);
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         mWebView.setWebViewClient(new WebViewClient() {
             @Override

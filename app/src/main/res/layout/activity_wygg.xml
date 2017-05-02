@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_wygg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.zxt.zxt_phone.view.wyfw.WyggActivity">
 
-</RelativeLayout>
+    <com.zxt.zxt_phone.view.widget.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_tab_height" />
+
+    <RadioGroup
+        android:id="@+id/rg_group"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_tab_height"
+        android:orientation="horizontal"
+        >
+        <RadioButton
+            android:id="@+id/rb_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="公告"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:button="@null"
+            android:layout_weight="1"/>
+        <RadioButton
+            android:id="@+id/rb_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="公示"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:button="@null"/>
+    </RadioGroup>
+
+    <ListView
+        android:id="@+id/left_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/px_10"
+        android:layout_marginRight="@dimen/px_10"
+        android:divider="#00000000"
+        android:dividerHeight="@dimen/px_4"
+        android:scrollbars="none" />
+
+</LinearLayout>

@@ -31,6 +31,7 @@ import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.BitmapUtil;
+import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.WaterUtils;
 import com.zxt.zxt_phone.view.customview.WrapHeightGridView;
 import com.zxt.zxt_phone.view.photo.ClipImageActivity;
@@ -281,7 +282,11 @@ public class KqdkActivityCopy extends BaseActivity {
 //                break;
             case CAMERA_WITH_DATA:// 照相机程序返回的,再次调用图片剪辑程序去修剪图片
 //                startCropImageActivity(Environment.getExternalStorageDirectory() + "/" + TMP_PATH);
+//                if(){
+//
+//                }
                 String path1 = Environment.getExternalStorageDirectory() + "/" + TMP_PATH;
+
                 ClipImageActivity.startActivity(this, path1, CROP_RESULT_CODE);
                 break;
             case CROP_RESULT_CODE: // 裁剪
@@ -295,8 +300,8 @@ public class KqdkActivityCopy extends BaseActivity {
 //                BitmapUtil.saveBitmap(mImage, path);
                 BitmapUtil.saveBitmapFile(mImage);
 //                ClipImageActivity.saveBitmap(mImage,path);
-                Log.i(TAG, "photo===========" + photo.getByteCount());
-                Log.i(TAG, "img===========" + mImage);
+                MLog.i(TAG, "photo===========" + photo.getByteCount());
+                MLog.i(TAG, "img===========" + mImage);
 
                 imagePic.setImageBitmap(mImage);
 
@@ -335,7 +340,7 @@ public class KqdkActivityCopy extends BaseActivity {
         public void onBefore(Request request, int id) {
 
 //            showLoading("正在加载...");
-            Log.e(TAG, "loading.....======");
+            MLog.e(TAG, "loading.....======");
         }
 
         @Override
@@ -346,13 +351,13 @@ public class KqdkActivityCopy extends BaseActivity {
         @Override
         public void onError(Call call, Exception e, int id) {
             e.printStackTrace();
-            Log.e(TAG, "onError：======");
+            MLog.e(TAG, "onError：======");
 
         }
 
         @Override
         public void onResponse(String response, int id) {
-            Log.e(TAG, "onResponse：complete" + response);
+            MLog.e(TAG, "onResponse：complete" + response);
             try {
                 JSONObject obj = new JSONObject(response);
                 if ("200".equals(obj.getString("status"))) {
@@ -366,7 +371,7 @@ public class KqdkActivityCopy extends BaseActivity {
 
         @Override
         public void inProgress(float progress, long total, int id) {
-            Log.e(TAG, "inProgress:" + progress);
+            MLog.e(TAG, "inProgress:" + progress);
 //            mProgressBar.setProgress((int) (100 * progress));
         }
     }
@@ -401,7 +406,7 @@ public class KqdkActivityCopy extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Log.i(TAG, "response=====" + response);
+                MLog.i(TAG, "response=====" + response);
 
             }
         });

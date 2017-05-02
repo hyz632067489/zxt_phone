@@ -5,7 +5,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -14,10 +13,7 @@ import com.zxt.zxt_phone.adapter.CommonAdapter;
 import com.zxt.zxt_phone.adapter.ViewHolder;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.model.DqfcModel;
-import com.zxt.zxt_phone.utils.GlideImageLoader;
-import com.zxt.zxt_phone.utils.LogUtil;
 import com.zxt.zxt_phone.utils.MLog;
-import com.zxt.zxt_phone.view.LoginActivity;
 import com.zxt.zxt_phone.view.customview.HomeGridView;
 import com.zxt.zxt_phone.view.customview.PullToRefreshView;
 

@@ -19,6 +19,7 @@
     <string name="gzrz">工作日志</string>
     <string name="gzrz_info">日志详情</string>
     <string name="add_gzrz">添加工作日志</string>
+    <string name="add_sjcl">添加事件处理</string>
     <string name="rkgl">人口管理</string>
     <string name="txl">通讯录</string>
     <string name="jzbf">精准帮扶</string>
@@ -60,4 +61,8 @@
 
 
     <string name="no_data">没有查询到数据</string>
+
+
+    <!--物业服务-->
+    <string name="wyfw_gzbx">故障报修</string>
 </resources>

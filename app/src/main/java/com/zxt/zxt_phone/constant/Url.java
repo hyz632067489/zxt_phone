@@ -8,7 +8,7 @@ package com.zxt.zxt_phone.constant;
 public class Url {
 
     //    http://192.168.1.125:8080/grid/user/validateUser.do?userName=admin&password=123
-    public static String BASE_URL = "http://192.168.1.125:8080/grid";
+//    public static String BASE_URL = "http://192.168.1.125:8080/grid";
     //登录接口--管理员
     public static final String login = "/user/validatesUser.do?";
 
@@ -17,6 +17,7 @@ public class Url {
     //html url
     public static final String URL_HTML = "http://oa.ybqtw.org.cn/api/Html/ApiReso.aspx?";
 
+
     //url
     public static final String URL = "http://oa.ybqtw.org.cn";
     //网格url
@@ -24,4 +25,13 @@ public class Url {
     //网格图片url
     public static final String URL_TU_PIAN = "http://192.168.1.223:8080/grid/";
 
+
+    /**
+     * 测试 网络地址    吕鹏
+     */
+    public static final String BASE_URL = "http://192.168.1.222:8099/api/APP1.0.aspx?";
+    /**
+     * html 网页
+     */
+    public static final String BASE_URL_HTML = "http://192.168.1.222:8099/api/Html/";
 }

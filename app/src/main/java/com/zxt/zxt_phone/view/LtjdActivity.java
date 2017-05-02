@@ -10,24 +10,17 @@ import android.widget.TextView;
 
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-import com.zhy.http.okhttp.cookie.store.CookieStore;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.CookieUtil;
-import com.zxt.zxt_phone.utils.LogUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
-
 import butterknife.BindView;
 import okhttp3.Call;
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 
 /**
  * Created by hyz on 2017/3/7.

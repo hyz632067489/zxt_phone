@@ -23,13 +23,15 @@ import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.BmfwActivity;
 import com.zxt.zxt_phone.view.BsznActivity;
 import com.zxt.zxt_phone.view.CzjfActivity;
+import com.zxt.zxt_phone.view.JgcxActivity;
 import com.zxt.zxt_phone.view.NewsDetailActivity;
 import com.zxt.zxt_phone.view.SqgwActivity;
 import com.zxt.zxt_phone.view.SqtjActivity;
 import com.zxt.zxt_phone.view.ZczxActivity;
 import com.zxt.zxt_phone.view.ZwfwActivity;
 import com.zxt.zxt_phone.view.customview.MyMarqueeView;
-import com.zxt.zxt_phone.view.shfw.wyfw.RepairsActivity;
+import com.zxt.zxt_phone.view.wyfw.RepairsActivity;
+import com.zxt.zxt_phone.view.wyfw.WyfwActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -175,46 +177,42 @@ String url;
 
     @OnClick({R.id.tv_zczx, R.id.tv_sqtj, R.id.tv_gscx, R.id.tv_bszn, R.id.tv_sqhd, R.id.tv_czjf, R.id.tv_sqds, R.id.tv_gzbx, R.id.tv_zwfw, R.id.tv_bmfw, R.id.tv_wyfw})
     public void onClick(View view) {
+        mIntent = new Intent();
         switch (view.getId()) {
             case R.id.tv_zczx://政策信息
-                mIntent = new Intent(getActivity(), ZczxActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(getActivity(), ZczxActivity.class);
                 break;
             case R.id.tv_sqtj://诉求提交
-                mIntent = new Intent(getActivity(), SqtjActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(getActivity(), SqtjActivity.class);
                 break;
-            case R.id.tv_gscx://查询公示
+            case R.id.tv_gscx://结果查询
+                mIntent.setClass(getActivity(), JgcxActivity.class);
                 break;
             case R.id.tv_bszn://办事指南
-                mIntent = new Intent(getActivity(), BsznActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(getActivity(), BsznActivity.class);
                 break;
             case R.id.tv_sqhd://社区活动
                 break;
             case R.id.tv_czjf://充值缴费
-                mIntent = new Intent(getActivity(), CzjfActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(getActivity(), CzjfActivity.class);
                 break;
             case R.id.tv_sqds://社区电商
-                mIntent = new Intent(getActivity(), SqgwActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(getActivity(), SqgwActivity.class);
                 break;
             case R.id.tv_gzbx://故障报修
-                mIntent = new Intent(getActivity(),RepairsActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(getActivity(), RepairsActivity.class);
                 break;
             case R.id.tv_zwfw://政务服务
-                mIntent = new Intent(getActivity(), ZwfwActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(getActivity(), ZwfwActivity.class);
                 break;
             case R.id.tv_bmfw://便民服务
-                mIntent = new Intent(getActivity(), BmfwActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(getActivity(), BmfwActivity.class);
                 break;
             case R.id.tv_wyfw://物业服务
+                mIntent.setClass(getActivity(), WyfwActivity.class);
                 break;
         }
+        startActivity(mIntent);
     }
 
     private void getData() {

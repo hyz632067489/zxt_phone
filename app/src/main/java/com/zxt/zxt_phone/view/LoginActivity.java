@@ -9,35 +9,28 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.CountDownTimerUtils;
-import com.zxt.zxt_phone.utils.LogUtil;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
-import okhttp3.Cookie;
 import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * Created by miliang on 2017/3/6/0006.

@@ -104,11 +104,15 @@
 
         <activity android:name=".view.zwfw.wggl.GzrzInfoActivity" />
         <activity android:name=".view.zwfw.DqfcActivity" />
-        <activity
-            android:name=".view.shfw.wyfw.RepairsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity android:name=".view.zwfw.wggl.SjclActivity" />
-        <activity android:name=".view.wyfw.WyggActivity"></activity>
+        <activity android:name=".view.wyfw.WyggActivity" />
+        <activity android:name=".view.zwfw.wggl.SjclInfoActivity" />
+        <activity android:name=".view.wyfw.WyfwActivity" />
+        <activity android:name=".view.wyfw.SafetyActivity" />
+        <activity android:name=".view.wyfw.JftjActivity" />
+        <activity android:name=".view.wyfw.PjglActivity" />
+        <activity android:name=".view.wyfw.RepairsActivity" />
+        <activity android:name=".view.zwfw.wggl.AddSjclActivity"></activity>
     </application>
 
 </manifest>

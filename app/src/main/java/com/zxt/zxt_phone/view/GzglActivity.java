@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.view.zwfw.wggl.GzrzActivity;
+import com.zxt.zxt_phone.view.zwfw.wggl.SjclActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,7 +47,7 @@ public class GzglActivity extends BaseActivity {
                 startActivity(new Intent(mActivity, GzrzActivity.class));
             break;
             case R.id.sjcl_Layout://时间处理
-
+                startActivity(new Intent(mActivity, SjclActivity.class));
                 break;
         }
     }

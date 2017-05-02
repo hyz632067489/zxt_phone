@@ -187,7 +187,7 @@ public class UploadPicHelper {
         Uri uri = Uri.fromFile(file);
         intent.setData(uri);
         context.sendBroadcast(intent);
-        LogUtil.e("保存成功了");
+
     }
 
 }
