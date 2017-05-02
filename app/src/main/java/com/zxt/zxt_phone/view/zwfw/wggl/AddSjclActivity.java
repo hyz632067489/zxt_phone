@@ -209,9 +209,9 @@ public class AddSjclActivity extends BaseActivity {
          */
         HashMap<String ,String > params = new HashMap<>();
         params.put("eventTitle",etTitle.getText().toString());
-        params.put("eventLevelId",tvScale.getText().toString());
-        params.put("sourceTypeId",tvCome.getText().toString());
-        params.put("eventTypeId",tvType.getText().toString());
+        params.put("eventLevelId",levelId);
+        params.put("sourceTypeId",comeId);
+        params.put("eventTypeId",typeId);
 
         params.put("isImportant", 1+"");
 
