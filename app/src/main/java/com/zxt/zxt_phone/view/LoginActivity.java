@@ -25,11 +25,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.Cookie;
 import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 import okhttp3.Request;
 
 /**
@@ -214,11 +217,10 @@ public class LoginActivity extends BaseActivity {
 //                    SharedPrefsUtil.putString(mActivity, "password", obj.getString("password"));
 
                         //获取cookie中的sessionId值 用于注入webView
-//                        CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
-//                        HttpUrl httpUrl = HttpUrl.parse(Url.URL_WG + "user/login.do?");
-//                        List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
-//
-//                        AppData.Cookie = cookies.get(0).toString();
+                        CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
+                        HttpUrl httpUrl = HttpUrl.parse(Url.URL_WG + "user/login.do?");
+                        List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
+                        AppData.Cookie = cookies.get(0).toString();
 //                        Log.i("TAG", "--------------" + httpUrl.host() + "对应的cookie如下：" + cookies.toString());
 
                         startActivity(new Intent(mActivity, WsbsActivity.class)

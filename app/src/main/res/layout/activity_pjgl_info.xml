@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_pjgl_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zxt.zxt_phone.view.wyfw.PjglInfoActivity">
+
+    <com.zxt.zxt_phone.view.widget.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_tab_height" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_56"
+            android:layout_marginTop="@dimen/px_40"
+            android:gravity="center"
+            android:text="社区中庭院修整投票"
+            android:textColor="@color/black"
+            android:textSize="@dimen/px_45" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_300"
+            android:layout_marginLeft="@dimen/px_60"
+            android:layout_marginRight="@dimen/px_60"
+            android:layout_marginTop="@dimen/px_30"
+            android:background="@drawable/shape_gary_input_bg"
+            android:padding="@dimen/px_15"
+            android:text="       温馨提示:登陆的社区为您所在的社区，账号为您的姓名，密码默认为身份证后6位，为了保障您的个人信息安全，请尽快修改密码；如无法登陆，请到物管处激活账号或修改密码"
+            android:textColor="@color/black"
+            android:textSize="@dimen/px_35" />
+
+        <LinearLayout
+            android:id="@+id/layout_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+           >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_130"
+                android:layout_marginBottom="@dimen/px_20"
+                android:layout_marginTop="@dimen/px_22"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/px_200"
+                android:paddingRight="@dimen/px_200">
+
+                <Button
+                    android:id="@+id/btn_tongyi"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/px_50"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btn_butongyi"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/px_50"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/tv_yijian"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_150"
+                android:layout_marginLeft="@dimen/px_60"
+                android:layout_marginRight="@dimen/px_60"
+                android:layout_marginTop="@dimen/px_22"
+                android:background="@drawable/shape_gary_input_bg"
+                android:hint="   请输入不赞成的理由，如赞成则此项不填"
+                android:padding="@dimen/px_5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/px_30" />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/layout_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/px_60"
+            android:layout_marginLeft="@dimen/px_60"
+            android:layout_marginRight="@dimen/px_60"
+            android:background="@drawable/shape_gary_input_bg"
+            android:visibility="gone">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/px_90"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.zxt.zxt_phone.view.customview.HomeGridView
+                        android:id="@+id/gv_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/px_20"
+                        android:layout_marginRight="@dimen/px_20"
+                        android:layout_marginTop="@dimen/px_20"
+                        android:horizontalSpacing="@dimen/px_15"
+                        android:numColumns="2"
+                        android:scrollbars="none"
+                        android:verticalSpacing="@dimen/px_15" />
+                </LinearLayout>
+            </ScrollView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_130"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/px_10"
+                android:layout_marginTop="@dimen/px_22">
+
+                <Button
+                    android:id="@+id/btn_touyipiao"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/px_300"
+                    android:layout_marginRight="@dimen/px_300"
+                    android:text="投\t\t一\t\t票"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

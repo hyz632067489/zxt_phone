@@ -21,7 +21,11 @@ import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.model.WyggModel;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.MLog;
+import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.NewsDetailActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -150,7 +154,9 @@ public class WyggActivity extends BaseActivity {
     private void getData() {
 
         OkHttpUtils.get()
-                .url(Url.BASE_URL + "method=anncounce")
+                .url(Url.BASE_URL)
+                .addParams("method","anncounce")
+                .addParams("deptId", SharedPrefsUtil.getString(mContext,"DeptId"))
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -162,24 +168,34 @@ public class WyggActivity extends BaseActivity {
                     public void onResponse(String response, int id) {
                         MLog.i(TAG, "response==" + response);
 
-                        model = new Gson().fromJson(response, WyggModel.class);
-                        // newsList = mainNew.getData();
-                        WyggModel.DataBean bean;
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            if("1".equals(obj.getString("Status"))){
+                                model = new Gson().fromJson(response, WyggModel.class);
+                                // newsList = mainNew.getData();
+                                WyggModel.DataBean bean;
 
-                        mDatas.clear();
-                        mDatas.addAll(model.getData());
+                                mDatas.clear();
+                                mDatas.addAll(model.getData());
 
-                        mList.clear();
-                        mList1.clear();
-                        for (int i = 0; i < mDatas.size(); i++) {
-                            if (1 == mDatas.get(i).getAid()) {
-                                mList.add(mDatas.get(i));
-                            } else if (2 == mDatas.get(i).getAid()) {
-                                mList1.add(mDatas.get(i));
+                                mList.clear();
+                                mList1.clear();
+                                for (int i = 0; i < mDatas.size(); i++) {
+                                    if (1 == mDatas.get(i).getAid()) {
+                                        mList.add(mDatas.get(i));
+                                    } else if (2 == mDatas.get(i).getAid()) {
+                                        mList1.add(mDatas.get(i));
+                                    }
+                                }
+
+                                mHandler.sendEmptyMessage(0);
+                            }else {
+
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
 
-                        mHandler.sendEmptyMessage(0);
                     }
                 });
     }

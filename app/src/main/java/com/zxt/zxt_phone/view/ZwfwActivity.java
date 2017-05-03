@@ -19,6 +19,7 @@ import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.model.ZwfwModel;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.zwfw.DqfcActivity;
+import com.zxt.zxt_phone.view.zwfw.sqgk.SqgkActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +48,17 @@ public class ZwfwActivity extends BaseActivity {
 
     private List<ZwfwModel> mDatas;
 
+
+int []icons = {R.drawable.zwfw_sqgk, R.drawable.zwfw_dqfc,R.drawable.zwfw_sqtj,R.drawable.zwfw_jgcx,
+        R.drawable.zwfw_zcxx,R.drawable.zwfw_yybs,R.drawable.zwfw_bszn,R.drawable.zwfw_pasq,
+        R.drawable.zwfw_qtfw,R.drawable.zwfw_qgpt,R.drawable.zwfw_jzbf, R.drawable.zwfw_wggl};
+
+
+
     private String[] titles = {"社区概况", "党群风采", "诉求提交", "结果查询", "政策信息", "预约办事",
-            "办事指南", "满意度查询", "群团服务", "群工平台"};
+            "办事指南", "平安社区", "群团服务", "群工平台","精准帮扶"};
     private String[] titleName = {"社区概况", "党群风采", "诉求提交", "结果查询", "政策信息", "预约办事",
-            "办事指南", "满意度查询", "群团服务", "群工平台", "网格管理"};
+            "办事指南", "平安社区", "群团服务", "群工平台", "精准帮扶","网格管理"};
     Intent mIntent;
 
     String Dept;
@@ -103,6 +111,7 @@ public class ZwfwActivity extends BaseActivity {
         //设置图片集合
         holder.setHolderBitmaps(mpas);
 
+
         gvList.setAdapter(new CommonAdapter<ZwfwModel>(getApplication(), mDatas, R.layout.grid_item_layout) {
             @Override
             public void convert(ViewHolder holder, ZwfwModel item) {
@@ -117,65 +126,65 @@ public class ZwfwActivity extends BaseActivity {
     @OnItemClick(R.id.gv_list)
     public void OnItemClick(AdapterView<?> parent, View view, int position, long id) {
         int i = parent.getSelectedItemPosition();
-//        {"社区概况", "党群风采", "诉求提交", "结果查询", "网格管理", "预约办事",
-//                "办事指南", "满意度查询", "群团服务", "群工平台", "政策资讯"};
+//       {"社区概况", "党群风采", "诉求提交", "结果查询", "政策信息", "预约办事",
+//        "办事指南", "平安社区", "群团服务", "群工平台", "精准帮扶","网格管理"};
+        mIntent = new Intent();
         switch (position) {
             case 0:
-                toast("社区概况");
+//                toast("社区概况");
+                mIntent.setClass(ZwfwActivity.this, SqgkActivity.class);
                 break;
             case 1:
 //                toast("党群风采");
-                mIntent = new Intent(mActivity, DqfcActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(ZwfwActivity.this, DqfcActivity.class);
                 break;
             case 2:
 //                toast("诉求提交");
-                mIntent = new Intent(mActivity, SqtjActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(ZwfwActivity.this, SqtjActivity.class);
                 break;
             case 3:
 //                toast("结果查询");
-                mIntent = new Intent(mActivity, JgcxActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(ZwfwActivity.this, JgcxActivity.class);
                 break;
             case 4:
 //                toast("政策信息");
-                mIntent = new Intent(mActivity, ZczxActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(ZwfwActivity.this, ZczxActivity.class);
                 break;
             case 5:
 //                toast("预约办事");
-                mIntent = new Intent(mActivity, YybsInfoActivity.class);
+                mIntent.setClass(ZwfwActivity.this, YybsInfoActivity.class);
                 mIntent.putExtra("title",titles[5]);
-                startActivity(mIntent);
                 break;
             case 6:
 //                toast("办事指南");
-                mIntent = new Intent(mActivity, BsznActivity.class);
-                startActivity(mIntent);
+                mIntent.setClass(ZwfwActivity.this, BsznActivity.class);
                 break;
             case 7:
-                toast("满意度查询");
+                toast("平安社区");
+                mIntent.setClass(ZwfwActivity.this, SqgkActivity.class);
                 break;
             case 8:
 //                toast("群团服务");
 //                mIntent = new Intent(mActivity,QtfwActivity.class);
 //                startActivity(mIntent);
-                startActivity(new Intent(mActivity, WebViewActivity.class)
-                        .putExtra("title", R.string.zwfw_qtfw)
-                        .putExtra("ClassId", "3"));
+                mIntent.setClass(ZwfwActivity.this, WebViewActivity.class);
+                mIntent .putExtra("title", R.string.zwfw_qtfw);
+                mIntent.putExtra("ClassId", "3");
                 break;
             case 9:
 //                toast("群工平台");
-                startActivity(new Intent(mActivity, WebViewActivity.class)
-                        .putExtra("title", R.string.zwfw_qtpt)
-                        .putExtra("ClassId", "2"));
+                mIntent.setClass(ZwfwActivity.this, WebViewActivity.class);
+                mIntent .putExtra("title", R.string.zwfw_qtpt);
+                mIntent .putExtra("ClassId", "2");
                 break;
-            case 10://网格管理
-                mIntent = new Intent(mActivity, WsbsActivity.class);
-                startActivity(mIntent);
+            case 10://精准帮扶
+                mIntent.setClass(ZwfwActivity.this, WsbsActivity.class);
+                break;
+            case 11://网格管理
+                mIntent.setClass(ZwfwActivity.this, WsbsActivity.class);
                 break;
         }
+        startActivity(mIntent);
     }
 
 
@@ -193,7 +202,7 @@ public class ZwfwActivity extends BaseActivity {
 //            int imageId = getResources().getIdentifier("ic_category_" + i, "mipmap", getPackageName());
                 zwfwModel = new ZwfwModel();
                 zwfwModel.setName(titles[i]);
-                zwfwModel.setImage(R.drawable.m_zwfw);
+                zwfwModel.setImage(icons[i]);
                 mDatas.add(zwfwModel);
             }
         } else {
@@ -204,7 +213,7 @@ public class ZwfwActivity extends BaseActivity {
 //            int imageId = getResources().getIdentifier("ic_category_" + i, "mipmap", getPackageName());
                 zwfwModel = new ZwfwModel();
                 zwfwModel.setName(titleName[i]);
-                zwfwModel.setImage(R.drawable.m_zwfw);
+                zwfwModel.setImage(icons[i]);
                 mDatas.add(zwfwModel);
             }
         }

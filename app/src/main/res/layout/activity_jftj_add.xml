@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_jftj_add"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zxt.zxt_phone.view.wyfw.JftjAddActivity">
+
+    <com.zxt.zxt_phone.view.widget.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_tab_height"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_200"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_100"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/px_50"
+                android:text="姓名:"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                />
+
+            <EditText
+                android:id="@+id/et_userName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/px_22"
+                android:layout_weight="5"
+                android:background="@drawable/shape_gary_input_bg"
+                android:hint="请输入姓名"
+                android:paddingLeft="@dimen/px_10"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_100"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/px_30"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/px_50"
+                android:text="手机号:"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_phone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/px_22"
+                android:layout_weight="5"
+                android:background="@drawable/shape_gary_input_bg"
+                android:hint="请输入手机号"
+                android:inputType="number"
+                android:maxLength="11"
+                android:paddingLeft="@dimen/px_10"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_100"
+            android:layout_marginTop="@dimen/px_40"
+
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/et_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/px_230"
+                android:layout_marginRight="@dimen/px_22"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/px_10"
+                android:background="@drawable/shape_gary_input_bg"
+                android:hint="请输入验证码" />
+
+            <Button
+                android:id="@+id/btn_code"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/px_10"
+                android:layout_marginRight="@dimen/px_65"
+                android:background="@drawable/shape_gary_input_bg"
+                android:gravity="center"
+                android:paddingLeft="@dimen/px_10"
+                android:paddingRight="@dimen/px_10"
+                android:text="获取短信验证码"
+                android:textColor="@color/red"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px_40"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <RadioGroup
+                android:id="@+id/rg_gs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/px_160"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_dwgs"
+                    android:layout_width="@dimen/px_250"
+                    android:layout_height="match_parent"
+                    android:button="@drawable/selector_radio_button"
+                    android:gravity="center"
+                    android:text="对外公示"
+                    android:textColor="@drawable/selector_sqtj_code_text"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_bdwgs"
+                    android:layout_width="@dimen/px_300"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/px_50"
+                    android:button="@drawable/selector_radio_button"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:text="不对外公示"
+                    android:textColor="@drawable/selector_sqtj_code_text"
+                    android:textSize="16sp" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_400"
+        android:layout_marginRight="@dimen/px_10"
+        android:layout_marginTop="@dimen/px_20"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/px_5"
+
+            android:layout_marginBottom="@dimen/px_20"
+            android:text="纠纷说明 :"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="@dimen/px_300"
+            android:layout_marginBottom="@dimen/px_20"
+            android:layout_marginRight="@dimen/px_22"
+            android:layout_toLeftOf="@+id/tv_p"
+            android:layout_toRightOf="@+id/tv_content"
+            android:background="@drawable/shape_gary_input_bg"
+            android:gravity="clip_horizontal"
+            android:hint="请输入要提交的内容"
+            android:inputType="textMultiLine"
+            android:maxLines="20"
+            android:paddingLeft="@dimen/px_30"
+            android:paddingRight="@dimen/px_30"
+            android:paddingTop="@dimen/px_5"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_commit"
+        android:layout_width="@dimen/px_300"
+        android:layout_height="@dimen/px_150"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/px_22"
+        android:layout_marginTop="@dimen/px_20"
+        android:text="提交"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+</LinearLayout>

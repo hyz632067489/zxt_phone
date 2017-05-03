@@ -111,8 +111,15 @@
         <activity android:name=".view.wyfw.SafetyActivity" />
         <activity android:name=".view.wyfw.JftjActivity" />
         <activity android:name=".view.wyfw.PjglActivity" />
-        <activity android:name=".view.wyfw.RepairsActivity" />
-        <activity android:name=".view.zwfw.wggl.AddSjclActivity"></activity>
+        <activity
+            android:name=".view.wyfw.RepairsActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".view.zwfw.wggl.AddSjclActivity" />
+        <activity
+            android:name=".view.wyfw.PjglInfoActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".view.wyfw.JftjAddActivity" />
+        <activity android:name=".view.zwfw.sqgk.SqgkActivity"></activity>
     </application>
 
 </manifest>

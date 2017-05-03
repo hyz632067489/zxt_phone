@@ -29,7 +29,11 @@ public class Url {
     /**
      * 测试 网络地址    吕鹏
      */
-    public static final String BASE_URL = "http://192.168.1.222:8099/api/APP1.0.aspx?";
+//    public static final String BASE_URL = "http://192.168.1.222:8099/api/APP1.0.aspx?";
+    /**
+     * 测试 网络地址    何琼
+     */
+    public static final String BASE_URL = "http://192.168.1.225:8099/api/APP1.0.aspx?";
     /**
      * html 网页
      */

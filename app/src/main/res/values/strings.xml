@@ -53,6 +53,8 @@
 
     <string name="zwfw_sqtjxy">诉求提交协议</string>
     <string name="zwfw_sqtj">诉求提交</string>
+    <string name="zwfw_sqgk">社区概况</string>
+
     <!--社区购物-->
     <string name="sqgw_tabname">社区购物</string>
     <!--办事指南-->
@@ -65,4 +67,8 @@
 
     <!--物业服务-->
     <string name="wyfw_gzbx">故障报修</string>
+    <string name="wyfw_pjgl">评价调研</string>
+    <string name="wyfw_pjgl_info">评价调研详情</string>
+    <string name="wyfw_jftj">纠纷调解</string>
+    <string name="wyfw_jftj_add">添加纠纷调解</string>
 </resources>
