@@ -98,7 +98,7 @@ public class RepairsActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repairs);
-        ButterKnife.bind(this);
+
 
         getDataDept();
         initView();
