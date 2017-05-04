@@ -71,7 +71,7 @@ public class BsznActivity extends BaseActivity {
     @BindView(R.id.process_bar)
     ProgressBar processBar;
 
-    private QueryType selectTab ;
+    private QueryType selectTab;
 
     private enum QueryType {
         gerenHandle, qiyeHandle;
@@ -98,9 +98,9 @@ public class BsznActivity extends BaseActivity {
             switch (msg.what) {
                 case 0:
                     mDatas.clear();
-                    if(isChecked){
+                    if (isChecked) {
                         mDatas.addAll(mList1);
-                    }else {
+                    } else {
                         mDatas.addAll(mList2);
 
                     }
@@ -126,19 +126,19 @@ public class BsznActivity extends BaseActivity {
         mRd_g.setOnCheckedChangeListener(listener);
 
 
-        myAdapter = new CommonAdapter<BsznListModel.DataBean>(mContext,mDatas,R.layout.item_common) {
+        myAdapter = new CommonAdapter<BsznListModel.DataBean>(mContext, mDatas, R.layout.item_common) {
             @Override
             public void convert(ViewHolder holder, BsznListModel.DataBean item) {
-                Glide.with(mContext).load(Url.BASE_L + item.getPic())//
-                        .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存修改过的图片
-                        .override(120,120)
-                        .crossFade() //设置淡入淡出效果，默认300ms，可以传参
-                        .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
-                        .error(R.drawable.ic_default_color)//
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
-                        .into((ImageView) holder.getView(R.id.iv_icon));
+//                Glide.with(mContext).load(Url.BASE_L + item.getPic())//
+//                        .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存修改过的图片
+//                        .override(120,120)
+//                        .crossFade() //设置淡入淡出效果，默认300ms，可以传参
+//                        .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
+//                        .error(R.drawable.ic_default_color)//
+////                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
+//                        .into((ImageView) holder.getView(R.id.iv_icon));
 
-
+                holder.setImageByUrl(R.id.iv_icon, item.getPic());
                 holder.setText(R.id.tv_title, item.getCategory());
             }
         };
@@ -168,12 +168,12 @@ public class BsznActivity extends BaseActivity {
         public void onCheckedChanged(RadioGroup group, int checkedId) {
 
             if (checkedId == rbGeren.getId()) {
-                isChecked=true;
+                isChecked = true;
                 mDatas.clear();
                 mDatas.addAll(mList1);
                 myAdapter.notifyDataSetChanged();
-            }else if(checkedId == rbQiye.getId()){
-                isChecked=false;
+            } else if (checkedId == rbQiye.getId()) {
+                isChecked = false;
                 mDatas.clear();
                 mDatas.addAll(mList2);
                 myAdapter.notifyDataSetChanged();
@@ -184,18 +184,15 @@ public class BsznActivity extends BaseActivity {
     @OnItemClick(R.id.grid_view)
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        if("1".equals(mDatas.get(position).getEnabled())){
-            mIntent = new Intent(mActivity,BsznInfoActivity.class);
+        if ("1".equals(mDatas.get(position).getEnabled())) {
+            mIntent = new Intent(mActivity, BsznInfoActivity.class);
             mIntent.putExtra("id", mDatas.get(position).getId());
             mIntent.putExtra("title", mDatas.get(position).getCategory());
             startActivity(mIntent);
-        }else{
+        } else {
             toast("此功能持续更新中,敬请关注");
         }
-
     }
-
-
 
     private void getData() {
         showProgressDialog();
@@ -203,8 +200,8 @@ public class BsznActivity extends BaseActivity {
         OkHttpUtils.get()
                 .url(Url.BASE_URL)
                 .addParams("method", "bszls")
-                .addParams("Key", SharedPrefsUtil.getString(mContext,"Key"))
-                .addParams("TVInfoId", SharedPrefsUtil.getString(mContext,"TVInfoId"))
+                .addParams("Key", SharedPrefsUtil.getString(mContext, "Key"))
+                .addParams("TVInfoId", SharedPrefsUtil.getString(mContext, "TVInfoId"))
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -214,13 +211,13 @@ public class BsznActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        MLog.i(TAG,"response=="+response);
+                        MLog.i(TAG, "response==" + response);
                         closeProgressDialog();
 
                         try {
                             JSONObject obj = new JSONObject(response);
-                            if("1".equals(obj.getString("Status"))){
-                                model = new Gson().fromJson(response,BsznListModel.class);
+                            if ("1".equals(obj.getString("Status"))) {
+                                model = new Gson().fromJson(response, BsznListModel.class);
                                 mDatas.addAll(model.getData());
 
                                 mList2.clear();
@@ -232,10 +229,17 @@ public class BsznActivity extends BaseActivity {
                                         mList2.add(mDatas.get(i));
                                     }
                                 }
+                                mDatas.clear();
+                                if (isChecked) {
+                                    mDatas.addAll(mList1);
+                                } else {
+                                    mDatas.addAll(mList2);
 
-                                mHandler.sendEmptyMessage(0);
+                                }
+                                myAdapter.notifyDataSetChanged();
+//                                mHandler.sendEmptyMessage(0);
 
-                            }else {
+                            } else {
                                 gridView.setVisibility(View.GONE);
                                 noData.setVisibility(View.VISIBLE);
                             }
@@ -245,43 +249,6 @@ public class BsznActivity extends BaseActivity {
                     }
                 });
     }
-
-    /**
-     * 添加一个得到数据的方法，方便使用
-     */
-    private ArrayList<BsznModel> getDate() {
-        ArrayList<BsznModel> listItem = new ArrayList<BsznModel>();
-        BsznModel model = null;
-        /**为动态数组添加数据*/
-        for (int i = 0; i < 20; i++) {
-            model = new BsznModel();
-            model.setImage(R.drawable.m_bsbx);
-            model.setText("个人办事" + i);
-            listItem.add(model);
-        }
-        return listItem;
-    }
-    private ArrayList<BsznModel> getDate1() {
-        ArrayList<BsznModel> listItem = new ArrayList<BsznModel>();
-        BsznModel model = null;
-        /**为动态数组添加数据*/
-        for (int i = 0; i < 15; i++) {
-            model = new BsznModel();
-            model.setImage(R.drawable.m_bsbx);
-            model.setText("政府办事" + i);
-            listItem.add(model);
-        }
-        return listItem;
-    }
-
-    private void addFirstData(){
-        BsznModel model = new BsznModel();
-        model.setText("全部");
-        model.setImage(R.drawable.m_gscx);
-        getDate().add(0,model);
-        getDate1().add(0,model);
-    }
-
 
 
 }

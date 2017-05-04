@@ -30,8 +30,8 @@ public class BsznInfoActivity extends BaseActivity {
     ListView lv_Liebiao;
 
 
-    CommonAdapter myAdapter;
-
+    CommonAdapter<BsznInfoModel> myAdapter;
+    List<BsznInfoModel> mDatas;
     Intent mIntent;
 
     private int id;
@@ -48,13 +48,14 @@ public class BsznInfoActivity extends BaseActivity {
         title = getIntent().getStringExtra("title");
 
         initView();
+//        getData();
     }
 
     private void initView() {
         tabName.setText(R.string.bszn_liebiao);
+        mDatas = new ArrayList<>();
 
-
-        myAdapter = new CommonAdapter<BsznInfoModel>(getApplicationContext(), getDate(), R.layout.bszn_liebiao_item) {
+        myAdapter = new CommonAdapter<BsznInfoModel>(mContext, mDatas, R.layout.bszn_liebiao_item) {
             @Override
             public void convert(ViewHolder helper, BsznInfoModel item) {
 
@@ -68,18 +69,5 @@ public class BsznInfoActivity extends BaseActivity {
          lv_Liebiao.setAdapter(myAdapter);
     }
 
-    public List<BsznInfoModel> getDate(){
-        List<BsznInfoModel> mDates = new ArrayList<>();
-        BsznInfoModel model = null;
-        for(int i=0;i<10;i++){
-            model = new BsznInfoModel();
-            model.setImage(R.drawable.m_sqds);
-            model.setTitle("宗教活动"+i);
-            model.setTv_all("全部"+i+"项");
-            model.setTv_sp("审批类"+i+"项");
-            model.setTv_fw("服务类"+i+"项");
-            mDates.add(model);
-        }
-        return mDates;
-    }
+
 }

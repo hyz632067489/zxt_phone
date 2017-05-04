@@ -1,5 +1,6 @@
 package com.zxt.zxt_phone.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.SparseArray;
@@ -29,6 +30,7 @@ public class ViewHolder
     private final SparseArray<View> mViews;
     private int mPosition;
     private View mConvertView;
+    private Activity mActivity;
 
     private ViewHolder(Context context, ViewGroup parent, int layoutId,
                        int position)
@@ -136,14 +138,14 @@ public class ViewHolder
     public ViewHolder setImageByUrl(int viewId, String url)
     {
 
-//        Glide.with(mContext).load(Url.BASE_L + item.getPic())//
-//                .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存修改过的图片
-//                .override(120,120)
-//                .crossFade() //设置淡入淡出效果，默认300ms，可以传参
-//                .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
-//                .error(R.drawable.ic_default_color)//
-////                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
-//                .into((ImageView) holder.getView(R.id.iv_icon));
+        Glide.with(mConvertView.getContext()).load(Url.BASE_L+url)//
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存修改过的图片
+                .override(120,120)
+                .crossFade() //设置淡入淡出效果，默认300ms，可以传参
+                .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
+                .error(R.drawable.ic_default_color)//
+//                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
+                .into((ImageView) getView(viewId));
 //        ImageLoader.getInstance(3, Type.LIFO).loadImage(url,
 //                (ImageView) getView(viewId));
         return this;

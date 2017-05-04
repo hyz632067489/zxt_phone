@@ -76,15 +76,13 @@ public class ZyzfwActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
+                    mDatas.clear();
                     if (isChecked) {
-                        mDatas.clear();
                         mDatas.addAll(mList1);
-                        myAdapter.notifyDataSetChanged();
                     } else {
-                        mDatas.clear();
                         mDatas.addAll(mList2);
-                        myAdapter.notifyDataSetChanged();
                     }
+                    myAdapter.notifyDataSetChanged();
                     break;
             }
         }
@@ -108,21 +106,18 @@ public class ZyzfwActivity extends BaseActivity {
         rdG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                mDatas.clear();
                 if (rb1.getId() == checkedId) {
                     isChecked = true;
-                    mDatas.clear();
                     mDatas.addAll(mList1);
-                    gridView.setVisibility(View.VISIBLE);
-                    noData.setVisibility(View.GONE);
-                    myAdapter.notifyDataSetChanged();
                 } else if (rb2.getId() == checkedId) {
                     isChecked = false;
-                    mDatas.clear();
                     mDatas.addAll(mList2);
-                    gridView.setVisibility(View.VISIBLE);
-                    noData.setVisibility(View.GONE);
-                    myAdapter.notifyDataSetChanged();
                 }
+                gridView.setVisibility(View.VISIBLE);
+                noData.setVisibility(View.GONE);
+                myAdapter.notifyDataSetChanged();
             }
         });
         myAdapter = new CommonAdapter<ZyzfwModel.DataBean>(mContext, mDatas, R.layout.pop_list_img_item) {
@@ -189,6 +184,7 @@ public class ZyzfwActivity extends BaseActivity {
                                 model = new Gson().fromJson(response, ZyzfwModel.class);
                                 mList1.clear();
                                 mList1.addAll(model.getData());
+
                                 mHandler.sendEmptyMessage(0);
                             } else {
                                 gridView.setVisibility(View.GONE);
