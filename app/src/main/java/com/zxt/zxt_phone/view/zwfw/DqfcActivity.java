@@ -1,30 +1,28 @@
 package com.zxt.zxt_phone.view.zwfw;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.adapter.CommonAdapter;
 import com.zxt.zxt_phone.adapter.ViewHolder;
 import com.zxt.zxt_phone.base.BaseActivity;
-import com.zxt.zxt_phone.bean.model.DqfcModel;
-import com.zxt.zxt_phone.utils.MLog;
+import com.zxt.zxt_phone.bean.model.CommonModel;
 import com.zxt.zxt_phone.view.customview.HomeGridView;
-import com.zxt.zxt_phone.view.customview.PullToRefreshView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.zxt.zxt_phone.view.zwfw.dqfc.DqhdActivity;
+import com.zxt.zxt_phone.view.zwfw.dqfc.FfclActivity;
+import com.zxt.zxt_phone.view.zwfw.dqfc.SdxfActivity;
+import com.zxt.zxt_phone.view.zwfw.dqfc.SjxxActivity;
+import com.zxt.zxt_phone.view.zwfw.dqfc.ZsdxActivity;
+import com.zxt.zxt_phone.view.zwfw.dqfc.ZyzfwActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import okhttp3.Call;
 
 /**
  * 党群风采
@@ -36,18 +34,22 @@ public class DqfcActivity extends BaseActivity {
     @BindView(R.id.tab_name)
     TextView tabName;
 
-    @BindView(R.id.refreshView)
-    PullToRefreshView myRefreshView;
 
     @BindView(R.id.gv_list)
     HomeGridView gvList;
 
-    private  DqfcModel model;
-    CommonAdapter<DqfcModel.DataNewsModel> myAdapter;
-    private List<DqfcModel.DataNewsModel> listData   = new ArrayList<>();
+
+    CommonAdapter<CommonModel> myAdapter;
+    private List<CommonModel> listData = new ArrayList<>();
+
+    private CommonModel model;
+    int[] icons = {R.drawable.dqfc_dqhd, R.drawable.dqfc_zyzfw, R.drawable.dqfc_zsdx,
+            R.drawable.dqfc_sjxx, R.drawable.dqfc_sdxf, R.drawable.dqfc_ffcl};
+    String[] titles = {"党群活动", "志愿者服务", "掌上党校", "书记信箱", "时代先锋", "反腐倡廉"};
+
 
     @Override
-    public  void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dqfc);
 
@@ -56,53 +58,61 @@ public class DqfcActivity extends BaseActivity {
     }
 
 
-    public void initView(){
+    public void initView() {
         tabName.setText(R.string.zwfw_dqfc);
 
 
-        myAdapter = new CommonAdapter<DqfcModel.DataNewsModel>(mContext,listData,R.layout.pop_list_img_item) {
+        myAdapter = new CommonAdapter<CommonModel>(mContext, listData, R.layout.item_common) {
             @Override
-            public void convert(ViewHolder holder, DqfcModel.DataNewsModel item) {
-                MLog.i(TAG,"response=="+item.getCoverImg());
-
-                Glide.with(mContext).load(item.getCoverImg())//
-                        .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
-                        .error(R.drawable.ic_default_color)//
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
-                        .into((ImageView) holder.getView(R.id.repairs_img));
-
-                holder.setText(R.id.tv_pop_list,item.getTitle());
+            public void convert(ViewHolder holder, CommonModel item) {
+//                Glide.with(mContext).load(item.getCoverImg())//
+//                        .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
+//                        .error(R.drawable.ic_default_color)//
+////                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
+//                        .into((ImageView) holder.getView(R.id.repairs_img));
+                holder.setImageResource(R.id.iv_icon, item.getIcon());
+                holder.setText(R.id.tv_title, item.getName());
             }
         };
         gvList.setAdapter(myAdapter);
+        gvList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                switch (position) {
+                    case 0:
+                        intent.setClass(DqfcActivity.this, DqhdActivity.class);
+                        break;
+                    case 1:
+                        intent.setClass(DqfcActivity.this, ZyzfwActivity.class);
+                        break;
+                    case 2:
+                        intent.setClass(DqfcActivity.this, ZsdxActivity.class);
+                        break;
+                    case 3:
+                        intent.setClass(DqfcActivity.this, SjxxActivity.class);
+                        break;
+                    case 4:
+                        intent.setClass(DqfcActivity.this, SdxfActivity.class);
+                        break;
+                    case 5:
+                        intent.setClass(DqfcActivity.this, FfclActivity.class);
+                        break;
+                }
+                startActivity(intent);
+            }
+        });
     }
+
+
     private void getData() {
-        OkHttpUtils.get()
-                .url("http://192.168.1.222:8099/api/APP1.0.aspx?method=Activities")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
 
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        MLog.i(TAG,"response=="+response);
-                        if(response.length()>0){
-                            try {
-                                JSONObject obj = new JSONObject(response);
-
-                                model= new Gson().fromJson(response,DqfcModel.class);
-                                listData.addAll(model.getData());
-
-                                myAdapter.notifyDataSetChanged();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                });
+        for (int i = 0; i < icons.length; i++) {
+            model = new CommonModel();
+            model.setIcon(icons[i]);
+            model.setName(titles[i]);
+            listData.add(model);
+        }
     }
 
 }

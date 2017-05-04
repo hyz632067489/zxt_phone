@@ -7,7 +7,7 @@ import java.util.List;
  * powered by company
  */
 
-public class DqfcModel {
+public class DqhdModel {
 
     /**
      * Status : 1
@@ -19,6 +19,7 @@ public class DqfcModel {
     private int Status;
     private String Message;
     private int CountNum;
+    private String pioneerUrl;
     private List<DataNewsModel> Data;
 
     public int getStatus() {
@@ -35,6 +36,14 @@ public class DqfcModel {
 
     public void setMessage(String Message) {
         this.Message = Message;
+    }
+
+    public String getPioneerUrl() {
+        return pioneerUrl;
+    }
+
+    public void setPioneerUrl(String pioneerUrl) {
+        this.pioneerUrl = pioneerUrl;
     }
 
     public int getCountNum() {

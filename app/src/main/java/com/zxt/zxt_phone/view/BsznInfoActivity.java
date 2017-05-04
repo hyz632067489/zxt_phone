@@ -1,5 +1,6 @@
 package com.zxt.zxt_phone.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -30,10 +31,21 @@ public class BsznInfoActivity extends BaseActivity {
 
 
     CommonAdapter myAdapter;
+
+    Intent mIntent;
+
+    private int id;
+    private String title;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bszn_info);
+
+        mIntent = getIntent();
+
+        id = getIntent().getIntExtra("id", 0);
+        title = getIntent().getStringExtra("title");
 
         initView();
     }

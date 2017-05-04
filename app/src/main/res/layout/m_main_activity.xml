@@ -41,6 +41,7 @@
                     android:id="@+id/dynamic_icon_ig"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:background="@drawable/selector_white_grey_on_off"
                     android:padding="@dimen/dp_4"
                     android:src="@drawable/dynamic_icon" />
@@ -243,20 +244,20 @@
 
             </LinearLayout>
 
-            <com.zxt.zxt_phone.view.customview.PullToRefreshView
-                android:id="@+id/refreshView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <!--<com.zxt.zxt_phone.view.customview.PullToRefreshView-->
+                <!--android:id="@+id/refreshView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
 
-                <ListView
-                    android:id="@+id/listview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:descendantFocusability="afterDescendants"
-                    android:divider="@color/white"
-                    android:dividerHeight="1dp"
-                    android:listSelector="@android:color/transparent" />
-            </com.zxt.zxt_phone.view.customview.PullToRefreshView>
+                <!--<ListView-->
+                    <!--android:id="@+id/listview"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:descendantFocusability="afterDescendants"-->
+                    <!--android:divider="@color/white"-->
+                    <!--android:dividerHeight="1dp"-->
+                    <!--android:listSelector="@android:color/transparent" />-->
+            <!--</com.zxt.zxt_phone.view.customview.PullToRefreshView>-->
 
         </LinearLayout>
     </ScrollView>

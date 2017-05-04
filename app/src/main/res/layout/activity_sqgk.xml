@@ -9,5 +9,122 @@
 
     <com.zxt.zxt_phone.view.widget.TitleLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/action_tab_height"/>
+        android:layout_height="@dimen/action_tab_height" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_30"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:id="@+id/layout_sqjs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/sqgk_jieshao" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/px_15"
+                android:text="社区介绍"
+                android:textSize="@dimen/px_50" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_rkxx"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/sqgk_rkxx" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/px_15"
+                android:text="人口信息"
+                android:textSize="@dimen/px_50" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_zzjg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/sqgk_zzjg" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/px_15"
+                android:text="组织架构"
+                android:textSize="@dimen/px_50" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.66dp"
+        android:layout_marginTop="@dimen/px_30"
+        android:background="#ccc" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_tab_height"
+        android:layout_marginLeft="@dimen/px_300"
+        android:layout_marginRight="@dimen/px_300"
+        android:background="@color/base_color"
+        android:gravity="center"
+        android:text="社区新闻"
+        android:textColor="@color/white"
+        android:textSize="@dimen/px_80" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.66dp"
+        android:background="#ccc" />
+
+    <com.zxt.zxt_phone.view.customview.PullToRefreshView
+        android:id="@+id/refreshView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:cacheColorHint="@color/gainsboro"
+            android:divider="@color/gainsboro"
+            android:dividerHeight="0.5dip"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none" />
+
+    </com.zxt.zxt_phone.view.customview.PullToRefreshView>
+
 </LinearLayout>

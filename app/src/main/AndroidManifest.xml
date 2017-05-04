@@ -81,8 +81,9 @@
         <activity android:name=".view.GzglActivity" />
         <activity android:name=".view.zwfw.wggl.GzrzActivity" />
         <activity android:name=".view.zwfw.wggl.AddGzrzActivity" />
-        <activity android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
-            android:theme="@style/ImagePickerThemeFullScreen"/>
+        <activity
+            android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
+            android:theme="@style/ImagePickerThemeFullScreen" />
         <activity
             android:name=".view.LevelActivity"
             android:theme="@style/android:Theme.Holo.Light.NoActionBar" />
@@ -120,7 +121,13 @@
             android:name=".view.wyfw.PjglInfoActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".view.wyfw.JftjAddActivity" />
-        <activity android:name=".view.zwfw.sqgk.SqgkActivity"></activity>
+        <activity android:name=".view.zwfw.sqgk.SqgkActivity" />
+        <activity android:name=".view.zwfw.dqfc.DqhdActivity" />
+        <activity android:name=".view.zwfw.dqfc.ZyzfwActivity" />
+        <activity android:name=".view.zwfw.dqfc.ZsdxActivity" />
+        <activity android:name=".view.zwfw.dqfc.SjxxActivity" />
+        <activity android:name=".view.zwfw.dqfc.SdxfActivity" />
+        <activity android:name=".view.zwfw.dqfc.FfclActivity"></activity>
     </application>
 
 </manifest>

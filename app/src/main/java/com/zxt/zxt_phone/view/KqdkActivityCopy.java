@@ -285,6 +285,7 @@ public class KqdkActivityCopy extends BaseActivity {
 //                if(){
 //
 //                }
+                //FileProvider 7.0文件读取共享权限
                 String path1 = Environment.getExternalStorageDirectory() + "/" + TMP_PATH;
 
                 ClipImageActivity.startActivity(this, path1, CROP_RESULT_CODE);

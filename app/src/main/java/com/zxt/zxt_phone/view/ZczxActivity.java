@@ -235,10 +235,10 @@ public class ZczxActivity extends BaseActivity {
                 .get()
                 .url(Url.URL_PT)
                 .addParams("method", "DeptNewsTab")
-//                .addParams("TVInfoId", SharedPrefsUtil.getValue(this, "userinfo", "TVInfoId", ""))
-//                .addParams("Key", SharedPrefsUtil.getValue(this, "userinfo", "Key", ""))
-                .addParams("TVInfoId", "19")
-                .addParams("Key", "21218CCA77804D2BA1922C33E0151105")
+                .addParams("TVInfoId", SharedPrefsUtil.getString(mContext,"TVInfoId"))
+                .addParams("Key", SharedPrefsUtil.getString(mContext,"Key"))
+//                .addParams("TVInfoId", "19")
+//                .addParams("Key", "21218CCA77804D2BA1922C33E0151105")
                 .build()
                 .execute(new StringCallback() {
                     @Override

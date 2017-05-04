@@ -9,6 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.zxt.zxt_phone.R;
+import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.GlideImageLoader;
+
 import java.util.zip.Inflater;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
@@ -127,12 +133,21 @@ public class ViewHolder
      * @param drawableId
      * @return
      */
-//    public ViewHolder setImageByUrl(int viewId, String url)
-//    {
+    public ViewHolder setImageByUrl(int viewId, String url)
+    {
+
+//        Glide.with(mContext).load(Url.BASE_L + item.getPic())//
+//                .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存修改过的图片
+//                .override(120,120)
+//                .crossFade() //设置淡入淡出效果，默认300ms，可以传参
+//                .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
+//                .error(R.drawable.ic_default_color)//
+////                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
+//                .into((ImageView) holder.getView(R.id.iv_icon));
 //        ImageLoader.getInstance(3, Type.LIFO).loadImage(url,
 //                (ImageView) getView(viewId));
-//        return this;
-//    }
+        return this;
+    }
 
     public int getPosition()
     {
