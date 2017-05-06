@@ -20,6 +20,7 @@ import com.zxt.zxt_phone.bean.model.ZwfwModel;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.zwfw.DqfcActivity;
 import com.zxt.zxt_phone.view.zwfw.sqgk.SqgkActivity;
+import com.zxt.zxt_phone.view.zwfw.sqtj.SqtjActivity;
 
 import java.util.ArrayList;
 import java.util.List;

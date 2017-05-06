@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_sjxx"
+    android:id="@+id/activity_sqtj_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zxt.zxt_phone.view.zwfw.dqfc.SjxxActivity">
+    tools:context="com.zxt.zxt_phone.view.zwfw.sqtj.SqtjInfoActivity">
 
     <com.zxt.zxt_phone.view.widget.TitleLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/action_tab_height"/>
+        android:layout_height="@dimen/action_tab_height" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -22,9 +23,7 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <LinearLayout
-                android:id="@+id/name_layout"
-                style="@style/sqti_info_layout">
+            <LinearLayout style="@style/sqti_info_layout">
 
                 <TextView
                     style="@style/sqtj_info_1"
@@ -45,9 +44,7 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/phone_layout"
-                style="@style/sqti_info_layout">
+            <LinearLayout style="@style/sqti_info_layout">
 
                 <TextView
                     style="@style/sqtj_info_1"
@@ -74,9 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_90"
                 android:layout_marginTop="@dimen/px_10"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                >
+                android:orientation="horizontal">
 
                 <View
                     android:layout_width="0dp"
@@ -195,7 +190,7 @@
 
                 <TextView
                     style="@style/sqtj_info_1"
-                    android:text="事	项：" />
+                    android:text="类	型：" />
 
                 <TextView
                     android:id="@+id/typeName"
@@ -221,8 +216,7 @@
 
                 <TextView
                     style="@style/sqtj_info_1"
-                    android:text="接收人："
-                     />
+                    android:text="部	门：" />
 
                 <TextView
                     android:id="@+id/deptName"
@@ -242,31 +236,7 @@
 
 
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/time_Layout"
-                style="@style/sqti_info_layout">
 
-                <TextView
-                    style="@style/sqtj_info_1"
-                    android:text="时	间：" />
-
-                <TextView
-                    android:id="@+id/time_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:paddingLeft="5dp"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/px_40" />
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/time_icon" />
-
-            </LinearLayout>
             <LinearLayout
 
                 style="@style/sqti_info_layout">
@@ -325,7 +295,7 @@
                 android:layout_height="match_parent"
                 android:button="@drawable/selector_radio_button"
                 android:gravity="center"
-                android:text="实名写信"
+                android:text="对外公示"
                 android:textColor="@drawable/selector_sqtj_code_text"
                 android:textSize="16sp" />
 
@@ -337,7 +307,7 @@
                 android:button="@drawable/selector_radio_button"
                 android:checked="false"
                 android:gravity="center"
-                android:text="匿名写信"
+                android:text="不对外公示"
                 android:textColor="@drawable/selector_sqtj_code_text"
                 android:textSize="16sp" />
 
@@ -354,4 +324,6 @@
         android:textColor="@color/white"
         android:textSize="@dimen/px_80" />
 </LinearLayout>
+
+
 

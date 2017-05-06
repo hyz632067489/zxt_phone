@@ -51,17 +51,22 @@
     <string name="zwfw_yybsinfo">预约办事时间</string>
     <string name="zwfw_dqfc">党群风采</string>
     <string name="zwfw_dqhd">党群活动</string>
+    <string name="zwfw_zsdx">掌上党校</string>
+    <string name="zwfw_sjxx">书记信箱</string>
+    <string name="zwfw_sdxf">时代先锋</string>
+    <string name="zwfw_ffcl">反腐倡廉</string>
     <string name="zwfw_zyzfw">自愿者服务</string>
     <string name="zwfw_sqtjxy">诉求提交协议</string>
     <string name="zwfw_sqtj">诉求提交</string>
     <string name="zwfw_sqgk">社区概况</string>
+
 
     <!--社区购物-->
     <string name="sqgw_tabname">社区购物</string>
     <!--办事指南-->
     <string name="bszn_tabname">办事指南</string>
     <string name="bszn_liebiao">办事指南列表</string>
-
+    <string name="bszn_info">办理证件</string>
 
     <string name="no_data">没有查询到数据</string>
 

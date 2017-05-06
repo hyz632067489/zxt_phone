@@ -10,36 +10,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <RelativeLayout
+        <com.zxt.zxt_phone.view.widget.TitleLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/topcolor"
-            android:orientation="vertical"
-            >
+            android:layout_height="@dimen/action_tab_height" />
 
-            <ImageView
-                android:id="@+id/backBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:onClick="doBack"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/back_selector"
-                android:visibility="visible"
-                >
-            </ImageView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="提交成功"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:layout_centerInParent="true"
-                android:layout_centerHorizontal="true"
-                />
-
-        </RelativeLayout>
 
 
 

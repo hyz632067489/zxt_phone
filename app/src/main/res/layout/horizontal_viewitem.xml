@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
+    android:layout_width="@dimen/px_300"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="horizontal"
@@ -10,10 +10,10 @@
     <TextView
         android:id="@+id/title"
         android:gravity="center"
-        android:layout_width="100dp"
+        android:layout_width="@dimen/px_280"
         android:layout_height="match_parent"
         android:textColor="@color/black"
-        android:textSize="@dimen/news_size"/>
+        android:textSize="@dimen/px_45"/>
     
     
 </LinearLayout>

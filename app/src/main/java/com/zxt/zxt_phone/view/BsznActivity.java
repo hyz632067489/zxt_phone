@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -17,16 +15,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
+
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.adapter.CommonAdapter;
-import com.zxt.zxt_phone.adapter.GridviewAdapter;
 import com.zxt.zxt_phone.adapter.ViewHolder;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.model.BsznListModel;
-import com.zxt.zxt_phone.bean.model.BsznModel;
-import com.zxt.zxt_phone.bean.model.WyggModel;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
@@ -37,15 +33,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import okhttp3.Call;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * Created by hyz on 2017/3/9.
@@ -71,11 +64,6 @@ public class BsznActivity extends BaseActivity {
     @BindView(R.id.process_bar)
     ProgressBar processBar;
 
-    private QueryType selectTab;
-
-    private enum QueryType {
-        gerenHandle, qiyeHandle;
-    }
 
     @BindView(R.id.refreshView)
     PullToRefreshView mRefreshView;
@@ -85,9 +73,10 @@ public class BsznActivity extends BaseActivity {
 
     CommonAdapter<BsznListModel.DataBean> myAdapter, myAdapter1;
     BsznListModel model;
-    List<BsznListModel.DataBean> mList1 = new ArrayList<>();
-    List<BsznListModel.DataBean> mList2 = new ArrayList<>();
+    List<BsznListModel.DataBean> mList1= new ArrayList<>();
+    List<BsznListModel.DataBean> mList2= new ArrayList<>();
     List<BsznListModel.DataBean> mDatas = new ArrayList<>();
+    List<BsznListModel.DataBean> allDatas = new ArrayList<>();
 
     Intent mIntent;
 
@@ -104,6 +93,7 @@ public class BsznActivity extends BaseActivity {
                         mDatas.addAll(mList2);
 
                     }
+//                    setAdapter();
                     myAdapter.notifyDataSetChanged();
                     break;
             }
@@ -123,24 +113,32 @@ public class BsznActivity extends BaseActivity {
 
     private void initView() {
         tabName.setText(R.string.bszn_tabname);
-        mRd_g.setOnCheckedChangeListener(listener);
+
+
+        mRd_g.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                mDatas.clear();
+                if (checkedId == rbGeren.getId()) {
+                    isChecked = true;
+                    mDatas.addAll(mList1);
+                } else if (checkedId == rbQiye.getId()) {
+                    isChecked = false;
+                    mDatas.addAll(mList2);
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+        });
 
 
         myAdapter = new CommonAdapter<BsznListModel.DataBean>(mContext, mDatas, R.layout.item_common) {
             @Override
             public void convert(ViewHolder holder, BsznListModel.DataBean item) {
-//                Glide.with(mContext).load(Url.BASE_L + item.getPic())//
-//                        .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存修改过的图片
-//                        .override(120,120)
-//                        .crossFade() //设置淡入淡出效果，默认300ms，可以传参
-//                        .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
-//                        .error(R.drawable.ic_default_color)//
-////                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
-//                        .into((ImageView) holder.getView(R.id.iv_icon));
 
-                holder.setImageByUrl(R.id.iv_icon, item.getPic());
+                holder.setImageByUrlIcon(R.id.iv_icon, item.getPic());
                 holder.setText(R.id.tv_title, item.getCategory());
             }
+
         };
         gridView.setAdapter(myAdapter);
 
@@ -148,38 +146,22 @@ public class BsznActivity extends BaseActivity {
         mRefreshView.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
             @Override
             public void onHeaderRefresh(PullToRefreshView view) {
-                page = 1;
                 mDatas.clear();
+                allDatas.clear();
                 getData();
             }
         });
         mRefreshView.setOnFooterLoadListener(new PullToRefreshView.OnFooterLoadListener() {
             @Override
             public void onFooterLoad(PullToRefreshView view) {
-                page++;
+                mDatas.clear();
+                allDatas.clear();
                 getData();
             }
         });
 
     }
 
-    RadioGroup.OnCheckedChangeListener listener = new RadioGroup.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-            if (checkedId == rbGeren.getId()) {
-                isChecked = true;
-                mDatas.clear();
-                mDatas.addAll(mList1);
-                myAdapter.notifyDataSetChanged();
-            } else if (checkedId == rbQiye.getId()) {
-                isChecked = false;
-                mDatas.clear();
-                mDatas.addAll(mList2);
-                myAdapter.notifyDataSetChanged();
-            }
-        }
-    };
 
     @OnItemClick(R.id.grid_view)
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -207,6 +189,10 @@ public class BsznActivity extends BaseActivity {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         closeProgressDialog();
+                        if (null != mRefreshView) {
+                            mRefreshView.onFooterLoadFinish();
+                            mRefreshView.onHeaderRefreshFinish();
+                        }
                     }
 
                     @Override
@@ -218,27 +204,30 @@ public class BsznActivity extends BaseActivity {
                             JSONObject obj = new JSONObject(response);
                             if ("1".equals(obj.getString("Status"))) {
                                 model = new Gson().fromJson(response, BsznListModel.class);
-                                mDatas.addAll(model.getData());
+                                allDatas.addAll(model.getData());
 
+                                mDatas.clear();
                                 mList2.clear();
                                 mList1.clear();
-                                for (int i = 0; i < mDatas.size(); i++) {
-                                    if (1 == mDatas.get(i).getPid()) {
-                                        mList1.add(mDatas.get(i));
-                                    } else if (2 == mDatas.get(i).getPid()) {
-                                        mList2.add(mDatas.get(i));
+                                for (int i = 0; i < allDatas.size(); i++) {
+                                    if (1 == allDatas.get(i).getPid()) {
+                                        mList1.add(allDatas.get(i));
+                                    } else if (2 == allDatas.get(i).getPid()) {
+                                        mList2.add(allDatas.get(i));
                                     }
                                 }
-                                mDatas.clear();
-                                if (isChecked) {
-                                    mDatas.addAll(mList1);
-                                } else {
-                                    mDatas.addAll(mList2);
 
-                                }
-                                myAdapter.notifyDataSetChanged();
-//                                mHandler.sendEmptyMessage(0);
+//                                mDatas.clear();
+//                                if (isChecked) {
+//                                    mDatas.addAll(mList1);
+//                                } else {
+//                                    mDatas.addAll(mList2);
+//                                }
+//                                myAdapter.notifyDataSetChanged();
+                                mHandler.sendEmptyMessage(0);
 
+                                mRefreshView.onFooterLoadFinish();
+                                mRefreshView.onHeaderRefreshFinish();
                             } else {
                                 gridView.setVisibility(View.GONE);
                                 noData.setVisibility(View.VISIBLE);
@@ -250,5 +239,10 @@ public class BsznActivity extends BaseActivity {
                 });
     }
 
+    @Override
+    protected void onDestroy() {
+        mHandler.removeCallbacksAndMessages(null);
+        super.onDestroy();
+    }
 
 }

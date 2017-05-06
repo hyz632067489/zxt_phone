@@ -1,34 +1,30 @@
-package com.zxt.zxt_phone.view;
+package com.zxt.zxt_phone.view.zwfw.sqtj;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
-import com.zxt.zxt_phone.adapter.PopAdapter;
-import com.zxt.zxt_phone.adapter.PopNameAdapter;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.model.DeptNameModel;
 import com.zxt.zxt_phone.bean.model.TypeDepartment;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.MLog;
+import com.zxt.zxt_phone.utils.Mobile;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
+import com.zxt.zxt_phone.view.SuccessActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,10 +38,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
-public class YjtjInfoActivity extends BaseActivity {
+public class SqtjInfoActivity extends BaseActivity {
 
 
-    private String TAG = YjtjInfoActivity.class.getCanonicalName();
+    private String TAG = SqtjInfoActivity.class.getCanonicalName();
 
     @BindView(R.id.tab_name)
     TextView tabName;
@@ -70,8 +66,32 @@ public class YjtjInfoActivity extends BaseActivity {
     @BindView(R.id.submit_btn)
     Button subBtn;
 
+
+    @BindView(R.id.rb_code)
+    RadioButton rbCode;
+    @BindView(R.id.rb_noCode)
+    RadioButton rbNoCode;
+    @BindView(R.id.rg_sms)
+    RadioGroup rgSms;
+    @BindView(R.id.et_code)
+    EditText etCode;
+    @BindView(R.id.code_layout)
+    LinearLayout codeLayout;
+    @BindView(R.id.rb_dwgs)
+    RadioButton rbDwgs;
+    @BindView(R.id.rb_bdwgs)
+    RadioButton rbBdwgs;
+    @BindView(R.id.rg_gs)
+    RadioGroup rgGs;
+
+
     int checkedItem = 0;
     int ocheckedItem = 0;
+
+    private int visible = -1;//1对外公示 0不公示
+    private int sms = -1;//1验证 0不验证
+    String codeNum="321";
+
     String[] DeptName = null;
     String[] Deptid = null;
     String[] OpinionClassId = null;
@@ -84,50 +104,59 @@ public class YjtjInfoActivity extends BaseActivity {
     TypeDepartment typeDepartment = null;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_yjtj_info);
+        setContentView(R.layout.activity_sqtj_info);
         ButterKnife.bind(this);
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         initData();
         initView();
-
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     private void initView() {
         tabName.setText(R.string.zwfw_sqtj);
 
+        //选择是否短信验证
+        rgSms.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (rbCode.getId() == checkedId) {
+                    codeLayout.setVisibility(View.VISIBLE);
+                    sms = 1;
+                } else if (rbNoCode.getId() == checkedId) {
+                    codeLayout.setVisibility(View.GONE);
+                    sms = 0;
+                }
+
+            }
+        });
+        //选择是否对外公示
+        rgGs.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (rbDwgs.getId() == checkedId) {
+                    visible = 1;
+                } else if (rbBdwgs.getId() == checkedId) {
+                    visible = 0;
+                }
+            }
+        });
+
 
     }
 
 
-    @OnClick({R.id.submit_btn, R.id.typeLayout, R.id.deptLayout})
+    @OnClick({R.id.submit_btn, R.id.typeLayout, R.id.deptLayout, R.id.btn_code})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.submit_btn:
-                if ("".equals(name.getText().toString())) {
-                    toast("姓名不能为空!");
-                    return;
-                } else if ("".equals(phone.getText().toString())) {
-                    toast("电话不能为空!");
-                    return;
-                } else if (phone.getText().toString().trim().length() != 11) {
-                    toast("请输入正确的电话号码!");
-                    return;
-                } else if ("".equals(typeName.getText().toString())) {
-                    toast("类型不能为空!");
-                    return;
-                } else if ("".equals(deptName.getText().toString())) {
-                    toast("部门不能为空!");
-                    return;
-                } else if ("".equals(mtitle.getText().toString())) {
-                    toast("标题不能为空!");
-                    return;
-                } else if ("".equals(content.getText().toString())) {
-                    toast("内容不能为空!");
-                    return;
-                }
+                if (verification()) return;
 
                 sentData();
                 break;
@@ -159,18 +188,113 @@ public class YjtjInfoActivity extends BaseActivity {
                                 }
                         ).show();
                 break;
+            case R.id.btn_code:
+
+                sentCode();
+                break;
         }
     }
 
 
+    /**
+     * 判断是否有值
+     *
+     * @return
+     */
+    private boolean verification() {
+        if ("".equals(name.getText().toString())) {
+            toast("姓名不能为空!");
+            return true;
+        } else if ("".equals(phone.getText().toString())) {
+            toast("电话不能为空!");
+            return true;
+        } else if (!Mobile.isPhoneNum(phone.getText().toString())) {
+            toast("请输入正确的手机号");
+            return true;
+        } else if ("".equals(typeName.getText().toString())) {
+            toast("类型不能为空!");
+            return true;
+        } else if ("".equals(deptName.getText().toString())) {
+            toast("部门不能为空!");
+            return true;
+        } else if ("".equals(mtitle.getText().toString())) {
+            toast("标题不能为空!");
+            return true;
+        } else if ("".equals(content.getText().toString())) {
+            toast("内容不能为空!");
+            return true;
+        } else if (sms == -1) {
+            toast("请选择是否短信验证!");
+            return true;
+        }
+        if (sms == 1) {
+            if ("".equals(etCode.getText().toString())) {
+                toast("请输入验证码");
+                return true;
+            }
+            if (!codeNum.equals(etCode.getText().toString())) {
+                toast("请输入正确的验证码");
+                return true;
+            }
+
+        }
+        if (visible == -1) {
+            toast("请选择是否对外公示");
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 获取验证码
+     */
+    private void sentCode() {
+        //判断手机号
+        if (!Mobile.isPhoneNum(phone.getText().toString())) {
+            toast("请输入正确的手机号");
+            return;
+        }
+
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("method", "Short");
+        params.put("TVInfoId", SharedPrefsUtil.getString(mActivity, "TVInfoId"));
+        params.put("Key", SharedPrefsUtil.getString(mActivity, "Key"));
+        params.put("Phone", phone.getText().toString());
+        params.put("YZ", String.valueOf(sms));//是否需要短信验证
+//        params.put("DeptId", SharedPrefsUtil.getString(mActivity, "DeptId"));
+
+        OkHttpUtils.get()
+                .url(Url.URL_PT)
+                .params(params)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        MLog.i(TAG, "response=0=" + response);
+
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            if ("1".equals(obj.getString("Status"))) {
+                                codeNum = obj.getString("YZM");
+
+                                toast("已发送验证码");
+                            } else {
+                                toast("获取验证码出错");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
     private void initData() {
-
-        //类型TVInfoId=19&method=Opinionclass&Key=21218CCA77804D2BA1922C33E0151105
-//        HashMap<String, String> params = new HashMap<>();
-//        params.put("TVInfoId", SharedPrefsUtil.getString(mActivity, "TVInfoId"));
-//        params.put("method", "Opinionclass");
-//        params.put("Key", SharedPrefsUtil.getString(mActivity, "Key"));
-
         OkHttpUtils.get()
                 .url(Url.URL_PT)
                 .addParams("TVInfoId", SharedPrefsUtil.getString(mActivity, "TVInfoId"))
@@ -185,10 +309,11 @@ public class YjtjInfoActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
+                        MLog.i(TAG, "response=1=" + response);
 
                         try {
                             JSONObject obj = new JSONObject(response);
-                            if (!"0".equals(obj.getString("Status"))) {
+                            if ("1".equals(obj.getString("Status"))) {
                                 typeDepartment = new Gson().fromJson(response, TypeDepartment.class);
 
                                 OpinionClassName = new String[typeDepartment.getData().size()];
@@ -220,10 +345,10 @@ public class YjtjInfoActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.i(TAG, "response==" + response);
+                        MLog.i(TAG, "response=2=" + response);
                         try {
                             JSONObject obj = new JSONObject(response);
-                            if (!"0".equals(obj.getString("Status"))) {
+                            if ("1".equals(obj.getString("Status"))) {
                                 deptNameModel = new Gson().fromJson(response, DeptNameModel.class);
 
                                 DeptName = new String[deptNameModel.getData().size()];
@@ -249,16 +374,23 @@ public class YjtjInfoActivity extends BaseActivity {
      */
     private void sentData() {
 
-   HashMap<String ,String> params = new HashMap<>();
-        params.put("method", "OpinionAdd");
-        params.put("TVInfoId",SharedPrefsUtil.getString(mActivity,"TVInfoId"));
-        params.put("Key",SharedPrefsUtil.getString(mActivity,   "Key" ));
-        params.put("UserName",name.getText().toString());
-        params.put("MobileNo",phone.getText().toString());
-        params.put("OpinionClassId",listDatas.get(checkedItem).getOpinionClassId()+"");
-        params.put("deptId",listNames.get(ocheckedItem).getDeptid()+"");
-        params.put("Title",mtitle.getText().toString());
-        params.put("Content",content.getText().toString());
+        showProgressDialog();
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("method", "OpinionAdd1");
+        params.put("TVInfoId", SharedPrefsUtil.getString(mActivity, "TVInfoId"));
+        params.put("Key", SharedPrefsUtil.getString(mActivity, "Key"));
+        params.put("DeptId", SharedPrefsUtil.getString(mActivity, "DeptId"));
+        params.put("UserName", name.getText().toString());
+        params.put("MobileNo", phone.getText().toString());
+        params.put("OpinionClassId", listDatas.get(checkedItem).getOpinionClassId() + "");
+        params.put("deptId", listNames.get(ocheckedItem).getDeptid() + "");
+        params.put("Title", mtitle.getText().toString());
+        params.put("Content", content.getText().toString());
+
+        params.put("Visible", String.valueOf(visible));//是否公示
+        params.put("YZ", String.valueOf(sms));//是否需要短信验证
+
 
         OkHttpUtils.get()
                 .url(Url.URL_PT)
@@ -267,16 +399,20 @@ public class YjtjInfoActivity extends BaseActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        closeProgressDialog();
                     }
+
                     @Override
                     public void onResponse(String response, int id) {
-
+                        MLog.i(TAG, "response=3=" + response);
+                        closeProgressDialog();
                         try {
                             JSONObject obj = new JSONObject(response);
-                            if(!"0".equals(obj.getString("Status"))){
-                                startActivity(new Intent(mActivity, YjtjSuccessActivity.class));
+                            if ("1".equals(obj.getString("Status"))) {
+                                startActivity(new Intent(mActivity, SuccessActivity.class));
                                 finish();
+                            } else {
+                                toast(obj.getString("Message"));
                             }
 
                         } catch (JSONException e) {
@@ -286,5 +422,6 @@ public class YjtjInfoActivity extends BaseActivity {
                     }
                 });
     }
+
 
 }

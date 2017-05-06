@@ -143,4 +143,37 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="bszn_info_1">
+        <item name="android:layout_width">@dimen/px_200</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/px_35</item>
+    </style>
+
+    <style name="bszn_info_2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/px_35</item>
+    </style>
+
+    <style name="sqtj_info_1">
+        <item name="android:layout_width">@dimen/px_160</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/maop_text_color</item>
+        <item name="android:textSize">@dimen/px_40</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="sqti_info_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/px_110</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@drawable/xxjb_input_bg</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">@dimen/px_10</item>
+    </style>
+
 </resources>

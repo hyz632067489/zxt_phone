@@ -54,9 +54,14 @@ public class DqfcActivity extends BaseActivity {
         setContentView(R.layout.activity_dqfc);
 
         getData();
-        initView();
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initView();
+    }
 
     public void initView() {
         tabName.setText(R.string.zwfw_dqfc);
@@ -65,13 +70,10 @@ public class DqfcActivity extends BaseActivity {
         myAdapter = new CommonAdapter<CommonModel>(mContext, listData, R.layout.item_common) {
             @Override
             public void convert(ViewHolder holder, CommonModel item) {
-//                Glide.with(mContext).load(item.getCoverImg())//
-//                        .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
-//                        .error(R.drawable.ic_default_color)//
-////                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
-//                        .into((ImageView) holder.getView(R.id.repairs_img));
+
                 holder.setImageResource(R.id.iv_icon, item.getIcon());
                 holder.setText(R.id.tv_title, item.getName());
+
             }
         };
         gvList.setAdapter(myAdapter);

@@ -22,10 +22,13 @@ public class ZsdxActivity extends BaseActivity {
         setContentView(R.layout.activity_zsdx);
 
 
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
         initView();
     }
-
     private void initView() {
-        tabName.setText(R.string.add_gzrz);
+        tabName.setText(R.string.zwfw_zsdx);
     }
 }

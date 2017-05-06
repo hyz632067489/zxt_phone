@@ -1,4 +1,5 @@
-package com.zxt.zxt_phone.view;
+package com.zxt.zxt_phone.view.zwfw.sqtj;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,12 +24,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
-/**
- * 述求提交
- */
 public class SqtjActivity extends BaseActivity {
 
-    private String TAG = SqtjActivity.class.getCanonicalName();
+
+    private String TAG =  SqtjActivity.class.getCanonicalName();
 
     @BindView(R.id.tab_name)
     TextView tabName;
@@ -61,7 +60,7 @@ public class SqtjActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_agreed:
-                startActivity(new Intent(this, YjtjInfoActivity.class));
+                startActivity(new Intent(this, SqtjInfoActivity.class));
                 finish();
                 break;
 

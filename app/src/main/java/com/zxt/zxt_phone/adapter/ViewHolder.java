@@ -135,22 +135,39 @@ public class ViewHolder
      * @param drawableId
      * @return
      */
-    public ViewHolder setImageByUrl(int viewId, String url)
+    public ViewHolder setImageByUrlIcon(int viewId, String url)
     {
 
         Glide.with(mConvertView.getContext()).load(Url.BASE_L+url)//
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存修改过的图片
                 .override(120,120)
                 .crossFade() //设置淡入淡出效果，默认300ms，可以传参
-                .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
-                .error(R.drawable.ic_default_color)//
 //                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
                 .into((ImageView) getView(viewId));
 //        ImageLoader.getInstance(3, Type.LIFO).loadImage(url,
 //                (ImageView) getView(viewId));
         return this;
     }
+    /**
+     * 为ImageView设置图片
+     *
+     * @param viewId
+     * @param drawableId
+     * @return
+     */
+    public ViewHolder setImageByUrl(int viewId, String url)
+    {
 
+        Glide.with(mConvertView.getContext()).load(Url.BASE_L+url)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存修改过的图片
+                .override(250,250)
+                .crossFade() //设置淡入淡出效果，默认300ms，可以传参
+//                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
+                .into((ImageView) getView(viewId));
+//        ImageLoader.getInstance(3, Type.LIFO).loadImage(url,
+//                (ImageView) getView(viewId));
+        return this;
+    }
     public int getPosition()
     {
         return mPosition;

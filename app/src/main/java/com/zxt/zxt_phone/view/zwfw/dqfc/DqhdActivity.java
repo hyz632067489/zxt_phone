@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -70,6 +71,12 @@ public class DqhdActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         getData();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         initView();
     }
 
@@ -80,12 +87,13 @@ public class DqhdActivity extends BaseActivity {
         myAdapter = new CommonAdapter<DqhdModel.DataNewsModel>(mContext, listData, R.layout.pop_list_img_item) {
             @Override
             public void convert(ViewHolder holder, DqhdModel.DataNewsModel item) {
-                Glide.with(mContext).load(Url.BASE_L + item.getCoverImg())//
-                        .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
-                        .error(R.drawable.ic_default_color)//
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
-                        .into((ImageView) holder.getView(R.id.item_img));
+//                Glide.with(mContext).load(Url.BASE_L + item.getCoverImg())//
+//                        .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存修改过的图片
+//                        .override(120, 120)
+//                        .crossFade() //设置淡入淡出效果，默认300ms，可以传参
+//                        .into((ImageView) holder.getView(R.id.item_img));
 
+                holder.setImageByUrl(R.id.item_img, item.getCoverImg());
                 holder.setText(R.id.tv_pop_list, item.getTitle());
             }
         };
@@ -94,9 +102,10 @@ public class DqhdActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(DqhdActivity.this, NewsDetailActivity.class);
-                intent.putExtra("url", Url.BASE_URL + model.getPioneerUrl() + "?method=Activities"
-                        + "?&TVInfoId=" + SharedPrefsUtil.getString(mActivity, "TVInfoId")
+                intent.putExtra("url", Url.BASE_L + model.getPioneerUrl() + "?method=Activities"
+                        + "&TVInfoId=" + SharedPrefsUtil.getString(mActivity, "TVInfoId")
                         + "&Key=" + SharedPrefsUtil.getString(mActivity, "Key")
+                        + "&DeptId=" + SharedPrefsUtil.getString(mContext, "DeptId")
                         + "&id=" + listData.get(position).getId());
                 intent.putExtra("title", "党群活动");
                 startActivity(intent);
@@ -129,8 +138,8 @@ public class DqhdActivity extends BaseActivity {
         OkHttpUtils.get()
                 .url(Url.BASE_URL)
                 .addParams("method", "Activities")
-                .addParams("Key", SharedPrefsUtil.getString(mContext,"Key"))
-                .addParams("TVInfoId", SharedPrefsUtil.getString(mContext,"TVInfoId"))
+                .addParams("Key", SharedPrefsUtil.getString(mContext, "Key"))
+                .addParams("TVInfoId", SharedPrefsUtil.getString(mContext, "TVInfoId"))
                 .addParams("page", String.valueOf(page))
                 .addParams("pageSize", String.valueOf(pageSize))
                 .build()
@@ -143,6 +152,7 @@ public class DqhdActivity extends BaseActivity {
                             mRefreshView.onHeaderRefreshFinish();
                         }
                     }
+
                     @Override
                     public void onResponse(String response, int id) {
                         MLog.i(TAG, "response=" + response);

@@ -26,7 +26,7 @@ import com.zxt.zxt_phone.view.CzjfActivity;
 import com.zxt.zxt_phone.view.JgcxActivity;
 import com.zxt.zxt_phone.view.NewsDetailActivity;
 import com.zxt.zxt_phone.view.SqgwActivity;
-import com.zxt.zxt_phone.view.SqtjActivity;
+import com.zxt.zxt_phone.view.zwfw.sqtj.SqtjActivity;
 import com.zxt.zxt_phone.view.ZczxActivity;
 import com.zxt.zxt_phone.view.ZwfwActivity;
 import com.zxt.zxt_phone.view.customview.MyMarqueeView;

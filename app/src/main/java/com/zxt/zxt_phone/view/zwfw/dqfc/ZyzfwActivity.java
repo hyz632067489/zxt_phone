@@ -69,8 +69,8 @@ public class ZyzfwActivity extends BaseActivity {
     List<ZyzfwModel.DataBean> mList2 = new ArrayList<>();
 
     private boolean isChecked = true;
-    private int tag = -1;
-
+    private int tag1 = -1;
+    private int tag2 = -1;
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -83,6 +83,12 @@ public class ZyzfwActivity extends BaseActivity {
                         mDatas.addAll(mList2);
                     }
                     myAdapter.notifyDataSetChanged();
+                    break;
+                case 1:
+                    if (tag1 == 1 & tag2 == 2) {
+                        gridView.setVisibility(View.GONE);
+                        noData.setVisibility(View.VISIBLE);
+                    }
                     break;
             }
         }
@@ -97,9 +103,13 @@ public class ZyzfwActivity extends BaseActivity {
         getZyzxData();
         getZyhdData();
 
-        initView();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initView();
+    }
     private void initView() {
         tabName.setText(R.string.zwfw_zyzfw);
 
@@ -109,26 +119,41 @@ public class ZyzfwActivity extends BaseActivity {
 
                 mDatas.clear();
                 if (rb1.getId() == checkedId) {
+                    if (tag1 == 1) {
+                        gridView.setVisibility(View.GONE);
+                        noData.setVisibility(View.VISIBLE);
+                    } else {
+                        gridView.setVisibility(View.VISIBLE);
+                        noData.setVisibility(View.GONE);
+                    }
                     isChecked = true;
                     mDatas.addAll(mList1);
+
                 } else if (rb2.getId() == checkedId) {
+                    if (tag2 == 2) {
+                        gridView.setVisibility(View.GONE);
+                        noData.setVisibility(View.VISIBLE);
+                    } else {
+                        gridView.setVisibility(View.VISIBLE);
+                        noData.setVisibility(View.GONE);
+                    }
                     isChecked = false;
                     mDatas.addAll(mList2);
                 }
-                gridView.setVisibility(View.VISIBLE);
-                noData.setVisibility(View.GONE);
+
                 myAdapter.notifyDataSetChanged();
             }
         });
         myAdapter = new CommonAdapter<ZyzfwModel.DataBean>(mContext, mDatas, R.layout.pop_list_img_item) {
             @Override
             public void convert(ViewHolder holder, ZyzfwModel.DataBean item) {
-                Glide.with(mContext).load(Url.BASE_L + item.getCoverImg())//
-                        .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
-                        .error(R.drawable.ic_default_color)//
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
-                        .into((ImageView) holder.getView(R.id.item_img));
 
+//                Glide.with(mContext).load(Url.BASE_L + item.getCoverImg())//
+//                        .placeholder(R.drawable.ic_default_color)// 这行貌似是glide的bug,在部分机型上会导致第一次图片不在中间
+//                        .error(R.drawable.ic_default_color)//
+////                        .diskCacheStrategy(DiskCacheStrategy.ALL)//
+//                        .into((ImageView) holder.getView(R.id.item_img));
+                holder.setImageByUrl(R.id.item_img,item.getCoverImg());
                 holder.setText(R.id.tv_pop_list, item.getTitle());
             }
         };
@@ -140,16 +165,18 @@ public class ZyzfwActivity extends BaseActivity {
                 Intent intent = new Intent(ZyzfwActivity.this, NewsDetailActivity.class);
 
                 if (isChecked) {
-                    intent.putExtra("url", Url.BASE_L + model.getUrl() + "?volunteer&id="
-                            + "?&TVInfoId=" + SharedPrefsUtil.getString(mActivity, "TVInfoId")
+                    intent.putExtra("url", Url.BASE_L + model.getUrl() + "?method=volunteer"
+                            + "&TVInfoId=" + SharedPrefsUtil.getString(mActivity, "TVInfoId")
                             + "&Key=" + SharedPrefsUtil.getString(mActivity, "Key")
-                            + mDatas.get(position).getId());
+                            + "&DeptId=" + SharedPrefsUtil.getString(mContext, "DeptId")
+                            + "&id="+mDatas.get(position).getId());
                     intent.putExtra("title", "志愿资讯");
                 } else {
-                    intent.putExtra("url", Url.BASE_L + model.getUrl() + "?voluntary&id="
-                            + "?&TVInfoId=" + SharedPrefsUtil.getString(mActivity, "TVInfoId")
+                    intent.putExtra("url", Url.BASE_L + model.getUrl() + "?method=voluntary"
+                            + "&TVInfoId=" + SharedPrefsUtil.getString(mActivity, "TVInfoId")
+                            + "&DeptId=" + SharedPrefsUtil.getString(mContext, "DeptId")
                             + "&Key=" + SharedPrefsUtil.getString(mActivity, "Key")
-                            + mDatas.get(position).getId());
+                            + "&id="+mDatas.get(position).getId());
                     intent.putExtra("title", "志愿活动");
                 }
                 startActivity(intent);
@@ -165,6 +192,7 @@ public class ZyzfwActivity extends BaseActivity {
                 .addParams("method", "volunteer")
                 .addParams("Key", SharedPrefsUtil.getString(mContext, "Key"))
                 .addParams("TVInfoId", SharedPrefsUtil.getString(mContext, "TVInfoId"))
+                .addParams("DeptId", SharedPrefsUtil.getString(mContext, "DeptId"))
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -187,8 +215,8 @@ public class ZyzfwActivity extends BaseActivity {
 
                                 mHandler.sendEmptyMessage(0);
                             } else {
-                                gridView.setVisibility(View.GONE);
-                                noData.setVisibility(View.VISIBLE);
+                                tag1 = 1;
+                                mHandler.sendEmptyMessage(1);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -205,6 +233,7 @@ public class ZyzfwActivity extends BaseActivity {
                 .addParams("method", "voluntary")
                 .addParams("Key", SharedPrefsUtil.getString(mContext, "Key"))
                 .addParams("TVInfoId", SharedPrefsUtil.getString(mContext, "TVInfoId"))
+                .addParams("DeptId", SharedPrefsUtil.getString(mContext, "DeptId"))
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -226,8 +255,8 @@ public class ZyzfwActivity extends BaseActivity {
                                 mList2.addAll(model.getData());
                                 mHandler.sendEmptyMessage(0);
                             } else {
-                                gridView.setVisibility(View.GONE);
-                                noData.setVisibility(View.VISIBLE);
+                                tag2 = 2;
+                                mHandler.sendEmptyMessage(1);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

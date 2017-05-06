@@ -1,6 +1,6 @@
 package com.zxt.zxt_phone.view;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -9,16 +9,27 @@ import com.zxt.zxt_phone.base.BaseActivity;
 
 import butterknife.BindView;
 
-public class YjtjSuccessActivity extends BaseActivity {
+/**
+ * Created by hkc on 2017/5/6.
+ */
+
+public class SuccessActivity extends BaseActivity {
 
     @BindView(R.id.tab_name)
     TextView tabName;
 
+    Intent mIntent;
+
     @Override
-    public  void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yjtj_success);
 
-        tabName.setText("提交成功");
+        mIntent = getIntent();
+        initView();
+    }
+
+    private void initView() {
+        tabName.setText(mIntent.getStringExtra("title"));
     }
 }

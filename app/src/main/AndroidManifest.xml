@@ -70,9 +70,7 @@
         <activity android:name=".view.YjfkcxDetailActivity" />
         <activity android:name=".view.JgcxDetailActivity" />
         <activity android:name=".view.WebViewActivity" />
-        <activity android:name=".view.SqtjActivity" />
-        <activity android:name=".view.YjtjInfoActivity" />
-        <activity android:name=".view.YjtjSuccessActivity" />
+        <activity android:name=".view.SuccessActivity" />
         <activity android:name=".view.KqdkActivity" />
         <activity android:name=".view.KqdkActivityCopy" />
         <activity android:name=".view.photo.ClipImageActivity" />
@@ -125,9 +123,14 @@
         <activity android:name=".view.zwfw.dqfc.DqhdActivity" />
         <activity android:name=".view.zwfw.dqfc.ZyzfwActivity" />
         <activity android:name=".view.zwfw.dqfc.ZsdxActivity" />
-        <activity android:name=".view.zwfw.dqfc.SjxxActivity" />
+        <activity android:name=".view.zwfw.dqfc.SjxxActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".view.zwfw.dqfc.SdxfActivity" />
-        <activity android:name=".view.zwfw.dqfc.FfclActivity"></activity>
+        <activity android:name=".view.zwfw.dqfc.FfclActivity" />
+        <activity android:name=".view.BsznDetailActivity" />
+        <activity android:name=".view.zwfw.sqtj.SqtjActivity" />
+        <activity android:name=".view.zwfw.sqtj.SqtjInfoActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
     </application>
 
 </manifest>

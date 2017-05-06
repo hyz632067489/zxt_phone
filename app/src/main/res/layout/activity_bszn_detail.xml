@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_bszn_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zxt.zxt_phone.view.BsznDetailActivity">
+
+    <com.zxt.zxt_phone.view.widget.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_tab_height" />
+
+    <TextView
+        android:id="@+id/tv_right_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_120"
+        android:layout_marginLeft="@dimen/px_30"
+        android:layout_marginRight="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_30"
+        android:background="@drawable/shape_gary_input_bg"
+        android:gravity="center"
+        android:text="标题"
+        android:textColor="@color/red"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/px_30"
+        android:layout_marginLeft="@dimen/px_30"
+        android:layout_marginRight="@dimen/px_30"
+        android:layout_marginTop="@dimen/px_30"
+        android:background="@drawable/shape_gary_input_bg"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/px_10"
+        android:paddingLeft="@dimen/px_20"
+        android:paddingRight="@dimen/px_20"
+        android:paddingTop="@dimen/px_10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_120"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/bszn_info_1"
+                    android:text="办理程序：" />
+
+                <TextView
+                    android:id="@+id/tv_blcx"
+                    android:text=""
+                    style="@style/bszn_info_2" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_1"
+                android:layout_marginLeft="@dimen/px_50"
+                android:layout_marginRight="@dimen/px_50"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/px_200"
+                    android:layout_height="@dimen/px_200"
+                    android:gravity="center"
+                    android:text="申报材料："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/px_30" />
+
+
+                <TextView
+                    android:id="@+id/tv_sbcl"
+                    style="@style/bszn_info_2"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_1"
+                android:layout_marginLeft="@dimen/px_50"
+                android:layout_marginRight="@dimen/px_50"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_100"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/bszn_info_1"
+
+                    android:text="责任科室：" />
+
+                <TextView
+                    android:id="@+id/tv_zrks"
+                    style="@style/bszn_info_2" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_1"
+                android:layout_marginLeft="@dimen/px_50"
+                android:layout_marginRight="@dimen/px_50"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_100"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/bszn_info_1"
+                    android:text="费用："  />
+
+                <TextView
+                    android:id="@+id/tv_money"
+                    style="@style/bszn_info_2" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_1"
+                android:layout_marginLeft="@dimen/px_50"
+                android:layout_marginRight="@dimen/px_50"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_100"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/bszn_info_1"
+                    android:text="电话号码："  />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    style="@style/bszn_info_2" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
