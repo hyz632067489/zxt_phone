@@ -21,6 +21,7 @@ import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.zwfw.DqfcActivity;
 import com.zxt.zxt_phone.view.zwfw.sqgk.SqgkActivity;
 import com.zxt.zxt_phone.view.zwfw.sqtj.SqtjActivity;
+import com.zxt.zxt_phone.view.zwfw.yybs.YybsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,7 +154,7 @@ int []icons = {R.drawable.zwfw_sqgk, R.drawable.zwfw_dqfc,R.drawable.zwfw_sqtj,R
                 break;
             case 5:
 //                toast("预约办事");
-                mIntent.setClass(ZwfwActivity.this, YybsInfoActivity.class);
+                mIntent.setClass(ZwfwActivity.this, YybsActivity.class);
                 mIntent.putExtra("title",titles[5]);
                 break;
             case 6:

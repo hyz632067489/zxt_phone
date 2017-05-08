@@ -175,12 +175,19 @@ public class RepairsActivity extends BaseActivity {
                 fileList.put(selImageList.get(i).name, new File(selImageList.get(i).path));
             }
         }
+        HashMap<String, String> params = new HashMap<>();
+        params.put("method", "tp");
+        params.put("TVInfoId", SharedPrefsUtil.getString(mActivity, "TVInfoId"));
+        params.put("Key", SharedPrefsUtil.getString(mActivity, "Key"));
+        params.put("deptId", SharedPrefsUtil.getString(mActivity, "DeptId"));
+
         //上传多张图片 表头
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "multipart/form-data");
 
         OkHttpUtils.post()
-                .url(Url.BASE_URL + "method=tp")
+                .url(Url.BASE_URL)
+                .params(params)
                 .files("LJ", fileList)
                 .build()
                 .execute(new StringCallback() {
@@ -212,8 +219,9 @@ public class RepairsActivity extends BaseActivity {
 
         HashMap<String ,String > params = new HashMap<>();
         params.put("method","breakdownadd");
-        params.put("Key",SharedPrefsUtil.getString(mContext, "Key"));
-        params.put("TVInfoId",SharedPrefsUtil.getString(mContext, "TVInfoId"));
+        params.put("TVInfoId", SharedPrefsUtil.getString(mActivity, "TVInfoId"));
+        params.put("Key", SharedPrefsUtil.getString(mActivity, "Key"));
+        params.put("deptId", SharedPrefsUtil.getString(mActivity, "DeptId"));
         params.put("Name",etName.getText().toString());
         params.put("Phone",etPhone.getText().toString());
         params.put("img",picString);
@@ -315,12 +323,14 @@ public class RepairsActivity extends BaseActivity {
      * 获取重要程度
      */
     private void getDataDept() {
-        Map<String, String> map = new HashMap<>();
-        map.put("method", "faulthow");
-
+        Map<String, String> params = new HashMap<>();
+        params.put("method", "faulthow");
+        params.put("TVInfoId", SharedPrefsUtil.getString(mActivity, "TVInfoId"));
+        params.put("Key", SharedPrefsUtil.getString(mActivity, "Key"));
+        params.put("deptId", SharedPrefsUtil.getString(mActivity, "DeptId"));
         OkHttpUtils.get()
                 .url(Url.BASE_URL)
-                .params(map)
+                .params(params)
                 .build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {

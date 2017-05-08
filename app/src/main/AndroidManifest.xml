@@ -75,7 +75,6 @@
         <activity android:name=".view.KqdkActivityCopy" />
         <activity android:name=".view.photo.ClipImageActivity" />
         <activity android:name=".view.YybsInfoActivity" />
-        <activity android:name=".view.YybsActivity" />
         <activity android:name=".view.GzglActivity" />
         <activity android:name=".view.zwfw.wggl.GzrzActivity" />
         <activity android:name=".view.zwfw.wggl.AddGzrzActivity" />
@@ -123,14 +122,18 @@
         <activity android:name=".view.zwfw.dqfc.DqhdActivity" />
         <activity android:name=".view.zwfw.dqfc.ZyzfwActivity" />
         <activity android:name=".view.zwfw.dqfc.ZsdxActivity" />
-        <activity android:name=".view.zwfw.dqfc.SjxxActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity
+            android:name=".view.zwfw.dqfc.SjxxActivity"
+            android:theme="@style/android:Theme.Holo.Light.NoActionBar"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".view.zwfw.dqfc.SdxfActivity" />
         <activity android:name=".view.zwfw.dqfc.FfclActivity" />
         <activity android:name=".view.BsznDetailActivity" />
         <activity android:name=".view.zwfw.sqtj.SqtjActivity" />
-        <activity android:name=".view.zwfw.sqtj.SqtjInfoActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity
+            android:name=".view.zwfw.sqtj.SqtjInfoActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".view.zwfw.yybs.YybsActivity"></activity>
     </application>
 
 </manifest>

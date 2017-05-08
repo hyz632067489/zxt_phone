@@ -7,18 +7,30 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.adapter.CommonAdapter;
 import com.zxt.zxt_phone.adapter.ViewHolder;
 import com.zxt.zxt_phone.base.BaseActivity;
+import com.zxt.zxt_phone.bean.model.AboutModel;
 import com.zxt.zxt_phone.bean.model.CommonModel;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.MLog;
+import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.NewsDetailActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import okhttp3.Call;
 
 public class WyfwActivity extends BaseActivity {
 
@@ -41,14 +53,18 @@ public class WyfwActivity extends BaseActivity {
 
     Intent mIntent;
 
+    int choseId = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shfw);
 
         getDatas();
+        getData();
         initView();
     }
+
 
     private void initView() {
         tabName.setText("社会服务");
@@ -72,7 +88,7 @@ public class WyfwActivity extends BaseActivity {
 //                        toast("点击了" + "关于物业");
                         mIntent.setClass(mActivity, NewsDetailActivity.class);
                         mIntent.putExtra("title", "关于物业");
-                        mIntent.putExtra("url", Url.BASE_URL_HTML + "GyPro.aspx");
+                        mIntent.putExtra("url", Url.BASE_URL_HTML + "GyPro.aspx"+"?id="+choseId);
 
                         break;
                     case 1:
@@ -111,4 +127,45 @@ public class WyfwActivity extends BaseActivity {
             mDatas.add(model);
         }
     }
+
+    private void getData() {
+//        http://localhost:15494/api/APP1.0.aspx?method=grproerty&TVInfoId=4&Key=21218CCA77804D2BA1922C33E0151105&deptId=
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("method", "grproerty");
+        params.put("TVInfoId", SharedPrefsUtil.getString(mActivity, "TVInfoId"));
+        params.put("Key", SharedPrefsUtil.getString(mActivity, "Key"));
+        params.put("deptId", SharedPrefsUtil.getString(mActivity, "DeptId"));
+
+
+        OkHttpUtils.get()
+                .url(Url.BASE_URL)
+                .params(params)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        MLog.i(TAG, "response==" + response);
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            if ("1".equals(obj.getString("Status"))) {
+                                AboutModel model = new Gson().fromJson(response, AboutModel.class);
+
+                                choseId = model.getData().get(0).getEid();
+
+                            } else {
+                                toast(obj.getString("Message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
 }

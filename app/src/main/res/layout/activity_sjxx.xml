@@ -9,7 +9,8 @@
 
     <com.zxt.zxt_phone.view.widget.TitleLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/action_tab_height"/>
+        android:layout_height="@dimen/action_tab_height" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -24,7 +25,8 @@
 
             <LinearLayout
                 android:id="@+id/name_layout"
-                style="@style/sqti_info_layout">
+                style="@style/sqti_info_layout"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/sqtj_info_1"
@@ -47,7 +49,8 @@
 
             <LinearLayout
                 android:id="@+id/phone_layout"
-                style="@style/sqti_info_layout">
+                style="@style/sqti_info_layout"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/sqtj_info_1"
@@ -75,8 +78,7 @@
                 android:layout_height="@dimen/px_90"
                 android:layout_marginTop="@dimen/px_10"
                 android:orientation="horizontal"
-                android:visibility="gone"
-                >
+                android:visibility="gone">
 
                 <View
                     android:layout_width="0dp"
@@ -197,21 +199,30 @@
                     style="@style/sqtj_info_1"
                     android:text="事	项：" />
 
-                <TextView
-                    android:id="@+id/typeName"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:paddingLeft="5dp"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/px_40" />
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/xxjb_arrow_down" />
+                    <Spinner
+                        android:id="@+id/typeName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/xxjb_input_bg"
+                        android:paddingLeft="@dimen/px_10"
+                        android:paddingRight="@dimen/px_10"
+                        android:spinnerMode="dropdown"
+                        android:overlapAnchor="false"
+                        android:textSize="@dimen/px_40" />
+
+                    <ImageView
+                        android:layout_width="@dimen/px_50"
+                        android:layout_height="@dimen/px_50"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/px_20"
+                        android:src="@drawable/xxjb_arrow_down" />
+                </RelativeLayout>
+
 
             </LinearLayout>
 
@@ -221,27 +232,35 @@
 
                 <TextView
                     style="@style/sqtj_info_1"
-                    android:text="接收人："
-                     />
+                    android:text="接收人：" />
 
-                <TextView
-                    android:id="@+id/deptName"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:paddingLeft="5dp"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/px_40" />
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/xxjb_arrow_down" />
+                    <Spinner
+                        android:id="@+id/deptName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/xxjb_input_bg"
+                        android:paddingLeft="@dimen/px_10"
+                        android:paddingRight="@dimen/px_10"
+                        android:spinnerMode="dropdown"
+                        android:overlapAnchor="false"
+                        android:textSize="@dimen/px_40" />
+
+                    <ImageView
+                        android:layout_width="@dimen/px_50"
+                        android:layout_height="@dimen/px_50"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/px_20"
+                        android:src="@drawable/xxjb_arrow_down" />
+                </RelativeLayout>
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/time_Layout"
                 style="@style/sqti_info_layout">
@@ -259,6 +278,7 @@
                     android:paddingLeft="5dp"
                     android:singleLine="true"
                     android:textColor="@color/black"
+                    android:gravity="center_vertical"
                     android:textSize="@dimen/px_40" />
 
                 <ImageView
@@ -267,6 +287,7 @@
                     android:src="@drawable/time_icon" />
 
             </LinearLayout>
+
             <LinearLayout
 
                 style="@style/sqti_info_layout">

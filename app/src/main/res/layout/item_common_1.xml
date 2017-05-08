@@ -23,7 +23,7 @@
             android:paddingTop="@dimen/px_5"
             android:paddingLeft="@dimen/px_15"
             android:paddingRight="@dimen/px_15"
-            android:textSize="@dimen/px_25"
+            android:textSize="@dimen/px_35"
             android:textColor="@color/black"/>
         <TextView
             android:id="@+id/tv_button"
@@ -33,7 +33,7 @@
             android:paddingTop="@dimen/px_5"
             android:paddingLeft="@dimen/px_15"
             android:paddingRight="@dimen/px_15"
-            android:textSize="@dimen/px_25"
+            android:textSize="@dimen/px_35"
             android:textColor="@color/black"
            android:gravity="center"
             android:visibility="gone"/>
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:text="aaaa "
             android:paddingLeft="@dimen/px_15"
-            android:textSize="@dimen/px_25"
+            android:textSize="@dimen/px_35"
             android:textColor="@color/black"
             android:visibility="gone"/>
     </LinearLayout>

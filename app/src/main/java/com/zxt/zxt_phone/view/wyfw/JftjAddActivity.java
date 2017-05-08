@@ -151,13 +151,13 @@ public class JftjAddActivity extends BaseActivity {
 
         HashMap<String, String> params = new HashMap<>();
         params.put("method", "compostadd");
-        params.put("TVInfoId", SharedPrefsUtil.getString(mContext, "TVInfoId"));
-        params.put("Key", SharedPrefsUtil.getString(mContext, "Key"));
+        params.put("TVInfoId", SharedPrefsUtil.getString(mActivity, "TVInfoId"));
+        params.put("Key", SharedPrefsUtil.getString(mActivity, "Key"));
+//        params.put("deptId", SharedPrefsUtil.getString(mActivity, "DeptId"));
         params.put("Name", etUserName.getText().toString());
         params.put("Phone", etPhone.getText().toString());
         params.put("Explanation", etContent.getText().toString());
         params.put("dispublic", sms+"");
-        params.put("Deptid", SharedPrefsUtil.getString(mContext,"DeptId"));
         OkHttpUtils.get()
                 .url(Url.BASE_URL)
                 .params(params)

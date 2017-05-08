@@ -88,10 +88,13 @@ public class PjglActivity extends BaseActivity {
     }
 
     private void getData() {
+
         showProgressDialog();
         OkHttpUtils.get()
                 .url(Url.BASE_URL)
                 .addParams("method", "sort")
+                .addParams("TVInfoId", SharedPrefsUtil.getString(mContext, "TVInfoId"))
+                .addParams("Key", SharedPrefsUtil.getString(mContext, "Key"))
                 .addParams("Deptid", SharedPrefsUtil.getString(mContext, "DeptId"))
                 .build()
                 .execute(new StringCallback() {

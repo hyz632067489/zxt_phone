@@ -156,6 +156,8 @@ public class WyggActivity extends BaseActivity {
         OkHttpUtils.get()
                 .url(Url.BASE_URL)
                 .addParams("method","anncounce")
+                .addParams("TVInfoId", SharedPrefsUtil.getString(mContext,"TVInfoId"))
+                .addParams("Key", SharedPrefsUtil.getString(mContext,"Key"))
                 .addParams("deptId", SharedPrefsUtil.getString(mContext,"DeptId"))
                 .build()
                 .execute(new StringCallback() {

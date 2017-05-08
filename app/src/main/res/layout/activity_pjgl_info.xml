@@ -25,26 +25,27 @@
             android:gravity="center"
             android:text="社区中庭院修整投票"
             android:textColor="@color/black"
-            android:textSize="@dimen/px_45" />
+            android:textSize="@dimen/px_55" />
 
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="@dimen/px_300"
-            android:layout_marginLeft="@dimen/px_60"
-            android:layout_marginRight="@dimen/px_60"
+            android:layout_marginLeft="@dimen/px_30"
+            android:layout_marginRight="@dimen/px_30"
             android:layout_marginTop="@dimen/px_30"
             android:background="@drawable/shape_gary_input_bg"
             android:padding="@dimen/px_15"
             android:text="       温馨提示:登陆的社区为您所在的社区，账号为您的姓名，密码默认为身份证后6位，为了保障您的个人信息安全，请尽快修改密码；如无法登陆，请到物管处激活账号或修改密码"
             android:textColor="@color/black"
-            android:textSize="@dimen/px_35" />
+            android:textSize="@dimen/px_40" />
 
         <LinearLayout
             android:id="@+id/layout_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:visibility="gone"
            >
 
 
@@ -64,7 +65,7 @@
                     android:layout_marginRight="@dimen/px_50"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/px_45" />
 
                 <Button
                     android:id="@+id/btn_butongyi"
@@ -73,15 +74,15 @@
                     android:layout_marginLeft="@dimen/px_50"
                     android:layout_weight="1"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/px_45" />
             </LinearLayout>
 
             <EditText
                 android:id="@+id/tv_yijian"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px_150"
-                android:layout_marginLeft="@dimen/px_60"
-                android:layout_marginRight="@dimen/px_60"
+                android:layout_marginLeft="@dimen/px_30"
+                android:layout_marginRight="@dimen/px_30"
                 android:layout_marginTop="@dimen/px_22"
                 android:background="@drawable/shape_gary_input_bg"
                 android:hint="   请输入不赞成的理由，如赞成则此项不填"
@@ -97,8 +98,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/px_60"
-            android:layout_marginLeft="@dimen/px_60"
-            android:layout_marginRight="@dimen/px_60"
+            android:layout_marginLeft="@dimen/px_30"
+            android:layout_marginRight="@dimen/px_30"
             android:background="@drawable/shape_gary_input_bg"
             android:visibility="gone">
 
@@ -142,7 +143,7 @@
                     android:layout_marginRight="@dimen/px_300"
                     android:text="投\t\t一\t\t票"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/px_45" />
 
 
             </LinearLayout>

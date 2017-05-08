@@ -15,4 +15,8 @@ public class Common {
 
     public  static final String USERNAME = "";
     public  static final String PWD = "";
+
+
+    public static final int TYPE_S = 100;
+    public static final int PROPLE_S = 101;
 }

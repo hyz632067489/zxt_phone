@@ -24,6 +24,7 @@ import com.zxt.zxt_phone.bean.model.PjglInfoModel;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.Mobile;
+import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.customview.HomeGridView;
 
 import org.json.JSONArray;
@@ -118,6 +119,9 @@ public class PjglInfoActivity extends BaseActivity {
                 .url(Url.BASE_URL)
                 .addParams("method", "votes")
                 .addParams("id", String.valueOf(choseId))
+                .addParams("TVInfoId", SharedPrefsUtil.getString(mContext, "TVInfoId"))
+                .addParams("Key", SharedPrefsUtil.getString(mContext, "Key"))
+                .addParams("Deptid", SharedPrefsUtil.getString(mContext, "DeptId"))
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -251,6 +255,9 @@ public class PjglInfoActivity extends BaseActivity {
         OkHttpUtils.get()
                 .url(Url.BASE_URL)
                 .addParams("method", "voting")
+                .addParams("TVInfoId", SharedPrefsUtil.getString(mContext, "TVInfoId"))
+                .addParams("Key", SharedPrefsUtil.getString(mContext, "Key"))
+                .addParams("Deptid", SharedPrefsUtil.getString(mContext, "DeptId"))
                 .addParams("id", typeId+"")
                 .addParams("reason", reason)
                 .addParams("phone", etPhone)

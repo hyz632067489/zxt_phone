@@ -409,7 +409,8 @@ public class SqtjInfoActivity extends BaseActivity {
                         try {
                             JSONObject obj = new JSONObject(response);
                             if ("1".equals(obj.getString("Status"))) {
-                                startActivity(new Intent(mActivity, SuccessActivity.class));
+                                startActivity(new Intent(mActivity, SuccessActivity.class)
+                                .putExtra("title","诉求提交"));
                                 finish();
                             } else {
                                 toast(obj.getString("Message"));

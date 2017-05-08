@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.ActivityManager;
+import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.view.widget.LoadingDialog;
 
 import java.sql.Date;
@@ -45,6 +46,7 @@ public class BaseActivity extends FragmentActivity {
     protected Context mContext;
 
     public String initEndDateTime;
+    protected Date curDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +71,9 @@ public class BaseActivity extends FragmentActivity {
     private void initView1() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
 //        SimpleDateFormat formatter = new SimpleDateFormat(" HH:mm:ss  ");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+         curDate = new Date(System.currentTimeMillis());//获取当前时间
         initEndDateTime = formatter.format(curDate);
+        MLog.i(TAG, "initEndDateTime==" + initEndDateTime+"===curDate==="+curDate);
     }
 
     public void toast(String message) {
