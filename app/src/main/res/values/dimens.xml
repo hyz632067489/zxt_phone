@@ -5,7 +5,7 @@
     <dimen name="toolbar_padding_top">0dp</dimen>
 
     <!-- title高度 -->
-    <dimen name="action_tab_height">48dp</dimen>
+    <dimen name="action_tab_height">@dimen/px_150</dimen>
 
     <dimen name="adv_img_height">133dp</dimen>
 

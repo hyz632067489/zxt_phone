@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context="com.zxt.zxt_phone.view.LevelActivity">
+     >
 
     <com.zxt.zxt_phone.view.widget.TitleLayout
         android:layout_width="match_parent"
@@ -60,6 +60,7 @@
             android:drawableRight="@drawable/right"
             android:id="@+id/tv_lindao" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1.0dip"

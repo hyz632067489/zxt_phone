@@ -1,5 +1,6 @@
 package com.zxt.zxt_phone.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -60,18 +61,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+//将值传入DemoFragment
+        this.getSupportFragmentManager().findFragmentByTag(mMainFragment.class.getSimpleName()).onActivityResult(requestCode, resultCode, data);
+    }
+
     private void initView() {
         mRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.rb_main:
-                          mCurrentIndex = 0;
+                        mCurrentIndex = 0;
                         showFragment(mainFragment);
                         break;
                     case R.id.rb_car:
                         mCurrentIndex = 1;
-                        if(byCarFragment == null){
+                        if (byCarFragment == null) {
                             byCarFragment = new ByCarFragment();
                             addFragment(byCarFragment);
                         }
@@ -79,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.rb_zxing:
                         mCurrentIndex = 2;
-                        if(xingFragment == null){
+                        if (xingFragment == null) {
                             xingFragment = new zXingFragment();
                             addFragment(xingFragment);
                         }
@@ -87,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.rb_me:
                         mCurrentIndex = 3;
-                        if(meFragment == null){
+                        if (meFragment == null) {
                             meFragment = new mMeFragment();
                             addFragment(meFragment);
                         }
@@ -104,17 +112,17 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    private  void showFragment(Fragment fragment){
+    private void showFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.hide(mainFragment);
-        if(byCarFragment != null){
+        if (byCarFragment != null) {
             transaction.hide(byCarFragment);
         }
-        if(xingFragment != null){
+        if (xingFragment != null) {
             transaction.hide(xingFragment);
         }
-        if(meFragment !=null){
+        if (meFragment != null) {
             transaction.hide(meFragment);
         }
         transaction.show(fragment);

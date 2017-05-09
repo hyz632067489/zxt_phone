@@ -11,12 +11,15 @@ public class Common {
     public static final String SUCCEED = "1";
 
     //网格员登录成功后
-    public  static boolean IS_LOGIN = false;
+    public static boolean IS_LOGIN = false;
 
-    public  static final String USERNAME = "";
-    public  static final String PWD = "";
+    public static final String USERNAME = "";
+    public static final String PWD = "";
 
 
     public static final int TYPE_S = 100;
     public static final int PROPLE_S = 101;
+
+
+    public static final int REQUEST_CODE = 102;
 }

@@ -36,6 +36,9 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 	private TimePicker timePicker;
 	private AlertDialog ad;
 	private String dateTime;
+
+	public static String chonseTime;
+
 	private String initDateTime;
 	private Activity activity;
 
@@ -94,6 +97,7 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 				.setPositiveButton("设置", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						inputDate.setText(dateTime);
+
 					}
 				})
 				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -119,8 +123,9 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 				datePicker.getDayOfMonth(), timePicker.getCurrentHour(),
 				timePicker.getCurrentMinute());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
-
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		dateTime = sdf.format(calendar.getTime());
+		chonseTime=sdf1.format(calendar.getTime());
 		ad.setTitle(dateTime);
 	}
 

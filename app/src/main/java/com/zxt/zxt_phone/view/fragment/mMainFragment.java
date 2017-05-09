@@ -12,16 +12,19 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.google.gson.Gson;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseFragment;
 import com.zxt.zxt_phone.bean.model.BannerModel;
 import com.zxt.zxt_phone.bean.model.MarqueeModel;
+import com.zxt.zxt_phone.constant.Common;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.BmfwActivity;
 import com.zxt.zxt_phone.view.BsznActivity;
+import com.zxt.zxt_phone.view.CaptureActivity;
 import com.zxt.zxt_phone.view.CzjfActivity;
 import com.zxt.zxt_phone.view.JgcxActivity;
 import com.zxt.zxt_phone.view.NewsDetailActivity;
@@ -49,6 +52,8 @@ import me.militch.widget.bannerholder.BannerHolderView;
 import me.militch.widget.bannerholder.HolderAttr;
 import okhttp3.Call;
 
+import static com.zxt.zxt_phone.constant.Common.REQUEST_CODE;
+
 
 /**
  * Created by hyz on 2017/3/9.
@@ -62,6 +67,8 @@ public class mMainFragment extends BaseFragment {
     @BindView(R.id.tab_name)
     TextView tabName;
 
+    @BindView(R.id.sign_in)
+    TextView zxing;
 //    @BindView(R.id.searchView)
 //    SearchView searchView;
 BannerHolderView holder;
@@ -126,10 +133,40 @@ String url;
         initView();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);  //这个super可不能落下，否则可能回调不了
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    toast( "解析结果:" + result);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    toast( "解析二维码失败" );
+
+                }
+            }
+        }
+    }
+
     private void initView() {
 
         retBtn.setVisibility(View.GONE);
         tabName.setText(R.string.m_main_tab_name);
+        zxing.setVisibility(View.VISIBLE);
+        zxing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CaptureActivity.class);
+               startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+
 
         HolderAttr.Builder builder = holder.getHolerAttr();//获取Holder配置参数构建对象
         builder.setSwitchDuration(900)//设置切换Banner的持续时间

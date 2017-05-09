@@ -82,7 +82,7 @@
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:theme="@style/ImagePickerThemeFullScreen" />
         <activity
-            android:name=".view.LevelActivity"
+            android:name=".view.zwfw.wggl.LevelActivity"
             android:theme="@style/android:Theme.Holo.Light.NoActionBar" />
         <activity
             android:name=".view.TimeDialogActivity"
@@ -133,7 +133,9 @@
         <activity
             android:name=".view.zwfw.sqtj.SqtjInfoActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".view.zwfw.yybs.YybsActivity"></activity>
+        <activity android:name=".view.zwfw.yybs.YybsActivity" />
+        <activity android:name=".view.zwfw.yybs.YybsListActivity"/>
+        <activity android:name=".view.CaptureActivity"/>
     </application>
 
 </manifest>

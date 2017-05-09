@@ -120,7 +120,7 @@ public class BsznInfoActivity extends BaseActivity {
         mRefreshView.setOnFooterLoadListener(new PullToRefreshView.OnFooterLoadListener() {
             @Override
             public void onFooterLoad(PullToRefreshView view) {
-//                mDatas.clear();
+                mDatas.clear();
 //                page++;
                 getData();
             }

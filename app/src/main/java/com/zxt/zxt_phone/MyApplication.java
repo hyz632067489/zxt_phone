@@ -8,6 +8,7 @@ import android.util.Log;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
 import com.lzy.ninegrid.NineGridView;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
 import com.zhy.http.okhttp.cookie.store.PersistentCookieStore;
@@ -15,6 +16,7 @@ import com.zhy.http.okhttp.log.LoggerInterceptor;
 import com.zxt.zxt_phone.utils.CookieInterceptor;
 import com.zxt.zxt_phone.utils.GlideImageLoader;
 import com.zxt.zxt_phone.utils.LoggerInterceptor1;
+import com.zxt.zxt_phone.utils.MLog;
 
 import java.util.concurrent.TimeUnit;
 
@@ -36,7 +38,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
-
+        ZXingLibrary.initDisplayOpinion(this);
         initImagePicker();
         NineGridView.setImageLoader(new GlideImageLoader());
 
@@ -54,7 +56,7 @@ public class MyApplication extends Application {
 
         OkHttpUtils.initClient(okHttpClient);
 
-        Log.i("MyApplication","cookieJar====="+cookieJar.toString());
+        MLog.i("MyApplication","cookieJar====="+cookieJar.toString());
     }
     private void initImagePicker() {
         ImagePicker imagePicker = ImagePicker.getInstance();

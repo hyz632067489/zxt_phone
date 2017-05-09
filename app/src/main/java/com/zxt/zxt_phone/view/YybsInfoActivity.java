@@ -17,6 +17,7 @@ import com.zxt.zxt_phone.adapter.ViewHolder;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.model.TimeModel;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.view.customview.HomeGridView;
 import com.zxt.zxt_phone.view.customview.KCalendar;
 
@@ -70,16 +71,19 @@ public class YybsInfoActivity extends BaseActivity {
 //        tabName.setText(R.string.zwfw_yybsinfo);
         tabName.setText(mIntent.getStringExtra("title"));
 
-        Log.i(TAG,"===================="+mIntent.getStringExtra("title"));
+        MLog.i(TAG,"===================="+mIntent.getStringExtra("title"));
         timeSign.setText(calendar.getCalendarYear() + "年"
                 + calendar.getCalendarMonth() + "月");
+
 
 
         calendar.setOnCalendarDateChangedListener(new KCalendar.OnCalendarDateChangedListener() {
             public void onCalendarDateChanged(int year, int month) {
                 timeSign.setText(year + "年" + month + "月");
+
             }
         });
+
 
         //监听所选中的日期
         calendar.setOnCalendarClickListener(new KCalendar.OnCalendarClickListener() {
@@ -100,9 +104,8 @@ public class YybsInfoActivity extends BaseActivity {
                 } else {
                     list.add(dateFormat);
                     for (String str : list) {
-
                         dayTime = str;
-                        Log.i("TAG", "str===========" + str.toString());
+                        MLog.i("TAG", "str===========" + str.toString());
                     }
                     calendar.addMarks(list, 0);
                     calendar.removeAllBgColor();
@@ -136,7 +139,7 @@ public class YybsInfoActivity extends BaseActivity {
                 toast("点击了" + position);
 
                 hourTime = mDatas.get(position).getTime();
-                Log.i(TAG, "onItemClick 1 =============" + hourTime);
+                MLog.i(TAG, "onItemClick 1 =============" + hourTime);
                 for (int i = 0; i < parent.getCount(); i++) {
                     View v = parent.getChildAt(i);
                     if (position == i) {//当前选中的Item改变背景颜色
@@ -155,7 +158,6 @@ public class YybsInfoActivity extends BaseActivity {
             case R.id.igv_left:
                 calendar.lastMonth();
                 break;
-
             case R.id.igv_right:
                 calendar.nextMonth();
                 break;
