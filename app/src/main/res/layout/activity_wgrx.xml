@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_wgrx"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zxt.zxt_phone.view.zwfw.wggl.WgrxActivity">
+
+    <com.zxt.zxt_phone.view.widget.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_tab_height"/>
+
+    <LinearLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/search_bg_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="gone"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/UserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cxgs_yjfk_search_input"
+                android:hint="请输入姓名或者电话"
+                android:paddingLeft="5dp"
+                android:singleLine="true"
+                android:textColor="@color/maop_text_color"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/MobileNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/cxgs_yjfk_search_input"
+                android:hint="请输入手机号码"
+                android:maxLength="11"
+                android:numeric="integer"
+                android:paddingLeft="5dp"
+                android:singleLine="true"
+                android:textColor="@color/maop_text_color"
+                android:textSize="13sp"
+                android:visibility="gone"/>
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/cxgs_yjfk_search_ico"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/dp_4"
+            android:paddingTop="10dp"
+            android:text="搜索"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <com.zxt.zxt_phone.view.customview.PullToRefreshView
+        android:id="@+id/refreshView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ListView
+            android:id="@+id/newList"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:cacheColorHint="@color/gainsboro"
+            android:divider="@color/gainsboro"
+            android:dividerHeight="0.5dip"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none" />
+
+        <include layout="@layout/process_bar" />
+    </com.zxt.zxt_phone.view.customview.PullToRefreshView>
+
+</LinearLayout>

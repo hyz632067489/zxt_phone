@@ -5,7 +5,7 @@
     <dimen name="toolbar_padding_top">0dp</dimen>
 
     <!-- title高度 -->
-    <dimen name="action_tab_height">@dimen/px_150</dimen>
+    <dimen name="action_tab_height">48dp</dimen>
 
     <dimen name="adv_img_height">133dp</dimen>
 
@@ -20,7 +20,22 @@
     <color name="home_bg">#ffffff</color>
     <dimen name="news_size">15sp</dimen>
 
-    <dimen name="title_name">18sp</dimen>
+    <dimen name="title_name">16sp</dimen>
+
+    <dimen name="sp_25">25sp</dimen>
+    <dimen name="sp_18">18sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+    <dimen name="sp_15">15sp</dimen>
+    <dimen name="sp_14">14sp</dimen>
+    <dimen name="sp_12">12sp</dimen>
+
+    <dimen name="dp_50">50dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
+    <dimen name="dp_25">25dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_15">15dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_5">5dp</dimen>
 
     <dimen name="dp_14">14dp</dimen>
     <dimen name="dp_4">4dp</dimen>

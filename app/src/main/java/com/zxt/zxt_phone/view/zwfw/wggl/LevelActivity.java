@@ -116,8 +116,6 @@ public class LevelActivity extends BaseActivity implements ListPopwindow.OnPopIt
         HashMap<String, String> params = new HashMap<>();
         params.put("leaves_type_id", listDatas.get(checkedItem).getLeaves_type_id() + "");
         params.put("leaves_auditor", listNames.get(ocheckedItem).getGridStaffId() + "");
-//        params.put("leaves_begin_time", tvStartTime.getText().toString());
-//        params.put("leaves_end_time", tvEndTime.getText().toString());
         params.put("leaves_begin_time", DateTimePickDialogUtil.chonseTime);
         params.put("leaves_end_time",DateTimePickDialogUtil.chonseTime);
 

@@ -19,6 +19,7 @@ import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.model.ZwfwModel;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.zwfw.DqfcActivity;
+import com.zxt.zxt_phone.view.zwfw.pasq.PasqActivity;
 import com.zxt.zxt_phone.view.zwfw.sqgk.SqgkActivity;
 import com.zxt.zxt_phone.view.zwfw.sqtj.SqtjActivity;
 import com.zxt.zxt_phone.view.zwfw.yybs.YybsActivity;
@@ -162,8 +163,8 @@ int []icons = {R.drawable.zwfw_sqgk, R.drawable.zwfw_dqfc,R.drawable.zwfw_sqtj,R
                 mIntent.setClass(ZwfwActivity.this, BsznActivity.class);
                 break;
             case 7:
-                toast("平安社区");
-                mIntent.setClass(ZwfwActivity.this, SqgkActivity.class);
+//                toast("平安社区");
+                mIntent.setClass(ZwfwActivity.this, PasqActivity.class);
                 break;
             case 8:
 //                toast("群团服务");

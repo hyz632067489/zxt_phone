@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/return_back"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/action_tab_height"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:drawableRight="@drawable/back_n"
         android:gravity="center"
@@ -21,18 +21,18 @@
     <TextView
         android:id="@+id/tab_name"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/action_tab_height"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:drawablePadding="5dp"
         android:gravity="center"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/px_60" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/sign_in"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/action_tab_height"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:gravity="center"
@@ -40,6 +40,6 @@
         android:paddingRight="10dp"
         android:text="登录"
         android:textColor="@color/white"
-        android:textSize="@dimen/px_43"
+        android:textSize="16sp"
         android:visibility="gone" />
 </RelativeLayout>

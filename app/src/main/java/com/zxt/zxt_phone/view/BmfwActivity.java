@@ -28,7 +28,8 @@ import me.militch.widget.bannerholder.BannerHolderView;
 import me.militch.widget.bannerholder.HolderAttr;
 
 
-/**by hyz
+/**
+ * by hyz
  * 便民服务
  */
 public class BmfwActivity extends BaseActivity {
@@ -47,7 +48,7 @@ public class BmfwActivity extends BaseActivity {
     private List<BmfwModel> mDatas;
 
     private String[] titles = {"社区电商", "社区活动", "社区交流", "家庭维修", "家教", "二手交易",
-            "就业服务", "职能家居", "快递代收", "公交路线", "话费查询","家居保洁"};
+            "就业服务", "职能家居", "快递代收", "公交路线", "话费查询", "家居保洁"};
 
     Intent mIntent;
 
@@ -99,7 +100,7 @@ public class BmfwActivity extends BaseActivity {
 
         switch (position) {
             case 0://社区电商
-                mIntent = new Intent(mActivity,SqgwActivity.class);
+                mIntent = new Intent(mActivity, SqgwActivity.class);
                 startActivity(mIntent);
                 break;
             case 1://社区活动
@@ -126,7 +127,12 @@ public class BmfwActivity extends BaseActivity {
                 toast("智能家居");
                 break;
             case 8:
-                toast("快递代收");
+//                toast("快递代收");
+                mIntent = new Intent(mActivity, WebViewActivity.class);
+                mIntent.putExtra("type", "5");
+                mIntent.putExtra("title", "快递代收");
+                mIntent.putExtra("url", "http://wap.guoguo-app.com/");
+                startActivity(mIntent);
                 break;
             case 9:
                 toast("公交路线");

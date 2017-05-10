@@ -3,6 +3,8 @@ package com.zxt.zxt_phone.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -52,11 +54,7 @@ public class LtjdActivity extends BaseActivity {
         initView();
     }
 
-//    private void setCookies(String url){
-//        CookieManager cookieManager = CookieManager.getInstance();
-//        cookieManager.setAcceptCookie(true);
-//        cookieManager.setCookie(url, AppData.Cookie);
-//    }
+
 
     private void initView() {
         tabName.setText(R.string.ltjd);
@@ -77,6 +75,11 @@ public class LtjdActivity extends BaseActivity {
 
         newsUrl = Url.URL_WG+"info/getOneAreaIntrInfo.do";
 
+//        CookieSyncManager.createInstance(this);
+//        CookieManager cookieManager = CookieManager.getInstance();
+//        String cookieString = OkHttpUtil.JSessionId1;
+//        cookieManager.setCookie(newsUrl, cookieString);
+//        CookieSyncManager.getInstance().sync();
 
 
         if(AppData.isLogin)

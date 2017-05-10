@@ -57,7 +57,7 @@
         <!-- 首页 -->
         <activity android:name=".view.ZczxActivity" />
         <activity android:name=".view.BsznActivity" />
-        <activity android:name=".view.CzjfActivity" />
+        <activity android:name=".view.bmfw.CzjfActivity" />
         <activity android:name=".view.SqgwActivity" />
         <activity android:name=".view.BsznInfoActivity" />
         <activity android:name=".view.ZwfwActivity" />
@@ -134,8 +134,11 @@
             android:name=".view.zwfw.sqtj.SqtjInfoActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".view.zwfw.yybs.YybsActivity" />
-        <activity android:name=".view.zwfw.yybs.YybsListActivity"/>
-        <activity android:name=".view.CaptureActivity"/>
+        <activity android:name=".view.zwfw.yybs.YybsListActivity" />
+        <activity android:name=".view.CaptureActivity" />
+        <activity android:name=".view.zwfw.wggl.WgrxActivity" />
+        <activity android:name=".view.zwfw.pasq.PasqActivity" />
+        <activity android:name=".view.zwfw.pasq.SqmjActivity"></activity>
     </application>
 
 </manifest>

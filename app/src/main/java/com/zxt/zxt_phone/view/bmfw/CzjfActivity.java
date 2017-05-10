@@ -1,4 +1,4 @@
-package com.zxt.zxt_phone.view;
+package com.zxt.zxt_phone.view.bmfw;
 
 import android.os.Bundle;
 

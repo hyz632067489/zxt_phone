@@ -342,7 +342,7 @@
 
             <RadioButton
                 android:id="@+id/rb_dwgs"
-                android:layout_width="@dimen/px_250"
+                android:layout_width="@dimen/px_350"
                 android:layout_height="match_parent"
                 android:button="@drawable/selector_radio_button"
                 android:gravity="center"
@@ -352,7 +352,7 @@
 
             <RadioButton
                 android:id="@+id/rb_bdwgs"
-                android:layout_width="@dimen/px_300"
+                android:layout_width="@dimen/px_350"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/px_50"
                 android:button="@drawable/selector_radio_button"

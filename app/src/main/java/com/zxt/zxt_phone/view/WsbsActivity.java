@@ -18,6 +18,7 @@ import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.zwfw.wggl.LevelActivity;
+import com.zxt.zxt_phone.view.zwfw.wggl.WgrxActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -189,7 +190,9 @@ public class WsbsActivity extends BaseActivity {
                 startActivity(mIntent);
                 break;
             case R.id.wgry_layout:
-                toast("网格人员信息");
+//                toast("网格人员信息");
+                mIntent = new Intent(mActivity, WgrxActivity.class);
+                startActivity(mIntent);
                 break;
             case R.id.rkgl_Layout:
                 toast("点击了人口管理");

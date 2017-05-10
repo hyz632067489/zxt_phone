@@ -114,8 +114,10 @@ public class SjxxActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         getTypeData();
+        getPeopleData();
 
     }
+
 
 
     @Override
@@ -377,8 +379,9 @@ public class SjxxActivity extends BaseActivity {
                         }
                     }
                 });
+    }
 
-
+    private void getPeopleData() {
         //获取接收人
         HashMap<String, String> params2 = new HashMap<>();
         params2.put("method", "secretary");
@@ -419,4 +422,5 @@ public class SjxxActivity extends BaseActivity {
                     }
                 });
     }
+
 }
