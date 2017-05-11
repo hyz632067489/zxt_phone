@@ -75,4 +75,6 @@
     <color name="grey_dark_press">#c3c4cb</color>
     <color name="background_grey">#f4f4f4</color>
     <color name="froget">#00b4fd</color>
+
+    <color name="scan_corner_color">#0effc2</color>
 </resources>

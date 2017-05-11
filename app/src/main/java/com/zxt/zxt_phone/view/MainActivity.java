@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
+import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.view.fragment.ByCarFragment;
 import com.zxt.zxt_phone.view.fragment.mMainFragment;
 import com.zxt.zxt_phone.view.fragment.mMeFragment;
@@ -20,14 +21,16 @@ import com.zxt.zxt_phone.view.fragment.zXingFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.zxt.zxt_phone.constant.Common.REQUEST_CODE;
+
 /**
  * Created by hyz on 2017/3/7.
  * powered by company
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
-
+    private String TAG = MainActivity.class.getCanonicalName();
     private mMainFragment mainFragment;
     private ByCarFragment byCarFragment;
     private zXingFragment xingFragment;
@@ -62,11 +65,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-//将值传入DemoFragment
-        this.getSupportFragmentManager().findFragmentByTag(mMainFragment.class.getSimpleName()).onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            MLog.i(TAG, "activity=====");
+        }
     }
+
 
     private void initView() {
         mRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

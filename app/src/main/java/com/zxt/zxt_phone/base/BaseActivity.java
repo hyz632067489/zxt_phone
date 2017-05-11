@@ -1,15 +1,22 @@
 package com.zxt.zxt_phone.base;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +31,7 @@ import com.zxt.zxt_phone.view.widget.LoadingDialog;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -35,7 +43,7 @@ import okhttp3.Request;
  * powered by company
  */
 
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity extends FragmentActivity  {
 
     private String TAG = BaseActivity.class.getCanonicalName();
 
@@ -71,9 +79,9 @@ public class BaseActivity extends FragmentActivity {
     private void initView1() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
 //        SimpleDateFormat formatter = new SimpleDateFormat(" HH:mm:ss  ");
-         curDate = new Date(System.currentTimeMillis());//获取当前时间
+        curDate = new Date(System.currentTimeMillis());//获取当前时间
         initEndDateTime = formatter.format(curDate);
-        MLog.i(TAG, "initEndDateTime==" + initEndDateTime+"===curDate==="+curDate);
+        MLog.i(TAG, "initEndDateTime==" + initEndDateTime + "===curDate===" + curDate);
     }
 
     public void toast(String message) {
@@ -104,6 +112,7 @@ public class BaseActivity extends FragmentActivity {
 
 
     private ProgressDialog progressDialog;
+
     /**
      * 显示进度对话框
      */
@@ -164,6 +173,49 @@ public class BaseActivity extends FragmentActivity {
         }
     }
 
+//    7.0权限管理
+//    private OnBooleanListener onPermissionListener;
+//
+//    /**
+//     * 权限请求     * @param permission Manifest.permission.CAMERA     * @param onBooleanListener 权限请求结果回调，true-通过  false-拒绝
+//     */
+//    public void permissionRequests(Activity activity, String permission, OnBooleanListener onBooleanListener) {
+//        onPermissionListener = onBooleanListener;
+//        if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+////            Should we show an explanation ?
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
+//                    Manifest.permission.READ_CONTACTS)) {
+//                //权限通过
+//                onPermissionListener.onClick(true);
+//            } else {
+//                //没有权限，申请一下
+//                ActivityCompat.requestPermissions(activity, new String[]{permission}, 1);
+//            }
+//        } else {            //权限已有
+//            if (onPermissionListener != null) {
+//                onPermissionListener.onClick(true);
+//            }
+//        }
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+//        if (requestCode == 1) {
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                //权限通过
+//                if (onPermissionListener != null) {
+//                    onPermissionListener.onClick(true);
+//                }
+//            } else {
+//                //权限拒绝
+//                if (onPermissionListener != null) {
+//                    onPermissionListener.onClick(false);
+//                }
+//            }
+//            return;
+//        }
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//    }
 
     @Override
     protected void onDestroy() {

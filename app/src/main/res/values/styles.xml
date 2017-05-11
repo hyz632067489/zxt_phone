@@ -160,16 +160,16 @@
     </style>
 
     <style name="sqtj_info_1">
-        <item name="android:layout_width">@dimen/px_160</item>
+        <item name="android:layout_width">@dimen/dp_60</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:textColor">@color/maop_text_color</item>
-        <item name="android:textSize">@dimen/px_40</item>
+        <item name="android:textSize">@dimen/sp_15</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="sqti_info_layout">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/px_110</item>
+        <item name="android:layout_height">@dimen/dp_40</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:background">@drawable/xxjb_input_bg</item>
         <item name="android:orientation">horizontal</item>

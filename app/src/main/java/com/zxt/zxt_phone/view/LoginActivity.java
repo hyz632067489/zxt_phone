@@ -61,7 +61,7 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.et_code)
     TextView mEtCode;
 
-    String mUserId, mPwd, mCode,getCode;
+    String mUserId, mPwd, mCode, getCode;
 
     String status;
     CookieJar cookieJar;
@@ -96,14 +96,14 @@ public class LoginActivity extends BaseActivity {
                 if (verification(CODE_ID)) {
                     CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(forgetPassword, 60000, 1000);
                     mCountDownTimerUtils.start();
-                    getCode( );
+                    getCode();
                 }
 
                 break;
             case R.id.btnLogin:
                 //登录按钮
                 if (verification(CODE_ID)) {
-                    login( );
+                    login();
                 }
                 break;
         }
@@ -127,12 +127,12 @@ public class LoginActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.i(TAG,"response==="+response);
+                        Log.i(TAG, "response===" + response);
                         JSONObject obj = null;
                         try {
                             obj = new JSONObject(response);
                             if (200 == Integer.parseInt(obj.getString("statusCode"))) {
-                                getCode=obj.getString("captcha");
+                                getCode = obj.getString("captcha");
 
                             }
                         } catch (JSONException e) {
@@ -146,7 +146,7 @@ public class LoginActivity extends BaseActivity {
 
     private boolean verification(int checkId) {
 
-        if(checkId==CODE_ID){
+        if (checkId == CODE_ID) {
             mUserId = etUserId.getText().toString().trim();
             mPwd = etPwd.getText().toString().trim();
             if (TextUtils.isEmpty(mUserId)
@@ -154,14 +154,14 @@ public class LoginActivity extends BaseActivity {
                 toast("用户名或密码不能为空");
                 return false;
             }
-        }else if(checkId == LOGIN_ID){
+        } else if (checkId == LOGIN_ID) {
             verification(CODE_ID);
             mCode = mEtCode.getText().toString().trim();
-            if(TextUtils.isEmpty(mCode)){
+            if (TextUtils.isEmpty(mCode)) {
                 toast("请输入验证码");
                 return false;
             }
-            if(getCode ==mCode){
+            if (getCode == mCode) {
                 toast("请输入正确的验证码");
                 return false;
             }
@@ -169,7 +169,9 @@ public class LoginActivity extends BaseActivity {
         return true;
     }
 
-    private void login( ) {
+    private void login() {
+
+        showProgressDialog();
 
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", mUserId);
@@ -196,36 +198,37 @@ public class LoginActivity extends BaseActivity {
         @Override
         public void onError(Call call, Exception e, int id) {
             e.printStackTrace();
-//            mTv.setText("onError:" + e.getMessage());
+            closeProgressDialog();
+            toast("链接超时");
         }
 
         @Override
         public void onResponse(String response, int id) {
 //            dismissLoading();
             Log.i(TAG, "onResponse===" + response);
-
+            closeProgressDialog();
             try {
                 JSONObject obj = new JSONObject(response);
                 if (200 == Integer.parseInt(obj.getString("statusCode"))) {
 
-                        AppData.isLogin = true;
-                        //请求区域session
-                        runnable.run();
-                        toast(obj.getString("message"));
-                        SharedPrefsUtil.putString(mActivity, "roleLevel", obj.getString("roleLevel"));
+                    AppData.isLogin = true;
+                    //请求区域session
+                    runnable.run();
+                    toast(obj.getString("message"));
+                    SharedPrefsUtil.putString(mActivity, "roleLevel", obj.getString("roleLevel"));
 //                    SharedPrefsUtil.putString(mActivity, "userName", obj.getString("userName"));
 //                    SharedPrefsUtil.putString(mActivity, "password", obj.getString("password"));
 
-                        //获取cookie中的sessionId值 用于注入webView
-                        CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
-                        HttpUrl httpUrl = HttpUrl.parse(Url.URL_WG + "user/login.do?");
-                        List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
-                        AppData.Cookie = cookies.get(0).toString();
+                    //获取cookie中的sessionId值 用于注入webView
+                    CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
+                    HttpUrl httpUrl = HttpUrl.parse(Url.URL_WG + "user/login.do?");
+                    List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
+                    AppData.Cookie = cookies.get(0).toString();
 //                        Log.i("TAG", "--------------" + httpUrl.host() + "对应的cookie如下：" + cookies.toString());
 
-                        startActivity(new Intent(mActivity, WsbsActivity.class)
-                                .putExtra("roleLevel", obj.getString("roleLevel")));
-                        finish();
+                    startActivity(new Intent(mActivity, WsbsActivity.class)
+                            .putExtra("roleLevel", obj.getString("roleLevel")));
+                    finish();
 
                 } else {
                     toast(obj.getString("message"));

@@ -74,8 +74,8 @@ public class ClipImageActivity extends Activity implements OnClickListener {
 		if (v.getId() == R.id.okBtn) {
 			Bitmap bitmap = mClipImageLayout.clip();
 
-			String path = Environment.getExternalStorageDirectory() + "/"
-					+ KqdkActivityCopy.TMP_PATH;
+//			String path = Environment.getExternalStorageDirectory() + "/" + KqdkActivityCopy.TMP_PATH;
+			String path = Environment.getExternalStorageDirectory() + "/zxtPhone/"+ KqdkActivityCopy.TMP_PATH;
 //			saveBitmap(bitmap, path);//保存裁剪后的图片，覆盖原图片
 			BitmapUtil.saveBitmap(bitmap,path);
 			Log.i(TAG,"ClipImageActivity==="+path);

@@ -19,6 +19,7 @@ import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.model.ZwfwModel;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.zwfw.DqfcActivity;
+import com.zxt.zxt_phone.view.zwfw.jzbf.JzbfActivity;
 import com.zxt.zxt_phone.view.zwfw.pasq.PasqActivity;
 import com.zxt.zxt_phone.view.zwfw.sqgk.SqgkActivity;
 import com.zxt.zxt_phone.view.zwfw.sqtj.SqtjActivity;
@@ -181,7 +182,7 @@ int []icons = {R.drawable.zwfw_sqgk, R.drawable.zwfw_dqfc,R.drawable.zwfw_sqtj,R
                 mIntent .putExtra("ClassId", "2");
                 break;
             case 10://精准帮扶
-                mIntent.setClass(ZwfwActivity.this, WsbsActivity.class);
+                mIntent.setClass(ZwfwActivity.this,JzbfActivity.class);
                 break;
             case 11://网格管理
                 mIntent.setClass(ZwfwActivity.this, WsbsActivity.class);

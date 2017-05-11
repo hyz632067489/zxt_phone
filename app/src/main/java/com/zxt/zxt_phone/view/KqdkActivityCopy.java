@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -261,14 +262,24 @@ public class KqdkActivityCopy extends BaseActivity {
         }
     }
 
+    final String CACHE_IMG = Environment.getExternalStorageDirectory()+"/zxtPhone/";
 
     private void startCapture() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // 下面这句指定调用相机拍照后的照片存储的路径
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(
-                Environment.getExternalStorageDirectory(), TMP_PATH)));
+
+        File file = new File(CACHE_IMG, TMP_PATH);
+        Uri imageUri=FileProvider.getUriForFile(mActivity,"me.xifengwanzhao.fileprovider", file);//这里进行替换uri的获得方式
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//这里加入flag
+
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(
+//                Environment.getExternalStorageDirectory(), TMP_PATH)));
+
         startActivityForResult(intent, CAMERA_WITH_DATA);
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -281,12 +292,9 @@ public class KqdkActivityCopy extends BaseActivity {
 //                startCropImageActivity(getFilePath(data.getData()));
 //                break;
             case CAMERA_WITH_DATA:// 照相机程序返回的,再次调用图片剪辑程序去修剪图片
-//                startCropImageActivity(Environment.getExternalStorageDirectory() + "/" + TMP_PATH);
-//                if(){
 //
-//                }
                 //FileProvider 7.0文件读取共享权限
-                String path1 = Environment.getExternalStorageDirectory() + "/" + TMP_PATH;
+                String path1 = CACHE_IMG + TMP_PATH;
 
                 ClipImageActivity.startActivity(this, path1, CROP_RESULT_CODE);
                 break;
@@ -361,7 +369,7 @@ public class KqdkActivityCopy extends BaseActivity {
             MLog.e(TAG, "onResponse：complete" + response);
             try {
                 JSONObject obj = new JSONObject(response);
-                if ("200".equals(obj.getString("status"))) {
+                if ("200".equals(obj.getString("statusCode"))) {
                     picString = obj.getString("path");
                 }
                 sendData();
@@ -396,11 +404,11 @@ public class KqdkActivityCopy extends BaseActivity {
 //                toast("提交成功");
                 try {
                     JSONObject obj = new JSONObject(response);
-                    if ("200".equals(obj.getString("status"))) {
+                    if ("200".equals(obj.getString("statusCode"))) {
                         toast(" " + obj.getString("message"));
 
                         finish();
-                    } else if ("201".equals(obj.getString("status"))) {
+                    } else if ("201".equals(obj.getString("statusCode"))) {
                         toast(" " + obj.getString("message"));
                         btnTjkq.setEnabled(false);
                     }

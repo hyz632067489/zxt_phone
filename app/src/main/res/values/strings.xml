@@ -80,4 +80,14 @@
     <string name="wyfw_jftj">纠纷调解</string>
     <string name="wyfw_jftj_add">添加纠纷调解</string>
     <string name="wyfw_aqgl">安全管理</string>
+
+
+
+
+
+
+
+
+
+    <string name="install_apk_path">me.xifengwanzhao.fileprovider</string>
 </resources>

@@ -5,12 +5,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -20,6 +23,7 @@ import com.zxt.zxt_phone.base.BaseFragment;
 import com.zxt.zxt_phone.bean.model.BannerModel;
 import com.zxt.zxt_phone.bean.model.MarqueeModel;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.BmfwActivity;
 import com.zxt.zxt_phone.view.BsznActivity;
@@ -132,9 +136,15 @@ String url;
         initView();
     }
 
+
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);  //这个super可不能落下，否则可能回调不了
+        /**
+         * 处理二维码扫描结果
+         */
         if (requestCode == REQUEST_CODE) {
             //处理扫描结果（在界面上显示）
             if (null != data) {
@@ -144,10 +154,9 @@ String url;
                 }
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
-                    toast( "解析结果:" + result);
+                    MLog.i("解析结果:" + result);
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                    toast( "解析二维码失败" );
-
+                    MLog.i("解析失败:" );
                 }
             }
         }
@@ -157,12 +166,13 @@ String url;
 
         retBtn.setVisibility(View.GONE);
         tabName.setText(R.string.m_main_tab_name);
+
         zxing.setVisibility(View.VISIBLE);
         zxing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CaptureActivity.class);
-               startActivityForResult(intent, REQUEST_CODE);
+                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
 
@@ -228,6 +238,7 @@ String url;
                 mIntent.setClass(getActivity(), BsznActivity.class);
                 break;
             case R.id.tv_sqhd://社区活动
+                mIntent.setClass(getActivity(), BsznActivity.class);
                 break;
             case R.id.tv_czjf://充值缴费
                 mIntent.setClass(getActivity(), CzjfActivity.class);
