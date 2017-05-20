@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="@dimen/action_tab_height"
+    android:background="@color/topcolor"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_life"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="生活"
+            android:paddingRight="@dimen/dp_5"
+            android:textSize="@dimen/sp_18"
+            android:gravity="center_vertical||right"
+            />
+
+        <TextView
+            android:id="@+id/tv_fu_wu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/sp_18"
+            android:text="服务"
+            android:paddingLeft="@dimen/dp_5"
+            android:gravity="center_vertical||left"
+            />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

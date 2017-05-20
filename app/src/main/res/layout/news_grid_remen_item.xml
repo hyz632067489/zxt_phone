@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selector_white_grey_on_off">
+
+    <!--<com.zxt.zxt_phone.view.customview.SelectableRoundedImageView-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="150dp"-->
+    <!--android:id="@+id/repairs_img"-->
+    <!--android:scaleType="fitXY"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:layout_marginLeft="5dp"-->
+    <!--android:layout_marginRight="5dp"-->
+    <!--app:sriv_left_top_corner_radius="5dp"-->
+    <!--app:sriv_right_top_corner_radius="5dp"-->
+    <!--app:sriv_left_bottom_corner_radius="5dp"-->
+    <!--app:sriv_right_bottom_corner_radius="5dp"-->
+    <!--/>-->
+    <FrameLayout
+        android:id="@+id/FrameLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+
+        >
+
+        <!--<com.zxt.zxt_phone.view.customview.SelectableRoundedImageView-->
+        <!--android:id="@+id/iv_icon"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:scaleType="fitXY" />-->
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/is_waiting_deal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/main_re_men" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="重庆买房买到哪？"
+            android:textColor="@color/red"
+            android:textSize="@dimen/sp_18" />
+
+
+    </FrameLayout>
+
+
+</RelativeLayout>

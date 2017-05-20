@@ -26,8 +26,7 @@
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".MyApplication"
@@ -37,7 +36,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--7.0文件共享-->
+        <!-- 7.0文件共享 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="@string/install_apk_path"
@@ -48,12 +47,9 @@
                 android:resource="@xml/file_provider" />
         </provider>
 
-
-
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="01CZ8Ej2Wlhf1kB4GGkSwXdRWnyxTud3" />
-
 
         <activity android:name=".view.WelcomeActivity">
             <intent-filter>
@@ -62,9 +58,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".view.PermissionsActivity"/>
         <activity android:name=".view.MainActivity" />
         <activity android:name=".base.BaseActivity" />
         <activity android:name=".view.LoginActivity" />
+        <activity android:name=".view.TestActivity" />
 
         <!-- //网格 -->
         <activity android:name=".view.WsbsActivity" />
@@ -156,7 +155,8 @@
         <activity android:name=".view.zwfw.wggl.WgrxActivity" />
         <activity android:name=".view.zwfw.pasq.PasqActivity" />
         <activity android:name=".view.zwfw.pasq.SqmjActivity" />
-        <activity android:name=".view.zwfw.jzbf.JzbfActivity"></activity>
+        <activity android:name=".view.zwfw.jzbf.JzbfActivity" />
+        <activity android:name=".view.ViewCustomActivity"></activity>
     </application>
 
 </manifest>

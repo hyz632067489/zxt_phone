@@ -21,50 +21,74 @@ import java.util.List;
 
 public class GridviewAdapter extends BaseAdapter {
 
-    LayoutInflater mInflater;
-    Context mContext;
-    List<BsznModel> mDatas;
-    public GridviewAdapter(Context context, List<BsznModel> datas){
+    private List<BsznModel> mDatas;
+    private LayoutInflater mInflater;
+    /**
+     * 页数下标,从0开始(当前是第几页)
+     */
+    private int curIndex;
+    /**
+     * 每一页显示的个数
+     */
+    private int pageSize;
 
+
+    public GridviewAdapter(Context context, List<BsznModel> mDatas, int curIndex, int pageSize) {
         mInflater = LayoutInflater.from(context);
-        this.mContext = context;
-        this.mDatas = datas;
+        this.mDatas = mDatas;
+        this.curIndex = curIndex;
+        this.pageSize = pageSize;
     }
+
+    /**
+     * 先判断数据集的大小是否足够显示满本页,如果够，则直接返回每一页显示的最大条目个数pageSize,如果不够，则有几项就返回几,(也就是最后一页的时候就显示剩余item)
+     */
     @Override
     public int getCount() {
-        return mDatas.size();
+        return mDatas.size() > (curIndex + 1) * pageSize ? pageSize : (mDatas.size() - curIndex * pageSize);
+
     }
 
     @Override
     public Object getItem(int position) {
-        return mDatas.get(position);
+        return mDatas.get(position + curIndex * pageSize);
     }
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return position + curIndex * pageSize;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder = null;
-        if(convertView == null){
-            convertView = mInflater.inflate(R.layout.grid_item_layout,parent,false);
+        if (convertView == null) {
+            convertView = mInflater.inflate(R.layout.grid_item_layout, parent, false);
             holder = new ViewHolder();
             holder.mImageView = (ImageView) convertView.findViewById(R.id.im_item);
             holder.mTextView = (TextView) convertView.findViewById(R.id.tv_item);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.mTextView.setText(mDatas.get(position).getText());
         holder.mImageView.setImageResource(mDatas.get(position).getImage());
 
+        /**
+         * 在给View绑定显示的数据时，计算正确的position = position + curIndex * pageSize
+         */
+        int pos = position + curIndex * pageSize;
+        holder.mTextView.setText(mDatas.get(pos).getText());
+        holder.mImageView.setImageResource(mDatas.get(pos).getImage());
+
+
         return convertView;
     }
-    private final class ViewHolder
-    {
+
+
+    private final class ViewHolder {
         ImageView mImageView;
         TextView mTextView;
     }

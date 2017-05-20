@@ -25,7 +25,7 @@ public class BitmapUtil {
 
     public static void saveBitmapFile(Bitmap bitmap) {
 //        File file = new File(Environment.getExternalStorageDirectory().getPath() + "/zxt/images/"+ "/" + TMP_PATH);//将要保存图片的路径
-        File file = new File(Environment.getExternalStorageDirectory().getPath() + "/" + TMP_PATH);//将要保存图片的路径
+        File file = new File(Environment.getExternalStorageDirectory().getPath() + "/zxtPhone/" + TMP_PATH);//将要保存图片的路径
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
             bitmap.compress(Bitmap.CompressFormat.JPEG, 70, bos);

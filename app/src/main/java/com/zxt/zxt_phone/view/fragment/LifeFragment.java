@@ -14,13 +14,15 @@ import com.zxt.zxt_phone.base.BaseFragment;
  * powered by company
  */
 
-public class ByCarFragment extends BaseFragment{
+public class LifeFragment extends BaseFragment {
+
+    View view;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.by_car_activity,container,false);
-        return v;
+        view = inflater.inflate(R.layout.life_fragment_view, null);
+        return view;
     }
 }

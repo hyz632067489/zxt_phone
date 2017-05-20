@@ -74,6 +74,10 @@
     <color name="home_function_bg_pressed_color">#e6e6e6</color>
     <color name="grey_dark_press">#c3c4cb</color>
     <color name="background_grey">#f4f4f4</color>
+    <color name="gray_deep">#9E9E9E</color>
+    <color name="gray_item">#FFECECEC</color>
+    <color name="gray_item_press">#dad8d8</color>
+
     <color name="froget">#00b4fd</color>
 
     <color name="scan_corner_color">#0effc2</color>

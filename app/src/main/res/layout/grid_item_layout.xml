@@ -6,6 +6,7 @@
     android:layout_margin="5dp"
     android:orientation="vertical"
     android:paddingBottom="5dp"
+    android:background="@drawable/selector_white_grey_on_off"
     android:paddingTop="5dp">
 
     <ImageView

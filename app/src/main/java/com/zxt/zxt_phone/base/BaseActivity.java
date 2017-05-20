@@ -7,30 +7,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.ActivityManager;
 import com.zxt.zxt_phone.utils.MLog;
+import com.zxt.zxt_phone.utils.PermissionsChecker;
+import com.zxt.zxt_phone.view.PermissionsActivity;
 import com.zxt.zxt_phone.view.widget.LoadingDialog;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -56,6 +51,12 @@ public class BaseActivity extends FragmentActivity  {
     public String initEndDateTime;
     protected Date curDate;
 
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -66,7 +67,11 @@ public class BaseActivity extends FragmentActivity  {
         mContext = getApplication();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 
+
+
     }
+
+
 
     @Override
     public void setContentView(int layoutResID) {
@@ -75,6 +80,10 @@ public class BaseActivity extends FragmentActivity  {
         mUnbinder = ButterKnife.bind(this);
         initView1();
     }
+
+
+
+
 
     private void initView1() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");

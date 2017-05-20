@@ -82,12 +82,36 @@
     <string name="wyfw_aqgl">安全管理</string>
 
 
+    <!--商铺-->
+    <string name="main_shop">商铺</string>
 
 
 
 
-
-
+    <!--个人中心-->
+    <string name="about_me">个人中心</string>
+    <string name="me_fu_kuan">待付款</string>
+    <string name="me_shou_huo">待收货</string>
+    <string name="me_ping_jia">待评价</string>
+    <string name="me_shou_hou">售后/退款</string>
+    <string name="me_car">我的购物车</string>
+    <string name="me_address">管理收货地址</string>
+    <string name="me_communication">社区交流</string>
+    <string name="me_kefu">在线客户</string>
+    <string name="me_setting">设置</string>
 
     <string name="install_apk_path">me.xifengwanzhao.fileprovider</string>
+
+    <string name="more">更多</string>
+
+
+    <string name="permission">权限(permission)</string>
+    <string name="no_permissions">应用需要必要的运行权限</string>
+
+    <string name="settings">设置</string>
+    <string name="help">帮助</string>
+    <string name="string_help_text">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。\n\n最后点击两次后退按钮，即可返回。</string>
+    <string name="quit">退出</string>
+
+
 </resources>

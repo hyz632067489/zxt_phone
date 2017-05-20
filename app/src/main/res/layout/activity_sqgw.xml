@@ -34,17 +34,14 @@
         <RadioButton
             android:id="@+id/rb_sqcs"
             style="@style/mainRg_style"
-            android:drawableTop="@drawable/by_car_main"
             android:text="社区超市"/>
         <RadioButton
             android:id="@+id/rb_scdp"
             style="@style/mainRg_style"
-            android:drawableTop="@drawable/zxing_main"
             android:text="收藏店铺"/>
         <RadioButton
             android:id="@+id/rb_gwc"
             style="@style/mainRg_style"
-            android:drawableTop="@drawable/zxing_main"
             android:text="购物车"/>
         <RadioButton
             android:id="@+id/rb_me"

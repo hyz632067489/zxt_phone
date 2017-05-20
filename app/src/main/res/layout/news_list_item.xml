@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/list_selector"
+    android:background="@drawable/selector_white_grey_on_off"
    >
 
     <LinearLayout android:orientation="horizontal"
@@ -11,8 +11,8 @@
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/px_15"
         android:paddingRight="@dimen/px_15"
-        android:paddingTop="@dimen/px_25"
-        android:paddingBottom="@dimen/px_25"
+        android:paddingTop="@dimen/px_15"
+        android:paddingBottom="@dimen/px_15"
         >
         
         <TextView 

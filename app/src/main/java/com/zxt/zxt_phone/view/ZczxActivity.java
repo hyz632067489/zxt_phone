@@ -24,6 +24,7 @@ import com.zxt.zxt_phone.bean.model.NewsModel;
 import com.zxt.zxt_phone.bean.model.TitleModel;
 import com.zxt.zxt_phone.bean.model.ZczxModel;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 import com.zxt.zxt_phone.view.customview.HorizontalListView;
 import com.zxt.zxt_phone.view.customview.PullToRefreshView;
@@ -162,7 +163,7 @@ public class ZczxActivity extends BaseActivity {
                         + "&Key=" + SharedPrefsUtil.getString(mActivity, "Key")
                         + "&id=" + list.get(position).getNewsId();
 
-                Log.i("TAG", "==================" + newsUrl);
+                MLog.i("TAG", "==================" + newsUrl);
                 startActivity(new Intent(mActivity, NewsDetailActivity.class)
                         .putExtra("title", list.get(position).getModuName())
                         .putExtra("url", newsUrl));
@@ -248,7 +249,7 @@ public class ZczxActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.i(TAG, "response=title=====" + response);
+                        MLog.i(TAG, "response=title=====" + response);
                         try {
                             JSONObject obj = new JSONObject(response);
                             if (!"0".equals(obj.getString("Status"))) {
@@ -298,7 +299,7 @@ public class ZczxActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.i(TAG, "response======" + response);
+                        MLog.i(TAG, "response======" + response);
                         try {
 
                             JSONObject jsonObject = new JSONObject(response);

@@ -30,11 +30,6 @@
 
     </RadioGroup>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#ccc" />
-
     <com.zxt.zxt_phone.view.customview.PullToRefreshView
         android:id="@+id/refreshView"
         android:layout_width="match_parent"
@@ -64,6 +59,11 @@
             </LinearLayout>
         </ScrollView>
     </com.zxt.zxt_phone.view.customview.PullToRefreshView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc" />
 
 
 </LinearLayout>

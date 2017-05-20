@@ -8,7 +8,7 @@ import android.widget.RadioGroup;
 
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
-import com.zxt.zxt_phone.view.fragment.ByCarFragment;
+import com.zxt.zxt_phone.view.fragment.GovernmentFragment;
 import com.zxt.zxt_phone.view.fragment.mMeFragment;
 import com.zxt.zxt_phone.view.fragment.shequdianshang.ShoucangFragment;
 import com.zxt.zxt_phone.view.fragment.shequdianshang.SqcsFragment;
@@ -29,7 +29,7 @@ public class SqgwActivity extends BaseActivity {
     private SqdsMainFragment sqdsMainFragment;
     private SqcsFragment sqcsFragment;
     private ShoucangFragment shoucangFragment;
-    private ByCarFragment byCarFragment;
+    private GovernmentFragment governmentFragment;
     private mMeFragment meFragment;
 
     @Override
@@ -76,11 +76,11 @@ public class SqgwActivity extends BaseActivity {
                        break;
                    case R.id.rb_gwc://购物车
                        mCurrentIndex = 3;
-                       if(byCarFragment == null){
-                           byCarFragment = new ByCarFragment();
-                           addFragment(byCarFragment);
+                       if(governmentFragment == null){
+                           governmentFragment = new GovernmentFragment();
+                           addFragment(governmentFragment);
                        }
-                       showFragment(byCarFragment);
+                       showFragment(governmentFragment);
                        toast("购物车");
                        break;
                    case R.id.rb_me://个人中心
@@ -112,8 +112,8 @@ public class SqgwActivity extends BaseActivity {
         if(shoucangFragment != null){
             transaction.hide(shoucangFragment);
         }
-        if(byCarFragment != null){
-            transaction.hide(byCarFragment);
+        if(governmentFragment != null){
+            transaction.hide(governmentFragment);
         }
         if(meFragment != null){
             transaction.hide(meFragment);

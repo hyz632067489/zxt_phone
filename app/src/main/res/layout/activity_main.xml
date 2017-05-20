@@ -17,35 +17,41 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#ccc"
+
         />
     <RadioGroup
         android:id="@+id/rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/home_bg1"
+android:background="@drawable/main_bottom"
         android:orientation="horizontal">
         
         <RadioButton
            android:id="@+id/rb_main"
             style="@style/mainRg_style"
-            android:drawableTop="@drawable/m_main"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_main_main"
             android:text="首页"/>
         <RadioButton
-            android:id="@+id/rb_car"
+            android:id="@+id/rb_zw"
             style="@style/mainRg_style"
-            android:drawableTop="@drawable/by_car_main"
-            android:text="购物车"/>
+            android:drawableTop="@drawable/selector_main_zwfw"
+            android:text="政务"/>
         <RadioButton
-            android:id="@+id/rb_zxing"
+            android:id="@+id/rb_life"
             style="@style/mainRg_style"
-            android:drawableTop="@drawable/zxing_main"
-            android:text="扫描"/>
+            android:drawableTop="@drawable/selector_main_shfw"
+            android:text="生活"/>
+        <RadioButton
+            android:id="@+id/rb_shop"
+            style="@style/mainRg_style"
+            android:drawableTop="@drawable/selector_main_shop"
+            android:text="商城"/>
         <RadioButton
             android:id="@+id/rb_me"
             style="@style/mainRg_style"
-            android:drawableTop="@drawable/me_main"
-            android:text="个人中心"/>
+            android:drawableTop="@drawable/selector_main_me"
+            android:text="个人"/>
         
     </RadioGroup>
 </LinearLayout>

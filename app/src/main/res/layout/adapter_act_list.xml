@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/selector_white_grey_on_off"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10">
+
+    <LinearLayout
+        android:id="@+id/ly1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_5"
+            android:text="1111111111111"
+            android:textColor="@color/act_title_font"/>
+
+        <com.zxt.zxt_phone.view.customview.HomeGridView
+            android:id="@+id/adapter_act_img_hgv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="@dimen/dp_2"
+            android:verticalSpacing="@dimen/dp_2"
+            android:paddingTop="@dimen/dp_5"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_5"
+            android:drawablePadding="@dimen/dp_4"
+            android:text="zzzzzzzzz" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        android:layout_margin="@dimen/dp_4"
+        android:layout_toRightOf="@id/ly1"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bszn_sbbl" />
+
+</LinearLayout>

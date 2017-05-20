@@ -319,11 +319,6 @@ public class KqdkActivityCopy extends BaseActivity {
     }
 
 
-    // 裁剪图片的Activity
-//    private void startCropImageActivity(String path) {
-//        ClipImageActivity.startActivity(this, path, CROP_RESULT_CODE);
-//    }
-
 
     private void sendImages() {
         File file = new File(Environment.getExternalStorageDirectory() + "/" + TMP_PATH);
