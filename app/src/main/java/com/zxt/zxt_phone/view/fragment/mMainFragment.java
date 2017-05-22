@@ -3,19 +3,17 @@ package com.zxt.zxt_phone.view.fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,6 +23,9 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
@@ -36,11 +37,10 @@ import com.zxt.zxt_phone.base.BaseFragment;
 import com.zxt.zxt_phone.bean.TipDataModel;
 import com.zxt.zxt_phone.bean.model.BsznModel;
 import com.zxt.zxt_phone.bean.model.MarqueeModel;
-import com.zxt.zxt_phone.bean.model.NewsModel;
 import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.GlideImage;
 import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
-import com.zxt.zxt_phone.view.BmfwActivity;
 import com.zxt.zxt_phone.view.BsznActivity;
 import com.zxt.zxt_phone.view.CaptureActivity;
 import com.zxt.zxt_phone.view.JgcxActivity;
@@ -50,17 +50,13 @@ import com.zxt.zxt_phone.view.TestActivity;
 import com.zxt.zxt_phone.view.ViewCustomActivity;
 import com.zxt.zxt_phone.view.WsbsActivity;
 import com.zxt.zxt_phone.view.ZczxActivity;
-import com.zxt.zxt_phone.view.ZwfwActivity;
 import com.zxt.zxt_phone.view.bmfw.CzjfActivity;
-import com.zxt.zxt_phone.view.customview.HomeGridView;
 import com.zxt.zxt_phone.view.customview.MyListView;
 import com.zxt.zxt_phone.view.customview.MyMarqueeView;
-import com.zxt.zxt_phone.view.customview.PullToRefreshView;
 import com.zxt.zxt_phone.view.wyfw.JftjActivity;
 import com.zxt.zxt_phone.view.wyfw.PjglActivity;
 import com.zxt.zxt_phone.view.wyfw.RepairsActivity;
 import com.zxt.zxt_phone.view.wyfw.SafetyActivity;
-import com.zxt.zxt_phone.view.wyfw.WyfwActivity;
 import com.zxt.zxt_phone.view.wyfw.WyggActivity;
 import com.zxt.zxt_phone.view.zwfw.DqfcActivity;
 import com.zxt.zxt_phone.view.zwfw.pasq.PasqActivity;
@@ -79,9 +75,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import me.militch.widget.bannerholder.BannerClickListenenr;
-import me.militch.widget.bannerholder.BannerHolderView;
-import me.militch.widget.bannerholder.HolderAttr;
+import butterknife.Unbinder;
 import okhttp3.Call;
 
 import static com.zxt.zxt_phone.constant.Common.REQUEST_CODE;
@@ -93,7 +87,11 @@ import static com.zxt.zxt_phone.constant.Common.RESULT_OK;
  * powered by company
  */
 
-public class mMainFragment extends BaseFragment {
+public class mMainFragment extends BaseFragment implements OnBannerListener {
+
+
+    View v;
+    Unbinder unbinder;
 
     @BindView(R.id.return_back)
     TextView retBtn;
@@ -102,11 +100,8 @@ public class mMainFragment extends BaseFragment {
 
     @BindView(R.id.sign_in)
     TextView zxing;
-    //    @BindView(R.id.searchView)
-//    SearchView searchView;
-    BannerHolderView holder;
-    //    @BindView(R.id.id_banner)
-//    Banner mBanner;
+
+
     int num = 1;
 
     @BindView(R.id.scroll_view)
@@ -161,8 +156,8 @@ public class mMainFragment extends BaseFragment {
 
     @BindView(R.id.list_view)
     MyListView listview;
-//    @BindView(R.id.refreshView)
-//    PullToRefreshView mRefreshView;
+
+
     @BindView(R.id.no_data)
     TextView noData;
     @BindView(R.id.process_bar)
@@ -176,6 +171,10 @@ public class mMainFragment extends BaseFragment {
     List<MarqueeModel.DataNewsModel> mDataNewsList = new ArrayList<>();
     List<MarqueeModel.DataNewsModel> mDataNewsGrid = new ArrayList<>();
 
+    @BindView(R.id.banner_holder)
+    Banner bannerHolder;
+    public static List<String> images = new ArrayList<>();
+    public static List<String> titles = new ArrayList<>();
 
 
 
@@ -210,18 +209,17 @@ public class mMainFragment extends BaseFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View v = inflater.inflate(R.layout.m_main_activity, container, false);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+         v = inflater.inflate(R.layout.m_main_activity, container, false);
 
-        ButterKnife.bind(this, v);
+        unbinder = ButterKnife.bind(this, v);
         return v;
     }
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        holder = (BannerHolderView) view.findViewById(R.id.banner_holder);
-
         //获取垂直轮播数据
         getData();
 
@@ -231,6 +229,14 @@ public class mMainFragment extends BaseFragment {
         initView();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
+        //开始轮播
+        bannerHolder.startAutoPlay();
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -274,8 +280,7 @@ public class mMainFragment extends BaseFragment {
         });
 
 
-        //轮播图
-        setBanner();
+
         //仿美团功能选择切换
         setPagerFunction();
         //垂直轮播图
@@ -393,30 +398,43 @@ public class mMainFragment extends BaseFragment {
 
 
     /**
-     * 轮播图
+     * 设置轮播图Banner
      */
     private void setBanner() {
-        HolderAttr.Builder builder = holder.getHolerAttr();//获取Holder配置参数构建对象
-        builder.setSwitchDuration(900)//设置切换Banner的持续时间
-                .setAutoLooper(true)//开启自动轮播
-                .setLooperTime(1000)//设置轮播间隔时间
-                .setBannerClickListenenr(new BannerClickListenenr() {//Banner图片点击事件
-                    @Override
-                    public void onBannerClick(int p) {
-                        //p: 页面索引
-                    }
-                });
-        holder.setHolerAttr(builder);
-        List<Bitmap> mpas = new ArrayList<>();
-
-//测试Bitmap
-        mpas.add(BitmapFactory.decodeResource(getResources(), R.drawable.guanggao1));
-        mpas.add(BitmapFactory.decodeResource(getResources(), R.drawable.guanggao2));
-        mpas.add(BitmapFactory.decodeResource(getResources(), R.drawable.guanggao3));
-
-//设置图片集合
-        holder.setHolderBitmaps(mpas);
+        bannerHolder.setImages(images)
+                .setBannerTitles(titles)
+                .setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
+                .setImageLoader(new GlideImage())
+                .setOnBannerListener(this)
+                .start();
     }
+
+    @Override
+    public void OnBannerClick(int position) {
+        String newsUrl = Url.URL + marqueeModel.getNewsShowUrl() + "?&TVInfoId=" + SharedPrefsUtil.getString(getActivity(), "TVInfoId")
+                + "&Key=" + SharedPrefsUtil.getString(getActivity(), "Key")
+                + "&id=" + mDataNews.get(position).getNewsId();
+
+        MLog.i("TAG", "==================" + newsUrl);
+
+        //名字要修改
+        startActivity(new Intent(getActivity(), NewsDetailActivity.class)
+                .putExtra("title", mDataNews.get(position).getModuName())
+                .putExtra("url", newsUrl));
+    }
+
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+            switch (msg.what) {
+                case 0:
+                    setBanner();
+                    break;
+            }
+        }
+    };
 
 
     /**
@@ -456,8 +474,6 @@ public class mMainFragment extends BaseFragment {
         //设置圆点
         setOvalLayout();
     }
-
-
 
 
     /**
@@ -589,6 +605,7 @@ public class mMainFragment extends BaseFragment {
      * 设置圆点
      */
     public void setOvalLayout() {
+        mLlDot.clearFocus();
         for (int i = 0; i < pageCount; i++) {
             mLlDot.addView(mInflater.inflate(R.layout.dot, null));
         }
@@ -651,6 +668,14 @@ public class mMainFragment extends BaseFragment {
 
                             mDataNews.addAll(marqueeModel.getData());
 
+
+                            titles.clear();
+                            images.clear();
+                            for (int i = 0; i < array.length(); i++) {
+                                titles.add(mDataNews.get(i).getTitle());
+                                images.add(mDataNews.get(i).getImageIndex());
+                            }
+                            mHandler.sendEmptyMessage(0);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -755,6 +780,22 @@ public class mMainFragment extends BaseFragment {
         }
         startActivity(mIntent);
 
+    }
+
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        //结束轮播
+        bannerHolder.stopAutoPlay();
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
 

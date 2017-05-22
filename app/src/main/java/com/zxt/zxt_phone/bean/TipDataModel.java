@@ -131,6 +131,28 @@ public class TipDataModel {
         return result;
     }
 
+
+    /**
+     * 生活功能
+     */
+    private static String[] life_names = {"社区活动", "故障报修", "家政服务", "充值缴费", };
+    private static int[] life_icon = {R.drawable.sh_sqhd, R.drawable.sh_gzbx, R.drawable.sh_jzfw,
+            R.drawable.sh_czjf  };
+
+    public static List<CommonModel> getLife() {
+        List<CommonModel> result = new ArrayList<>();
+        for (int i = 0; i < life_names.length; i++) {
+            CommonModel remenModel = new CommonModel();
+            remenModel.setIcon(life_icon[i]);
+            remenModel.setName(life_names[i]);
+            result.add(remenModel);
+        }
+        return result;
+    }
+
+
+
+
     /**
      * 电商功能列表
      */

@@ -18,16 +18,7 @@ import com.zxt.zxt_phone.R;
 public class LifeTitleLayout extends LinearLayout {
     public LifeTitleLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.top_navigat, this);
+        LayoutInflater.from(context).inflate(R.layout.life_title_layout, this);
 
-        TextView return_back = (TextView) findViewById(R.id.return_back);
-
-        return_back.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ((Activity) getContext()).finish();
-            }
-        });
     }
 }

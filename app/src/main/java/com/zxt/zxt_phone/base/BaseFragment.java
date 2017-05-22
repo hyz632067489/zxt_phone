@@ -1,5 +1,6 @@
 package com.zxt.zxt_phone.base;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -50,25 +51,26 @@ public class BaseFragment extends Fragment {
         mLoadingDialog = null;
     }
 
-    /**
-     * 显示加载dialog
-     *
-     * @param message messageIsChanged message是否已经改变
-     */
+    private ProgressDialog progressDialog;
 
-    protected void showLoading(String message) {
-        if (mLoadingDialog == null) {
-            mLoadingDialog = new LoadingDialog(getActivity(), message);
+    /**
+     * 显示进度对话框
+     */
+    public void showProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("正在加载...");
+            progressDialog.setCanceledOnTouchOutside(false);
         }
-        mLoadingDialog.show();
+        progressDialog.show();
     }
 
     /**
-     * 隐藏
+     * 关闭进度对话框
      */
-    protected void dismissLoading() {
-        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
-            mLoadingDialog.dismiss();
+    public void closeProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
         }
     }
 

@@ -21,11 +21,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <me.militch.widget.bannerholder.BannerHolderView
+            <com.youth.banner.Banner
                 android:id="@+id/banner_holder"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                app:indicatorResId="@drawable/banner_holder_selector" />
+                android:layout_height="150dp"
+                app:title_background="#555CB85C"
+                app:title_height="25dp"
+                app:title_textcolor="@android:color/white"
+                app:title_textsize="14sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -229,8 +232,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="115dp"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
+
                 <com.zxt.zxt_phone.view.customview.MyListView
                     android:id="@+id/list_view"
                     android:layout_width="match_parent"

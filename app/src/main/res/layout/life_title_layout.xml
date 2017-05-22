@@ -7,33 +7,58 @@
     android:fitsSystemWindows="true"
     >
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tv_life"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="生活"
-            android:paddingRight="@dimen/dp_5"
-            android:textSize="@dimen/sp_18"
-            android:gravity="center_vertical||right"
-            />
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dip"
+            android:paddingTop="10dip" >
 
-        <TextView
-            android:id="@+id/tv_fu_wu"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="@dimen/sp_18"
-            android:text="服务"
-            android:paddingLeft="@dimen/dp_5"
-            android:gravity="center_vertical||left"
-            />
+            <TextView
+                android:id="@+id/tv_tab_1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:gravity="center|right"
+                android:layout_marginRight="@dimen/dp_10"
+                android:text="生活"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_tab_2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:gravity="center|left"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="服务"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:paddingBottom="3dip" >
+
+            <ImageView
+                android:id="@+id/iv_bottom_line"
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:scaleType="matrix"
+                android:src="#fff" />
+        </LinearLayout>
     </LinearLayout>
-
 
 
 </RelativeLayout>

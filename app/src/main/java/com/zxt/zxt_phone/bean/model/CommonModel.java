@@ -7,7 +7,16 @@ package com.zxt.zxt_phone.bean.model;
 public class CommonModel {
 
     private int icon;
-    private  String name;
+    private String name;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getIcon() {
         return icon;

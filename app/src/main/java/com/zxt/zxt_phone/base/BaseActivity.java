@@ -97,27 +97,6 @@ public class BaseActivity extends FragmentActivity  {
         Toast.makeText(mActivity, message, Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * 显示加载dialog
-     *
-     * @param message messageIsChanged message是否已经改变
-     */
-
-    protected void showLoading(String message) {
-        if (mLoadingDialog == null) {
-            mLoadingDialog = new LoadingDialog(getApplicationContext(), message);
-        }
-        mLoadingDialog.show();
-    }
-
-    /**
-     * 隐藏
-     */
-    public void dismissLoading() {
-        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
-            mLoadingDialog.dismiss();
-        }
-    }
 
 
     private ProgressDialog progressDialog;
