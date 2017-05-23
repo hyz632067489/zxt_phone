@@ -37,6 +37,7 @@ import com.zxt.zxt_phone.base.BaseFragment;
 import com.zxt.zxt_phone.bean.TipDataModel;
 import com.zxt.zxt_phone.bean.model.BsznModel;
 import com.zxt.zxt_phone.bean.model.MarqueeModel;
+import com.zxt.zxt_phone.bean.model.NewsListModel;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.GlideImage;
 import com.zxt.zxt_phone.utils.MLog;
@@ -137,7 +138,7 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
     List<MarqueeModel.DataNewsModel> mDataNews = new ArrayList<>();
     String url;
     MarqueeModel marqueeModel;
-    CommonAdapter<MarqueeModel.DataNewsModel> myAdapter;
+
 
     @BindView(R.id.dynic_marquee)
     MyMarqueeView marqueeView;
@@ -168,14 +169,23 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
     GridView gridView;
 
     CommonAdapter<MarqueeModel.DataNewsModel> gridAdapter;
-    List<MarqueeModel.DataNewsModel> mDataNewsList = new ArrayList<>();
+
     List<MarqueeModel.DataNewsModel> mDataNewsGrid = new ArrayList<>();
+
+    NewsListModel newsListModel;
+    List<NewsListModel.DataBean> mDataNewsList = new ArrayList<>();
+    CommonAdapter<NewsListModel.DataBean> listAdapter;
+
 
     @BindView(R.id.banner_holder)
     Banner bannerHolder;
     public static List<String> images = new ArrayList<>();
     public static List<String> titles = new ArrayList<>();
 
+    /**
+     * 新闻类型id
+     */
+    private int typeId = 1;
 
 
     private List<View> mPagerList;
@@ -210,7 +220,7 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         v = inflater.inflate(R.layout.m_main_activity, container, false);
+        v = inflater.inflate(R.layout.m_main_activity, container, false);
 
         unbinder = ButterKnife.bind(this, v);
         return v;
@@ -223,8 +233,7 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
         //获取垂直轮播数据
         getData();
 
-        //获取新闻数据
-        getDataNewsList(page);
+        getDataNewsList(typeId);
 
         initView();
     }
@@ -280,7 +289,6 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
         });
 
 
-
         //仿美团功能选择切换
         setPagerFunction();
         //垂直轮播图
@@ -324,14 +332,14 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
 
     private void setAdapter() {
 
-        myAdapter = new CommonAdapter<MarqueeModel.DataNewsModel>(getContext(), mDataNewsList, R.layout.news_list_item) {
+        listAdapter = new CommonAdapter<NewsListModel.DataBean>(getContext(), mDataNewsList, R.layout.news_list_item) {
             @Override
-            public void convert(ViewHolder holder, MarqueeModel.DataNewsModel item) {
-                holder.setText(R.id.Title, "· [" + item.getDeptName() + "]" + item.getTitle());
+            public void convert(ViewHolder holder, NewsListModel.DataBean item) {
+                holder.setText(R.id.Title, "· [" + item.getModuName() + "]"+item.getTitle()  );
                 holder.setText(R.id.EditDate, item.getEditDate());
             }
         };
-        listview.setAdapter(myAdapter);
+        listview.setAdapter(listAdapter);
 
 
         gridAdapter = new CommonAdapter<MarqueeModel.DataNewsModel>(getContext(), mDataNewsGrid, R.layout.news_grid_remen_item) {
@@ -341,7 +349,9 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
                 holder.setText(R.id.tv_title, item.getEditDate());
             }
         };
-        gridView.setAdapter(gridAdapter);
+//        gridView.setAdapter(gridAdapter);
+
+
     }
 
     /**
@@ -353,15 +363,13 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
                 if (rbZcNews.getId() == checkedId) {
-                    getDataNewsList(page);
-
+                    typeId = 1;
                 } else if (rbTongZhi.getId() == checkedId) {
-                    getDataNewsList(page);
-
+                    typeId = 2;
                 } else if (rbJxNews.getId() == checkedId) {
-                    getDataNewsList(page);
-
+                    typeId = 3;
                 }
+                getDataNewsList(typeId);
             }
         });
 
@@ -369,9 +377,11 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String newsUrl = Url.URL + marqueeModel.getNewsShowUrl() + "?&TVInfoId=" + SharedPrefsUtil.getString(getActivity(), "TVInfoId")
+                String newsUrl = Url.URL + newsListModel.getPioneerUrl() + "?&TVInfoId=" + SharedPrefsUtil.getString(getActivity(), "TVInfoId")
                         + "&Key=" + SharedPrefsUtil.getString(getActivity(), "Key")
-                        + "&id=" + mDataNewsList.get(position).getNewsId();
+                        + "&id=" + mDataNewsList.get(position).getNewsid()
+                        + "&method=newshtml";
+
 
                 MLog.i("TAG", "==================" + newsUrl);
 
@@ -689,13 +699,16 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
     /**
      * 获取新闻数据
      */
-    private void getDataNewsList(int page) {
+    private void getDataNewsList(int typeId) {
+//        http://192.168.1.222:8099/api/APP1.0.aspx?method=news&id=1&DeptId=851&Key=21218CCA77804D2BA1922C33E0151105&TVInfoId=8
         HashMap<String, String> params = new HashMap<>();
         params.put("TVInfoId", SharedPrefsUtil.getString(getActivity(), "TVInfoId"));
-        params.put("method", "IndexNews");
-        params.put("PageSize", "6");
-        params.put("Page", String.valueOf(page));
+        params.put("method", "news");
+        params.put("DeptId", SharedPrefsUtil.getString(getActivity(), "DeptId"));
         params.put("Key", SharedPrefsUtil.getString(getActivity(), "Key"));
+        params.put("id", String.valueOf(typeId));
+
+
         OkHttpUtils.get()
                 .url(Url.URL_PT)
                 .params(params)
@@ -714,22 +727,22 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
                         MLog.i(getTag(), "response==" + response);
                         try {
                             JSONObject obj = new JSONObject(response);
-                            marqueeModel = new Gson().fromJson(response, MarqueeModel.class);
+                            newsListModel = new Gson().fromJson(response, NewsListModel.class);
                             if ("1".equals(obj.getString("Status"))) {
                                 JSONArray array = obj.getJSONArray("Data");
-                                url = obj.getString("NewsShowUrl");
+
                                 mDataNewsList.clear();
-                                mDataNewsList.addAll(marqueeModel.getData());
+                                mDataNewsList.addAll(newsListModel.getData());
 
-                                mDataNewsGrid.clear();
-                                for (int i = 0; i < 2; i++) {
+//                                mDataNewsGrid.clear();
+//                                for (int i = 0; i < 2; i++) {
+//
+//                                    mDataNewsGrid.add(newsListModel.get(i));
+//                                }
 
-                                    mDataNewsGrid.add(mDataNewsList.get(i));
-                                }
 
-
-                                myAdapter.notifyDataSetChanged();
-                                gridAdapter.notifyDataSetChanged();
+                                listAdapter.notifyDataSetChanged();
+//                                gridAdapter.notifyDataSetChanged();
 
 
                             } else {
@@ -781,7 +794,6 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
         startActivity(mIntent);
 
     }
-
 
 
     @Override

@@ -15,11 +15,20 @@ import android.os.Message;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.UserInfo;
+import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.PermissionsChecker;
+import com.zxt.zxt_phone.utils.SPUtils;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import okhttp3.Call;
 
 /**
  * Created by hyz on 2017/3/16.
@@ -28,16 +37,16 @@ import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 
 public class WelcomeActivity extends BaseActivity {
 
-    private  String TAG = WelcomeActivity.class.getCanonicalName();
+    private String TAG = WelcomeActivity.class.getCanonicalName();
 
 
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             int key = msg.what;
-            switch (key){
+            switch (key) {
                 case 0:
-                    if( " ".equals(SharedPrefsUtil.getString(mActivity, "Key"))) {
+                    if (" ".equals(SharedPrefsUtil.getString(mActivity, "Key"))) {
 
                         startActivity(new Intent(getApplicationContext(), CheckActivity.class));
                     } else {
@@ -45,13 +54,11 @@ public class WelcomeActivity extends BaseActivity {
                     }
 
                     finish();
-                break;
+                    break;
             }
             return true;
         }
     });
-
-
 
 
     @Override
@@ -59,18 +66,18 @@ public class WelcomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        if(Build.VERSION.SDK_INT >=23){
+        if (Build.VERSION.SDK_INT >= 23) {
 //            checkPermission();
         }
 
-        Log.i(TAG,"USERNAME=="+SharedPrefsUtil.getString(mActivity,"Key"));
-        Log.i(TAG,"USERNAME=="+SharedPrefsUtil.getString(mActivity,"TVInfoId"));
-        Log.i(TAG,"USERNAME=="+SharedPrefsUtil.getString(mActivity,"DeptId"));
-        Log.i(TAG,"USERNAME=="+SharedPrefsUtil.getString(mActivity,"Address"));
-        Log.i(TAG,"USERNAME=="+SharedPrefsUtil.getString(mActivity,"UserId"));
-        Log.i(TAG,"USERNAME=="+SharedPrefsUtil.getString(mActivity,"RealName"));
-        Log.i(TAG,"USERNAME=="+SharedPrefsUtil.getString(mActivity,"Mobile"));
-        Log.i(TAG,"USERNAME=="+SharedPrefsUtil.getString(mActivity,"JobTel"));
+        Log.i(TAG, "USERNAME==" + SharedPrefsUtil.getString(mActivity, "Key"));
+        Log.i(TAG, "USERNAME==" + SharedPrefsUtil.getString(mActivity, "TVInfoId"));
+        Log.i(TAG, "USERNAME==" + SharedPrefsUtil.getString(mActivity, "DeptId"));
+        Log.i(TAG, "USERNAME==" + SharedPrefsUtil.getString(mActivity, "Address"));
+        Log.i(TAG, "USERNAME==" + SharedPrefsUtil.getString(mActivity, "UserId"));
+        Log.i(TAG, "USERNAME==" + SharedPrefsUtil.getString(mActivity, "RealName"));
+        Log.i(TAG, "USERNAME==" + SharedPrefsUtil.getString(mActivity, "Mobile"));
+        Log.i(TAG, "USERNAME==" + SharedPrefsUtil.getString(mActivity, "JobTel"));
 
 
         getData();
@@ -79,22 +86,47 @@ public class WelcomeActivity extends BaseActivity {
     }
 
 
-
-
-
     public void getData() {
-        new Thread() {
+
+        OkHttpUtils.get()
+                .url("http://192.168.1.222:8099/api/GetAppVar.aspx?method=getpadvar&typeVer=3")
+                .build().execute(new StringCallback() {
             @Override
-            public void run() {
+            public void onError(Call call, Exception e, int id) {
 
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+
+                MLog.i(TAG, "response=" + response);
                 try {
-                    Thread.sleep(2000);
-                    handler.sendEmptyMessage(0);
+                    JSONObject obj = new JSONObject(response);
+                    if ("1".equals(obj.getString("Status"))) {
+                        SPUtils.put(mContext,SPUtils.APK_VERSION,obj.getString("VersionName"));
+//                        SharedPrefsUtil.putString(mContext, SharedPrefsUtil.APK_VERSION, obj.getString("VersionCode"));
 
-                } catch (InterruptedException e) {
+                        MLog.i(TAG, "SPUtils=" + SPUtils.get(mContext, SPUtils.APK_VERSION,""));
+                    }
+
+                    handler.sendEmptyMessage(0);
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-        }.start();
+        });
+//        new Thread() {
+//            @Override
+//            public void run() {
+//
+//                try {
+//                    Thread.sleep(2000);
+//
+//
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }.start();
     }
 }

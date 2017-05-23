@@ -17,6 +17,11 @@ public class SharedPrefsUtil {
 
     private static final String SHARED_PATH = "zxt_phone";
 
+    public static final String APK_VERSION = "apk_version";//apk版本 默认值是""
+    public static final String WIFI_DOWNLOAD_SWITCH = "wifi_download_switch";//apk版本 默认值是""
+    public static final String KEY = "download_ID";
+
+
     public static SharedPreferences getDefaultSharedPreferences(Context context) {
         return context.getSharedPreferences(SHARED_PATH, Context.MODE_PRIVATE);
     }

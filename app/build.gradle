@@ -3,15 +3,14 @@ apply plugin: 'android-apt'
 
 android {
 
-//    signingConfigs {
-//        releaseSign {
-//            storeFile file('../lilang_key')
-//            keyAlias 'lilang'
-//            keyPassword '62489608'
-//            storePassword '62489608'
-//        }
-//    }
-
+    signingConfigs {
+        config {
+            keyAlias 'zxt'
+            keyPassword '52189913'
+            storeFile file('E:/workproject/zxt_phone/zxt_jsk.jks')
+            storePassword '52189913'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -19,7 +18,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -31,53 +30,39 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-//        exclude group: 'com.android.support', module: 'support-annotations'
-//    })
+    //    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    //        exclude group: 'com.android.support', module: 'support-annotations'
+    //    })
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support:recyclerview-v7:25.2.0'
-
     testCompile 'junit:junit:4.12'
     //butterknife注释
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
-
     compile 'com.zhy:okhttputils:2.6.2'
-//    compile 'com.zhy:base-adapter:3.0.3'
-
-
+    //    compile 'com.zhy:base-adapter:3.0.3'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.google.code.gson:gson:2.6.2'
-
     //轮播图
     compile 'me.militch.widget:bannerholder:1.0.1'
-
     compile 'com.youth.banner:banner:1.4.9'
-
-
     //垂直跑马灯
     compile 'com.sunfusheng:marqueeview:1.0.0'
-
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
     //图片选择器
     compile 'com.lzy.widget:imagepicker:0.5.5'
     compile 'com.lzy.widget:ninegridview:0.2.1'
-
     compile 'com.jzxiang.pickerview:TimePickerDialog:1.0.1'
-
     //二维码
     compile 'cn.yipianfengye.android:zxing-library:2.1'
-
     //百分比适配布局
-//    compile 'com.android.support:percent:25.3.0'
-//    compile 'com.zhy:percent-support-extends:1.1.1'
-
-
+    //    compile 'com.android.support:percent:25.3.0'
+    //    compile 'com.zhy:percent-support-extends:1.1.1'
 }
