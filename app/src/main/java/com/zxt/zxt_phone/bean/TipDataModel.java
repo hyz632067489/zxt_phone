@@ -72,13 +72,9 @@ public class TipDataModel {
     /**
      * 首页功能图标
      */
-    private static String[] main_names = {"政策信息", "诉求提交", "结果查询", "办事指南", "社区活动", "充值缴费",
-            "平安社区", "党群风采", "社区概况", "预约办事",
-            "物业公告", "安全管理", "故障报修", "纠纷调解",  "全部分类"};
+    private static String[] main_names = {"政策信息", "诉求提交", "结果查询", "办事指南", "社区活动",  "故障报修", "社区购物",  "全部分类"};
     private static int[] main_icon = {R.drawable.zw_zcxx, R.drawable.zw_sqtj, R.drawable.zw_jgcx,R.drawable.zw_bszn,
-            R.drawable.sh_sqhd,R.drawable.sh_czjf,R.drawable.zwfw_pasq,R.drawable.zw_dqfc,
-            R.drawable.zwfw_sqgk, R.drawable.zw_yybs, R.drawable.shfw_wygg, R.drawable.shfw_aqgl,
-            R.drawable.sh_gzbx,R.drawable.shfw_jftj,R.drawable.all};
+            R.drawable.sh_sqhd, R.drawable.sh_gzbx,R.drawable.sh_sqgw,R.drawable.all};
 
     public static List<BsznModel> getAll() {
         List<BsznModel> result = new ArrayList<>();
@@ -149,6 +145,23 @@ public class TipDataModel {
         }
         return result;
     }
+
+
+    private static String[] life_h_names = {"二手交易", "一键上门", "社区活动", };
+    private static int[] life_h_icon = {R.drawable.life_1, R.drawable.life_2, R.drawable.life_3,
+             };
+
+    public static List<BsznModel> getLifeH() {
+        List<BsznModel> result = new ArrayList<>();
+        for (int i = 0; i < life_h_names.length; i++) {
+            BsznModel remenModel = new BsznModel();
+            remenModel.setImage(life_h_icon[i]);
+            remenModel.setText(life_h_names[i]);
+            result.add(remenModel);
+        }
+        return result;
+    }
+
 
 
 

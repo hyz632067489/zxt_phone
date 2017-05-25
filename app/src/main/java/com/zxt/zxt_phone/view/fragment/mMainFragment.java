@@ -52,6 +52,7 @@ import com.zxt.zxt_phone.view.ViewCustomActivity;
 import com.zxt.zxt_phone.view.WsbsActivity;
 import com.zxt.zxt_phone.view.ZczxActivity;
 import com.zxt.zxt_phone.view.bmfw.CzjfActivity;
+import com.zxt.zxt_phone.view.customview.HomeGridView;
 import com.zxt.zxt_phone.view.customview.MyListView;
 import com.zxt.zxt_phone.view.customview.MyMarqueeView;
 import com.zxt.zxt_phone.view.wyfw.JftjActivity;
@@ -166,7 +167,11 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
 
 
     @BindView(R.id.grid_view)
-    GridView gridView;
+    HomeGridView gridView;
+    @BindView(R.id.grid_view_1)
+    HomeGridView gridView_1;
+
+    CommonAdapter<BsznModel> pagerAdapter;
 
     CommonAdapter<MarqueeModel.DataNewsModel> gridAdapter;
 
@@ -288,9 +293,15 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
             }
         });
 
+        //pager功能选择
+        rePager.setVisibility(View.VISIBLE);
+        //初始化数据源
+        initDatas();
+
+
 
         //仿美团功能选择切换
-        setPagerFunction();
+//        setPagerFunction();
         //垂直轮播图
         setMarqueeView();
 //设置adapter
@@ -332,6 +343,15 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
 
     private void setAdapter() {
 
+        pagerAdapter = new CommonAdapter<BsznModel>(getActivity(),mDatas,R.layout.grid_item_layout) {
+            @Override
+            public void convert(ViewHolder holder, BsznModel item) {
+                holder.setImageResource(R.id.im_item,item.getImage());
+                holder.setText(R.id.tv_item,item.getText());
+            }
+        };
+        gridView_1.setAdapter(pagerAdapter);
+
         listAdapter = new CommonAdapter<NewsListModel.DataBean>(getContext(), mDataNewsList, R.layout.news_list_item) {
             @Override
             public void convert(ViewHolder holder, NewsListModel.DataBean item) {
@@ -358,6 +378,16 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
      * 点击事件
      */
     private void setOnListener() {
+
+        gridView_1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String name = mDatas.get(position).getText();
+                goActivity(name);
+            }
+        });
+
+
         rdG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -456,6 +486,8 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
 
         //初始化数据源
         initDatas();
+
+
         mInflater = LayoutInflater.from(getActivity());
         //总的页数=总数/每页数量，并取整
         pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
@@ -482,7 +514,7 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
         //设置适配器
         mViewPager.setAdapter(new ViewPagerAdapter(mPagerList));
         //设置圆点
-        setOvalLayout();
+//        setOvalLayout();
     }
 
 

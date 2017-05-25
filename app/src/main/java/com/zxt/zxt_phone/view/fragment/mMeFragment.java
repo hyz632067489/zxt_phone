@@ -27,6 +27,8 @@ import com.zxt.zxt_phone.view.CaptureActivity;
 import com.zxt.zxt_phone.view.KqdkActivityCopy;
 import com.zxt.zxt_phone.view.customview.CircleImageView;
 import com.zxt.zxt_phone.view.photo.ClipImageActivity;
+import com.zxt.zxt_phone.view.shfw.PostNoteActivity;
+import com.zxt.zxt_phone.view.shop.LoginShopActivity;
 
 import java.io.File;
 
@@ -130,11 +132,13 @@ public class mMeFragment extends BaseFragment {
                 break;
             case R.id.me_my_address:
                 break;
-            case R.id.me_shequ_communication:
+            case R.id.me_shequ_communication://社区交流
+                startActivity(new Intent(getActivity(), PostNoteActivity.class));
                 break;
             case R.id.me_kefu:
                 break;
             case R.id.me_setting:
+                startActivity(new Intent(getActivity(),LoginShopActivity.class));
                 break;
         }
     }

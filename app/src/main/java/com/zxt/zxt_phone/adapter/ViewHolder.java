@@ -3,6 +3,7 @@ package com.zxt.zxt_phone.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.v7.widget.CardView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;

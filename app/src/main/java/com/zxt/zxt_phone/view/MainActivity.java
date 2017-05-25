@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
@@ -15,10 +16,11 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
-import com.zxt.zxt_phone.service.DownloadService;
+import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.NetworkTypeUtils;
 import com.zxt.zxt_phone.utils.SPUtils;
@@ -28,6 +30,7 @@ import com.zxt.zxt_phone.view.fragment.ShopFragment;
 import com.zxt.zxt_phone.view.fragment.mMainFragment;
 import com.zxt.zxt_phone.view.fragment.mMeFragment;
 import com.zxt.zxt_phone.view.fragment.LifeFragment;
+import com.zxt.zxt_phone.view.shop.LoginShopActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +67,9 @@ public class MainActivity extends BaseActivity {
 
     private static final int REQUEST_CODE = 0; // 请求码
 
-//    private String version_code= String.valueOf(SPUtils.get(mContext,SPUtils.APK_VERSION,""));
+
+    private final int LOGIN_CODE = 100;
+
 
     // 所需的全部权限
     static final String[] PERMISSIONS = new String[]{
@@ -137,8 +142,7 @@ public class MainActivity extends BaseActivity {
 
                     MLog.e(TAG, "wifi状态下自动下载");
 
-                    startService(new Intent(MainActivity.this, DownloadService.class));
-                    //startService(new Intent(MainActivity.this, DownloadService2.class));
+//                    startService(new Intent(MainActivity.this, DownloadService2.class));
                     //Log.e("TAG", "startService");
                 } else { //提示dialog
 
@@ -168,7 +172,7 @@ public class MainActivity extends BaseActivity {
                                     SPUtils.put(MainActivity.this, SPUtils.APK_VERSION, String.valueOf(SPUtils.get(mContext, SPUtils.APK_VERSION, "")));
                                 }
 
-                                MLog.e("TAG","取消 == " + isCheck);
+                                MLog.e("TAG", "取消 == " + isCheck);
 
                                 dialog.dismiss();
                             }
@@ -179,13 +183,12 @@ public class MainActivity extends BaseActivity {
                         Sure.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                startService(new Intent(MainActivity.this, DownloadService.class));
-                                //startService(new Intent(MainActivity.this, DownloadService2.class));
+//                                startService(new Intent(MainActivity.this, DownloadService2.class));
                                 //当true时 保存版本信息
                                 if (isCheck) {
                                     SPUtils.put(MainActivity.this, SPUtils.APK_VERSION, String.valueOf(SPUtils.get(mContext, SPUtils.APK_VERSION, "")));
                                 }
-                                MLog.e("TAG","确定 == " + isCheck);
+                                MLog.e("TAG", "确定 == " + isCheck);
                                 dialog.dismiss();
                                 //Log.e("TAG", "isCheck == " + isCheck);
                             }
@@ -230,16 +233,31 @@ public class MainActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
         if (resultCode != RESULT_OK) {
             MLog.i(TAG, "activity=====");
             return;
         }
+
         MLog.i(TAG, "activity=====" + requestCode);
-        if (requestCode == REQUEST_CODE) {
 
+        switch (requestCode) {
+            case REQUEST_CODE:
+                break;
+            case LOGIN_CODE:
+                if (resultCode == RESULT_OK && AppData.isLogin) {
+                    mCurrentIndex = 4;
+                    if (meFragment == null) {
+                        meFragment = new mMeFragment();
+                        addFragment(meFragment);
+                    }
+                    showFragment(meFragment);
+                } else {
+                    ((RadioButton) mRg.getChildAt(mCurrentIndex)).setChecked(true);
+                    MLog.i("mRg", "mCurrentIndex==" + mCurrentIndex);
+                }
+                break;
         }
-
-
     }
 
 
@@ -277,12 +295,19 @@ public class MainActivity extends BaseActivity {
                         showFragment(shopFragment);
                         break;
                     case R.id.rb_me:
-                        mCurrentIndex = 4;
-                        if (meFragment == null) {
-                            meFragment = new mMeFragment();
-                            addFragment(meFragment);
+
+                        if (AppData.isLogin) {
+                            mCurrentIndex = 4;
+                            if (meFragment == null) {
+                                meFragment = new mMeFragment();
+                                addFragment(meFragment);
+                            }
+                            showFragment(meFragment);
+                        } else {
+                            startActivityForResult(new Intent(mActivity, LoginShopActivity.class), LOGIN_CODE);
                         }
-                        showFragment(meFragment);
+
+
                         break;
                 }
             }
@@ -315,5 +340,28 @@ public class MainActivity extends BaseActivity {
         transaction.commit();
     }
 
+
+    private long time = 0;
+
+    /**
+     * 双击返回桌面
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - time > 1000)) {
+                Toast.makeText(this, "再按一次返回桌面", Toast.LENGTH_SHORT).show();
+                time = System.currentTimeMillis();
+            } else {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                startActivity(intent);
+            }
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }
 }
 

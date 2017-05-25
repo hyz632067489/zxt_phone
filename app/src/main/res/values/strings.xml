@@ -38,6 +38,8 @@
     <string name="login_code">\t获取验证码</string>
     <string name="login_wgy">\t网格人员</string>
 
+    <string name="read_1">您已阅读了</string>
+
 
     <!--首页-->
     <string name="m_main_tab_name">指讯通网格信息化服务群众平台</string>
@@ -84,8 +86,6 @@
 
     <!--商铺-->
     <string name="main_shop">商铺</string>
-
-
 
 
     <!--个人中心-->

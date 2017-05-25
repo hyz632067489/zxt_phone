@@ -38,10 +38,29 @@ import com.zxt.zxt_phone.constant.Common;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
+import com.zxt.zxt_phone.view.BsznActivity;
+import com.zxt.zxt_phone.view.JgcxActivity;
 import com.zxt.zxt_phone.view.LoginActivity;
+import com.zxt.zxt_phone.view.QtfwActivity;
+import com.zxt.zxt_phone.view.SqgwActivity;
+import com.zxt.zxt_phone.view.TestActivity;
+import com.zxt.zxt_phone.view.ViewCustomActivity;
+import com.zxt.zxt_phone.view.WsbsActivity;
+import com.zxt.zxt_phone.view.ZczxActivity;
+import com.zxt.zxt_phone.view.bmfw.CzjfActivity;
 import com.zxt.zxt_phone.view.customview.HomeGridView;
 import com.zxt.zxt_phone.view.customview.MyListView;
 import com.zxt.zxt_phone.view.customview.PullToRefreshView;
+import com.zxt.zxt_phone.view.wyfw.JftjActivity;
+import com.zxt.zxt_phone.view.wyfw.PjglActivity;
+import com.zxt.zxt_phone.view.wyfw.RepairsActivity;
+import com.zxt.zxt_phone.view.wyfw.SafetyActivity;
+import com.zxt.zxt_phone.view.wyfw.WyggActivity;
+import com.zxt.zxt_phone.view.zwfw.DqfcActivity;
+import com.zxt.zxt_phone.view.zwfw.pasq.PasqActivity;
+import com.zxt.zxt_phone.view.zwfw.sqgk.SqgkActivity;
+import com.zxt.zxt_phone.view.zwfw.sqtj.SqtjActivity;
+import com.zxt.zxt_phone.view.zwfw.yybs.YybsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -261,25 +280,23 @@ public class GovernmentFragment extends BaseFragment {
                     toast(mDatas.get(pos).getText() + "==" + pos + "==" + position);
                     String name = mDatas.get(pos).getText();
 
-                    if("网格管理".equals(name)){
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-                        dialog.setTitle("管理员登录");
-                        dialog.setMessage("您是否确定登录网格管理页面");
-                        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                    if ("群团服务".equals(name)) {
+                        mIntent.setClass(getActivity(), QtfwActivity.class);
+                    } else if ("党群风采".equals(name)) {
+                        mIntent.setClass(getActivity(), DqfcActivity.class);
+                    } else if ("诉求提交".equals(name)) {
+                        mIntent.setClass(getActivity(), SqtjActivity.class);
+                    } else if ("结果查询".equals(name)) {
+                        mIntent.setClass(getActivity(), JgcxActivity.class);
+                    } else if ("政策信息".equals(name)) {
+                        mIntent.setClass(getActivity(), ZczxActivity.class);
 
-                                mIntent = new Intent(getActivity(), LoginActivity.class);
-                                startActivity(mIntent);
-                            }
-                        });
-                        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        dialog.show();
+                    } else if ("预约办事".equals(name)) {
+                        mIntent.setClass(getActivity(), YybsActivity.class);
+                    } else if ("网格管理".equals(name)) {
+                        mIntent.setClass(getActivity(), BsznActivity.class);
+                    } else if ("办事指南".equals(name)) {
+                        mIntent.setClass(getActivity(), PasqActivity.class);
                     }
 //                    goActivity(name);
 
@@ -438,11 +455,102 @@ public class GovernmentFragment extends BaseFragment {
                 });
     }
 
-    @OnClick(R.id.act_more_ly)
-    public void onViewClicked() {
+    @OnClick({R.id.act_more_ly,R.id.tv_more})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.tv_more:
+                startActivity(new Intent(getActivity(),ViewCustomActivity.class));
+            break;
+        }
     }
 
+    /**
+     * 切换功能界面
+     *
+     * @param name
+     */
+    private void goActivity(String name) {
+        //                    {"社区概况", "党群风采", "诉求提交", "结果查询", "政策信息", "预约办事", "办事指南"
+//                                , "平安社区", "群团服务", "群攻平台", "精准帮扶"
+//                                , "网格管理", "社区电商", "社区活动", "社区交流"
+//                                , "家庭维修", "家教", "二手交易", "就业服务"
+//                                , "智能家居", "快递代收", "公交路线", "充值缴费"
+//                                , "家政保洁", "关于物业", "物业公告", "安全管理"
+//                                , "故障报修", "纠纷调解", "评价调研"} ;
 
+        mIntent = new Intent();
+        if ("社区概况".equals(name)) {
+            mIntent.setClass(getActivity(), SqgkActivity.class);
+        } else if ("党群风采".equals(name)) {
+            mIntent.setClass(getActivity(), DqfcActivity.class);
+        } else if ("诉求提交".equals(name)) {
+            mIntent.setClass(getActivity(), SqtjActivity.class);
+        } else if ("结果查询".equals(name)) {
+            mIntent.setClass(getActivity(), JgcxActivity.class);
+        } else if ("政策信息".equals(name)) {
+            mIntent.setClass(getActivity(), ZczxActivity.class);
+
+        } else if ("预约办事".equals(name)) {
+            mIntent.setClass(getActivity(), YybsActivity.class);
+        } else if ("办事指南".equals(name)) {
+            mIntent.setClass(getActivity(), BsznActivity.class);
+        } else if ("平安社区".equals(name)) {
+            mIntent.setClass(getActivity(), PasqActivity.class);
+        } else if ("群团服务".equals(name)) {
+
+        } else if ("群攻平台".equals(name)) {
+
+        } else if ("精准帮扶".equals(name)) {
+
+        } else if ("网格管理".equals(name)) {
+            mIntent.setClass(getActivity(), WsbsActivity.class);
+        } else if ("社区电商".equals(name)) {
+            mIntent.setClass(getActivity(), SqgwActivity.class);
+        } else if ("社区活动".equals(name)) {
+            mIntent.setClass(getActivity(), TestActivity.class);
+        } else if ("社区交流".equals(name)) {
+
+        } else if ("家庭维修".equals(name)) {
+
+        } else if ("家教".equals(name)) {
+
+        } else if ("二手交易".equals(name)) {
+
+        } else if ("就业服务".equals(name)) {
+
+        } else if ("智能家居".equals(name)) {
+
+        } else if ("快递代收".equals(name)) {
+
+        } else if ("公交路线".equals(name)) {
+
+        } else if ("充值缴费".equals(name)) {
+            mIntent.setClass(getActivity(), CzjfActivity.class);
+        } else if ("家政保洁".equals(name)) {
+
+        } else if ("关于物业".equals(name)) {
+//            mIntent.setClass(getActivity(), NewsDetailActivity.class);
+//            mIntent.putExtra("title", "关于物业");
+//            mIntent.putExtra("url", Url.BASE_URL_HTML + "GyPro.aspx"+"?id="+choseId);
+        } else if ("物业公告".equals(name)) {
+            mIntent.setClass(getActivity(), WyggActivity.class);
+        } else if ("安全管理".equals(name)) {
+            mIntent.setClass(getActivity(), SafetyActivity.class);
+        } else if ("故障报修".equals(name)) {
+            mIntent.setClass(getActivity(), RepairsActivity.class);
+        } else if ("纠纷调解".equals(name)) {
+            mIntent.setClass(getActivity(), JftjActivity.class);
+        } else if ("评价调研".equals(name)) {
+            mIntent.setClass(getActivity(), PjglActivity.class);
+        } else if ("全部分类".equals(name)) {
+            mIntent.setClass(getActivity(), ViewCustomActivity.class);
+//            mIntent.putExtra("title", (Serializable) mDatas);
+            startActivityForResult(mIntent, 200);
+            return;
+        }
+        startActivity(mIntent);
+
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

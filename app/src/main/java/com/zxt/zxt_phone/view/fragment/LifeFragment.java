@@ -75,6 +75,14 @@ public class LifeFragment extends BaseFragment {
         resources = getResources();
         initWidth();
 
+        initView();
+        initViewPager();
+        TranslateAnimation animation = new TranslateAnimation(position_one, position_two, 0, 0);
+        tvTab_1.setTextColor(resources.getColor(R.color.red));
+        animation.setFillAfter(true);
+        animation.setDuration(300);
+        ivBottomLine.startAnimation(animation);
+
         return view;
     }
 
@@ -96,13 +104,7 @@ public class LifeFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-        initView();
-        initViewPager();
-        TranslateAnimation animation = new TranslateAnimation(position_one, position_two, 0, 0);
-        tvTab_1.setTextColor(resources.getColor(R.color.red));
-        animation.setFillAfter(true);
-        animation.setDuration(300);
-        ivBottomLine.startAnimation(animation);
+
     }
 
 

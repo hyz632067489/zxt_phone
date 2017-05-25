@@ -43,10 +43,22 @@
                 android:background="#FFFFFF"
                 android:visibility="gone">
 
+                <com.zxt.zxt_phone.view.customview.HomeGridView
+                    android:id="@+id/grid_view_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="2dp"
+                    android:fadingEdge="none"
+                    android:horizontalSpacing="2.0dp"
+                    android:numColumns="4"
+                    android:scrollbars="none"
+                    android:verticalSpacing="2.0dp" />
+
                 <android.support.v4.view.ViewPager
                     android:id="@+id/viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="150dp"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:id="@+id/ll_dot"
@@ -55,6 +67,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="6dp"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:orientation="horizontal" />
             </RelativeLayout>
 

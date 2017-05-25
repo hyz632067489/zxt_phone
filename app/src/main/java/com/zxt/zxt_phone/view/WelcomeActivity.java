@@ -20,6 +20,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.UserInfo;
+import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.PermissionsChecker;
 import com.zxt.zxt_phone.utils.SPUtils;
@@ -88,8 +89,9 @@ public class WelcomeActivity extends BaseActivity {
 
     public void getData() {
 
+//        private static final String DOWN_APK_URL = "http://192.168.1.222:8099/api/appFile/ZxtPhone.apk";
         OkHttpUtils.get()
-                .url("http://192.168.1.222:8099/api/GetAppVar.aspx?method=getpadvar&typeVer=3")
+                .url(Url.BASE_L+"/api/GetAppVar.aspx?method=getpadvar&typeVer=3")
                 .build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
