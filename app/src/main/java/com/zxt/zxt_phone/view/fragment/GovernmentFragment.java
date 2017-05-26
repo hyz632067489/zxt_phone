@@ -158,7 +158,7 @@ public class GovernmentFragment extends BaseFragment {
 
 
     Intent mIntent;
-
+    String Dept;    //网格部门
 
     @Nullable
     @Override
@@ -185,6 +185,8 @@ public class GovernmentFragment extends BaseFragment {
     private void initView() {
         retBtn.setVisibility(View.GONE);
         tabName.setText(R.string.m_zwfw);
+
+        Dept = SharedPrefsUtil.getString(getActivity(), "roleLevel");
 
         //轮播图
         setBanner();
@@ -277,28 +279,40 @@ public class GovernmentFragment extends BaseFragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     int pos = position + curIndex * pageSize;
-                    toast(mDatas.get(pos).getText() + "==" + pos + "==" + position);
+//                    toast(mDatas.get(pos).getText() + "==" + pos + "==" + position);
                     String name = mDatas.get(pos).getText();
 
                     if ("群团服务".equals(name)) {
-                        mIntent.setClass(getActivity(), QtfwActivity.class);
+                        startActivity(new Intent(getActivity(), QtfwActivity.class));
                     } else if ("党群风采".equals(name)) {
-                        mIntent.setClass(getActivity(), DqfcActivity.class);
+                        startActivity(new Intent(getActivity(), DqfcActivity.class));
+
                     } else if ("诉求提交".equals(name)) {
-                        mIntent.setClass(getActivity(), SqtjActivity.class);
+                        startActivity(new Intent(getActivity(), SqtjActivity.class));
+
                     } else if ("结果查询".equals(name)) {
-                        mIntent.setClass(getActivity(), JgcxActivity.class);
+                        startActivity(new Intent(getActivity(), JgcxActivity.class));
+
                     } else if ("政策信息".equals(name)) {
-                        mIntent.setClass(getActivity(), ZczxActivity.class);
+                        startActivity(new Intent(getActivity(), ZczxActivity.class));
 
                     } else if ("预约办事".equals(name)) {
-                        mIntent.setClass(getActivity(), YybsActivity.class);
+                        startActivity(new Intent(getActivity(), YybsActivity.class));
+
                     } else if ("网格管理".equals(name)) {
-                        mIntent.setClass(getActivity(), BsznActivity.class);
+
+                        if (" ".equals(Dept)) {
+                            getDialogLogin();
+                        } else {
+                            startActivity(new Intent(getActivity(), WsbsActivity.class));
+
+                        }
+
                     } else if ("办事指南".equals(name)) {
-                        mIntent.setClass(getActivity(), PasqActivity.class);
+                        startActivity(new Intent(getActivity(), BsznActivity.class));
+
                     }
-//                    goActivity(name);
+
 
                 }
             });
@@ -308,6 +322,30 @@ public class GovernmentFragment extends BaseFragment {
         mViewPager.setAdapter(new ViewPagerAdapter(mPagerList));
         //设置圆点
 //        setOvalLayout();
+    }
+
+    /**
+     * 判断是否登录网格
+     */
+    private void getDialogLogin() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        dialog.setTitle("管理员登录");
+        dialog.setMessage("您是否确定登录网格管理页面");
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                mIntent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(mIntent);
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     /**

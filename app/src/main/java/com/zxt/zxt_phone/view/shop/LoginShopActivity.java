@@ -14,16 +14,23 @@ import com.zhy.http.okhttp.callback.BitmapCallback;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
+import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.MLog;
+import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 
 public class LoginShopActivity extends BaseActivity {
 
@@ -192,8 +199,11 @@ public class LoginShopActivity extends BaseActivity {
      * 登录商铺
      */
     private void LoginShop() {
+
+        showProgressDialog();
+
         OkHttpUtils.get()
-                .url(Url.URL_SHOP + "api/login.htm?")
+                .url(Url.URL_SHOP + "api/shopping_login.htm?")
                 .addParams("userName", etUsername.getText().toString())
                 .addParams("password", etPwd.getText().toString())
                 .addParams("code", etLoginCode.getText().toString())
@@ -202,18 +212,49 @@ public class LoginShopActivity extends BaseActivity {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         toast(e.getMessage());
+                        closeProgressDialog();
+                        //验证码过期，自动刷新验证码
+//                        if("000046".equals(getCode())){
+//                            imageCodeLoader.loadImageCode();
+//                            mEtCode.setText("");
+//                        }
+
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         MLog.i(TAG, "LoginShop==" + response);
-
+                        closeProgressDialog();
                         try {
                             JSONObject obj = new JSONObject(response);
                             if ("200".equals(obj.getString("statusCode"))) {
 
+
+
+                                //获取cookie中的sessionId值 用于注入webView
+                                CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
+                                HttpUrl httpUrl = HttpUrl.parse(Url.URL_SHOP + "api/shopping_login.htm?");
+                                List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
+                                AppData.Cookie = cookies.get(0).toString();
+                                MLog.i("TAG", " AppData.Cookie--------------"  +  AppData.Cookie);
+                                MLog.i("TAG", "--------------" + httpUrl.host() + "对应的cookie如下：" + cookies.toString());
+//                                SharedPrefsUtil.putString(mActivity,"userShopName",);
+
+
+                                JSONObject obj1 = new JSONObject(obj.getString("data"));
+                                if(!"".equals(obj1.getString("userName"))){
+                                    SharedPrefsUtil.putString(mActivity,"userNameShop",obj1.getString("userName"));
+                                    AppData.isLoginShop = SharedPrefsUtil.getString(mActivity,"userNameShop");
+                                }
+
+                                mActivity.setResult(RESULT_OK);
+
+                                mActivity. finish();
                                 toast(obj.getString("msg"));
                             } else {
+                                getCode();
+                                etLoginCode.setText("");
+
                                 toast(obj.getString("msg"));
                             }
                         } catch (JSONException e) {

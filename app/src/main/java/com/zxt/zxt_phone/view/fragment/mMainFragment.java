@@ -173,9 +173,9 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
 
     CommonAdapter<BsznModel> pagerAdapter;
 
-    CommonAdapter<MarqueeModel.DataNewsModel> gridAdapter;
+    CommonAdapter<NewsListModel.DataBean> gridAdapter;
 
-    List<MarqueeModel.DataNewsModel> mDataNewsGrid = new ArrayList<>();
+    List<NewsListModel.DataBean> mDataNewsGrid = new ArrayList<>();
 
     NewsListModel newsListModel;
     List<NewsListModel.DataBean> mDataNewsList = new ArrayList<>();
@@ -362,14 +362,14 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
         listview.setAdapter(listAdapter);
 
 
-        gridAdapter = new CommonAdapter<MarqueeModel.DataNewsModel>(getContext(), mDataNewsGrid, R.layout.news_grid_remen_item) {
+        gridAdapter = new CommonAdapter<NewsListModel.DataBean>(getContext(), mDataNewsGrid, R.layout.news_grid_remen_item) {
             @Override
-            public void convert(ViewHolder holder, MarqueeModel.DataNewsModel item) {
-                holder.setImageByUrl(R.id.iv_icon, item.getImageIndex());
+            public void convert(ViewHolder holder, NewsListModel.DataBean item) {
+                holder.setImageByUrl(R.id.iv_icon, item.getModuName());
                 holder.setText(R.id.tv_title, item.getEditDate());
             }
         };
-//        gridView.setAdapter(gridAdapter);
+        gridView.setAdapter(gridAdapter);
 
 
     }
@@ -426,7 +426,7 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String newsUrl = Url.URL + marqueeModel.getNewsShowUrl() + "?&TVInfoId=" + SharedPrefsUtil.getString(getActivity(), "TVInfoId")
                         + "&Key=" + SharedPrefsUtil.getString(getActivity(), "Key")
-                        + "&id=" + mDataNewsGrid.get(position).getNewsId();
+                        + "&id=" + mDataNewsGrid.get(position).getNewsid();
 
                 MLog.i("TAG", "==================" + newsUrl);
                 startActivity(new Intent(getActivity(), NewsDetailActivity.class)
@@ -766,15 +766,15 @@ public class mMainFragment extends BaseFragment implements OnBannerListener {
                                 mDataNewsList.clear();
                                 mDataNewsList.addAll(newsListModel.getData());
 
-//                                mDataNewsGrid.clear();
-//                                for (int i = 0; i < 2; i++) {
-//
-//                                    mDataNewsGrid.add(newsListModel.get(i));
-//                                }
+                                mDataNewsGrid.clear();
+                                for (int i = 0; i < 2; i++) {
+
+                                    mDataNewsGrid.add(mDataNewsList.get(i));
+                                }
 
 
                                 listAdapter.notifyDataSetChanged();
-//                                gridAdapter.notifyDataSetChanged();
+                                gridAdapter.notifyDataSetChanged();
 
 
                             } else {

@@ -1,5 +1,7 @@
 package com.zxt.zxt_phone.bean;
 
+import com.zxt.zxt_phone.utils.SharedPrefsUtil;
+
 /**
  *
  */
@@ -12,4 +14,7 @@ public class AppData {
     public static UserInfo userInfo = null;
     //分享信息
 //    public static ShareData sShareData = null;
+    //商铺是否登录
+
+    public static String isLoginShop = null;
 }

@@ -114,4 +114,5 @@
     <string name="quit">退出</string>
 
 
+    <string name="setting_outLogin">退出登录</string>
 </resources>

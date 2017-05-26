@@ -12,8 +12,14 @@ public class Url {
 
     //基本地址url   吕鹏
 //    public static final String BASE_L = "http://192.168.1.222:8099";
-    public static final String BASE_WG = "http://192.168.1.223:8080/";
+    public static final String BASE_WG = "http://192.168.1.223:8099/";
 
+
+    //玲玲才
+    public static final String BASE_S = "http://192.168.1.223:8080/";
+    //张凤兵
+//    public static final String BASE_S = "http://192.168.1.194:8080/";
+//    http://192.168.1.194:8080/shopping/api/loadLevelOne.htm
     //-----------------------服务器地址链接---------------------
     public static final String BASE_L = "http://oa.ybqtw.org.cn";
 //    public static final String BASE_WG = "www.eollse.cn:8080/";
@@ -49,7 +55,7 @@ public class Url {
 
 
     //电商
-    public static final String URL_SHOP = BASE_WG + "shopping/";
+    public static final String URL_SHOP = BASE_S + "shopping/";
 
     //-----------------------服务器地址链接---------------------
 //    //基本地址url   服务器

@@ -19,6 +19,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
+import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.bean.UserInfo;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.MLog;
@@ -83,6 +84,7 @@ public class WelcomeActivity extends BaseActivity {
 
         getData();
 
+        AppData.isLoginShop = SharedPrefsUtil.getString(mActivity,"userNameShop");
 
     }
 

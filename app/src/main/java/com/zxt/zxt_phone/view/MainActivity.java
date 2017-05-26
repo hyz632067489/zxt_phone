@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.AppData;
+import com.zxt.zxt_phone.constant.Common;
 import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.NetworkTypeUtils;
 import com.zxt.zxt_phone.utils.SPUtils;
@@ -215,18 +216,16 @@ public class MainActivity extends BaseActivity {
     }
 
 
+
+
+
     @Override
     protected void onResume() {
         super.onResume();
-
-        // 缺少权限时, 进入权限配置页面
-//        if (mPermissionsChecker.lacksPermissions(PERMISSIONS)) {
-//            startPermissionsActivity();
-//        }
-    }
-
-    private void startPermissionsActivity() {
-        PermissionsActivity.startActivityForResult(this, REQUEST_CODE, PERMISSIONS);
+        //用户退出登录后显示首页
+        if ("".equals(AppData.isLoginShop) && mCurrentIndex == 4) {
+            ((RadioButton) mRg.getChildAt(0)).setChecked(true);
+        }
     }
 
     @Override
@@ -244,8 +243,22 @@ public class MainActivity extends BaseActivity {
         switch (requestCode) {
             case REQUEST_CODE:
                 break;
+            case Common.OUT_LOGIN_CODE:
+                MLog.i("mRg", "mCurrentIndex==");
+                if (resultCode == RESULT_OK && !"".equals(AppData.isLoginShop)) {
+                    mCurrentIndex = 4;
+                    if (meFragment == null) {
+                        meFragment = new mMeFragment();
+                        addFragment(meFragment);
+                    }
+                    showFragment(meFragment);
+                } else {
+                    ((RadioButton) mRg.getChildAt(mCurrentIndex)).setChecked(true);
+                    MLog.i("mRg", "mCurrentIndex==" + mCurrentIndex);
+                }
+                break;
             case LOGIN_CODE:
-                if (resultCode == RESULT_OK && AppData.isLogin) {
+                if (resultCode == RESULT_OK && !"".equals(AppData.isLoginShop)) {
                     mCurrentIndex = 4;
                     if (meFragment == null) {
                         meFragment = new mMeFragment();
@@ -296,7 +309,7 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.rb_me:
 
-                        if (AppData.isLogin) {
+                        if (!"".equals(AppData.isLoginShop)) {
                             mCurrentIndex = 4;
                             if (meFragment == null) {
                                 meFragment = new mMeFragment();

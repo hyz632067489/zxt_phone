@@ -179,6 +179,7 @@ public class RegistShopActivity extends BaseActivity {
                 registCode.setText("");
                 break;
             case R.id.regist_btn:
+                setTextView();
                 if (TextUtils.isEmpty(regName)
                         || TextUtils.isEmpty(rwgPwd)
                         || TextUtils.isEmpty(regEmail)
@@ -221,10 +222,11 @@ public class RegistShopActivity extends BaseActivity {
                         try {
                             JSONObject obj = new JSONObject(response);
                             if ("200".equals(obj.getString("statusCode"))) {
-                                Intent intent = new Intent();
-                                intent.putExtra("userName",regName);
-                                intent.putExtra("password",rwgPwd);
-                                setResult(RESULT_OK,intent);
+                                toast(obj.getString("msg"));
+//                                Intent intent = new Intent();
+//                                intent.putExtra("userName",regName);
+//                                intent.putExtra("password",rwgPwd);
+//                                setResult(RESULT_OK,intent);
                                 finish();
                             } else {
                                 toast(obj.getString("msg"));

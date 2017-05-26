@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/maop_bgcolor"
     android:orientation="vertical">
 
-    <com.zxt.zxt_phone.view.widget.TitleLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/action_tab_height" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,36 +16,43 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
             <LinearLayout
-                android:id="@+id/preson_info_ly"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:background="@drawable/selector_white_grey_on_off"
-                android:paddingBottom="@dimen/dp_10"
-android:gravity="center"
-                android:orientation="vertical"
-                android:paddingTop="@dimen/dp_10">
+                android:layout_height="wrap_content"
+                android:background="@drawable/me_back"
+                android:orientation="vertical">
 
-                <com.zxt.zxt_phone.view.customview.CircleImageView
-                    android:id="@+id/user_photo"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:padding="@dimen/dp_10"
-                    android:src="@drawable/user_photo"
-                    app:border_color="#50ffffff"
-                    app:border_width="1dp" />
+                <com.zxt.zxt_phone.view.widget.TitleLayout_white
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/action_tab_height" />
+
+                <LinearLayout
+                    android:id="@+id/preson_info_ly"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_10">
+
+                    <com.zxt.zxt_phone.view.customview.CircleImageView
+                        android:id="@+id/user_photo"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:padding="@dimen/dp_10"
+                        android:src="@drawable/user_photo"
+                        app:border_color="#50ffffff"
+                        app:border_width="1dp" />
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="你好！用户名"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="你好！用户名" />
+
+                </LinearLayout>
 
             </LinearLayout>
-
-
 
             <!--全部订单-->
             <LinearLayout
@@ -180,7 +184,7 @@ android:gravity="center"
                 android:layout_height="48dp"
                 android:layout_marginTop="@dimen/dp_4"
                 android:background="@drawable/selector_white_grey_click_bg"
-                android:drawableLeft="@drawable/me_kefu"
+                android:drawableLeft="@drawable/setting"
                 android:drawablePadding="@dimen/dp_10"
                 android:gravity="left|center"
                 android:paddingLeft="@dimen/dp_20"

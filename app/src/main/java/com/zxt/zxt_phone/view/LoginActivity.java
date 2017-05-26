@@ -19,6 +19,7 @@ import com.zxt.zxt_phone.base.BaseActivity;
 import com.zxt.zxt_phone.bean.AppData;
 import com.zxt.zxt_phone.constant.Url;
 import com.zxt.zxt_phone.utils.CountDownTimerUtils;
+import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.SharedPrefsUtil;
 
 import org.json.JSONException;
@@ -102,7 +103,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.btnLogin:
                 //登录按钮
-                if (verification(CODE_ID)) {
+                if (verification(LOGIN_ID)) {
                     login();
                 }
                 break;
@@ -176,7 +177,7 @@ public class LoginActivity extends BaseActivity {
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", mUserId);
         params.put("password", mPwd);
-//        params.put("code", mCode);
+        params.put("code", mCode);
 
         OkHttpUtils.post()
                 .url(Url.URL_WG + "user/login.do?")
@@ -223,8 +224,8 @@ public class LoginActivity extends BaseActivity {
                     CookieJar cookieJar = OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
                     HttpUrl httpUrl = HttpUrl.parse(Url.URL_WG + "user/login.do?");
                     List<Cookie> cookies = cookieJar.loadForRequest(httpUrl);
-                    AppData.Cookie = cookies.get(0).toString();
-//                        Log.i("TAG", "--------------" + httpUrl.host() + "对应的cookie如下：" + cookies.toString());
+//                    AppData.Cookie = cookies.get(0).toString();
+                        MLog.i("TAG", "--------------" + httpUrl.host() + "对应的cookie如下：" + cookies.toString());
 
                     startActivity(new Intent(mActivity, WsbsActivity.class)
                             .putExtra("roleLevel", obj.getString("roleLevel")));

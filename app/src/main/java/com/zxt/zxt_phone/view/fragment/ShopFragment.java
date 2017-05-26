@@ -1,5 +1,6 @@
 package com.zxt.zxt_phone.view.fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -10,9 +11,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.lzy.ninegrid.ImageInfo;
 import com.lzy.ninegrid.NineGridView;
 import com.lzy.ninegrid.preview.NineGridViewClickAdapter;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.adapter.CommonAdapter;
 import com.zxt.zxt_phone.adapter.ViewHolder;
@@ -20,7 +24,14 @@ import com.zxt.zxt_phone.base.BaseFragment;
 import com.zxt.zxt_phone.bean.TipDataModel;
 import com.zxt.zxt_phone.bean.model.CommonModel;
 import com.zxt.zxt_phone.bean.model.EvaluationPic;
+import com.zxt.zxt_phone.bean.model.ShopTypeModel;
+import com.zxt.zxt_phone.constant.Url;
+import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.view.customview.HomeGridView;
+import com.zxt.zxt_phone.view.shop.ShopListActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +42,7 @@ import butterknife.Unbinder;
 import me.militch.widget.bannerholder.BannerClickListenenr;
 import me.militch.widget.bannerholder.BannerHolderView;
 import me.militch.widget.bannerholder.HolderAttr;
+import okhttp3.Call;
 
 /**
  * Created by hyz on 2017/3/9.
@@ -40,7 +52,7 @@ import me.militch.widget.bannerholder.HolderAttr;
 public class ShopFragment extends BaseFragment {
 
     View view;
-
+    private String TAG = "ShopFragment";
     @BindView(R.id.tab_name)
     TextView tabName;
     @BindView(R.id.return_back)
@@ -53,9 +65,9 @@ public class ShopFragment extends BaseFragment {
 
     Unbinder unbinder;
 
-    CommonAdapter<CommonModel> shopAdapter;
-    List<CommonModel> shopDatas = new ArrayList<>();
-    CommonModel remenModel;
+    CommonAdapter<ShopTypeModel.DataBean> shopAdapter;
+    List<ShopTypeModel.DataBean> shopDatas = new ArrayList<>();
+    ShopTypeModel model;
 
 
     @BindView(R.id.tv_username)
@@ -81,11 +93,14 @@ public class ShopFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
 
+        //获取功能分类
+        getDatas();
         //初始化数据源
-        initDatas();
+//        initDatas();
 
         initView();
     }
+
 
     private void initView() {
         retBtn.setVisibility(View.GONE);
@@ -128,24 +143,29 @@ public class ShopFragment extends BaseFragment {
     }
 
 
+    /**
+     * 功能类型展示
+     */
     private void setAdapter() {
 
-
-        //热门办事展示
-        shopAdapter = new CommonAdapter<CommonModel>(getContext(), shopDatas, R.layout.grid_item_layout) {
+        //功能展示
+        shopAdapter = new CommonAdapter<ShopTypeModel.DataBean>(getContext(), shopDatas, R.layout.grid_item_layout) {
             @Override
-            public void convert(ViewHolder holder, CommonModel item) {
+            public void convert(ViewHolder holder, ShopTypeModel.DataBean item) {
 
-                holder.setImageResource(R.id.im_item, item.getIcon());
-                holder.setText(R.id.tv_item, item.getName());
+//                holder.setImageResource(R.id.im_item, item.getIcon());
+                holder.setText(R.id.tv_item, item.getClassName());
             }
         };
         gridView1.setAdapter(shopAdapter);
-
         gridView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                startActivity(new Intent(getActivity(), ShopListActivity.class)
+                        .putExtra("datas", model)
+                        .putExtra("position", position + "")
+                        .putExtra("title", shopDatas.get(position).getClassName()));
 
             }
         });
@@ -188,6 +208,45 @@ public class ShopFragment extends BaseFragment {
 
     }
 
+    /**
+     * 功能分类
+     */
+    private void getDatas() {
+        OkHttpUtils.get()
+                .url(Url.URL_SHOP + "api/loadLevelOne.htm")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        MLog.i(TAG, "response=" + response);
+
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            if ("200".equals(obj.getString("statusCode"))) {
+
+                                model = new Gson().fromJson(response, ShopTypeModel.class);
+
+                                shopDatas.clear();
+                                shopDatas.addAll(model.getData());
+
+                                shopAdapter.notifyDataSetChanged();
+
+                            } else {
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
 
     /**
      * 初始化数据源
@@ -195,8 +254,8 @@ public class ShopFragment extends BaseFragment {
     private void initDatas() {
 
 
-        shopDatas.clear();
-        shopDatas.addAll(TipDataModel.getShop());
+//        shopDatas.clear();
+//        shopDatas.addAll(TipDataModel.getShop());
     }
 
     @Override

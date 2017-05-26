@@ -16,16 +16,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zxt.zxt_phone.R;
 import com.zxt.zxt_phone.base.BaseFragment;
+import com.zxt.zxt_phone.constant.Common;
 import com.zxt.zxt_phone.utils.BitmapUtil;
 import com.zxt.zxt_phone.utils.MLog;
 import com.zxt.zxt_phone.utils.WaterUtils;
 import com.zxt.zxt_phone.view.CaptureActivity;
 import com.zxt.zxt_phone.view.KqdkActivityCopy;
 import com.zxt.zxt_phone.view.customview.CircleImageView;
+import com.zxt.zxt_phone.view.personal.PersonalSettingActivity;
 import com.zxt.zxt_phone.view.photo.ClipImageActivity;
 import com.zxt.zxt_phone.view.shfw.PostNoteActivity;
 import com.zxt.zxt_phone.view.shop.LoginShopActivity;
@@ -53,6 +57,11 @@ public class mMeFragment extends BaseFragment {
 
     @BindView(R.id.tab_name)
     TextView tabName;
+    @BindView(R.id.title_relayout)
+    RelativeLayout topLayout;
+    @BindView(R.id.iv_setting)
+    ImageView iv_setting;
+
     @BindView(R.id.user_photo)
     CircleImageView userPhoto;
 
@@ -81,7 +90,8 @@ public class mMeFragment extends BaseFragment {
     private void initView() {
 
         tabName.setText(R.string.about_me);
-
+        topLayout.getBackground().setAlpha(0);
+        iv_setting.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -104,7 +114,8 @@ public class mMeFragment extends BaseFragment {
                 break;
         }
     }
-    @OnClick({R.id.user_photo,R.id.tv_fu_kuan, R.id.tv_shou_huo, R.id.tv_ping_jia, R.id.tv_shou_hou, R.id.me_buy_car, R.id.me_my_address, R.id.me_shequ_communication, R.id.me_kefu, R.id.me_setting})
+    @OnClick({R.id.user_photo,R.id.tv_fu_kuan, R.id.tv_shou_huo, R.id.tv_ping_jia, R.id.tv_shou_hou,
+            R.id.me_buy_car, R.id.me_my_address, R.id.me_shequ_communication, R.id.me_kefu, R.id.me_setting,R.id.iv_setting})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.user_photo:
@@ -138,7 +149,10 @@ public class mMeFragment extends BaseFragment {
             case R.id.me_kefu:
                 break;
             case R.id.me_setting:
-                startActivity(new Intent(getActivity(),LoginShopActivity.class));
+//                startActivity(new Intent(getActivity(),SettingActivity.class));
+                break;
+            case R.id.iv_setting:
+                startActivity(new Intent(getActivity(),PersonalSettingActivity.class));
                 break;
         }
     }

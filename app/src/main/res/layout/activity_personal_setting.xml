@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_personal_setting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zxt.zxt_phone.view.personal.PersonalSettingActivity">
+
+    <com.zxt.zxt_phone.view.widget.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_tab_height"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/shape_driver"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivHeaderPic"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/user_photo"
+                    />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    tools:text="财富账号:\n18523846300"
+                    />
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvRenzheng"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:layout_margin="10dp"-->
+                    <!--android:background="@drawable/shape_renzheng"-->
+                    <!--android:paddingBottom="3dp"-->
+                    <!--android:paddingLeft="9dp"-->
+                    <!--android:paddingRight="9dp"-->
+                    <!--android:paddingTop="3dp"-->
+                    <!--android:text="@string/setting_renzheng"-->
+                    <!--android:textColor="#fff"-->
+                    <!--/>-->
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
+                android:text="个人设置"
+                android:textColor="#999"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:id="@+id/changePwd"
+                style="@style/setting_tvStyle"
+                android:text="修改登录密码"/>
+
+            <TextView
+                android:id="@+id/changeEmail"
+                style="@style/setting_tvStyle"
+                android:text="修改邮箱"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingRight="20dp"
+                >
+
+                <TextView
+                    style="@style/setting_tvStyle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:drawableRight="@null"
+                    android:text="启动手势"
+                    />
+
+                <Switch
+                    android:id="@+id/switchPasswrod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:checked="false"
+                    android:switchMinWidth="36dp"
+                    android:textOff=""
+                    android:textOn=""
+                    android:thumb="@drawable/shape_switch_thumb"
+                    android:track="@drawable/shape_switch_track"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="#eef"
+                />
+
+            <!--<FrameLayout-->
+                <!--android:id="@+id/flJiance"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--&gt;-->
+
+                <!--<TextView-->
+                    <!--style="@style/setting_tvStyle"-->
+                    <!--android:text="@string/setting_jiance"/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/jiance"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_vertical|right"-->
+                    <!--android:layout_marginRight="35dp"-->
+                    <!--android:textColor="@color/mainTextHuise"-->
+                    <!--android:textSize="@dimen/text_12"-->
+                    <!--tools:text="当前版本:V1.1.5"-->
+                    <!--/>-->
+            <!--</FrameLayout>-->
+
+            <!--<FrameLayout-->
+                <!--android:id="@+id/flClean"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--&gt;-->
+
+                <!--<TextView-->
+                    <!--style="@style/setting_tvStyle"-->
+                    <!--android:text="@string/setting_clean"/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/clean"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_vertical|right"-->
+                    <!--android:layout_marginRight="35dp"-->
+                    <!--android:textColor="@color/mainTextHuise"-->
+                    <!--android:textSize="@dimen/text_12"-->
+                    <!--tools:text="2.01KB"-->
+                    <!--/>-->
+            <!--</FrameLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:paddingRight="20dp"-->
+                <!--&gt;-->
+
+                <!--<TextView-->
+                    <!--style="@style/setting_tvStyle"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:drawableRight="@null"-->
+                    <!--android:text="@string/setting_tuisong"-->
+                    <!--/>-->
+
+                <!--<Switch-->
+                    <!--android:id="@+id/switchTuisong"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:checked="true"-->
+                    <!--android:switchMinWidth="36dp"-->
+                    <!--android:textOff=""-->
+                    <!--android:textOn=""-->
+                    <!--android:thumb="@drawable/shape_switch_thumb"-->
+                    <!--android:track="@drawable/shape_switch_track"-->
+                    <!--/>-->
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:background="#eef"-->
+                <!--/>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:padding="10dp"-->
+                <!--&gt;-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/setting_yaoqingma"-->
+                    <!--android:textColor="@color/mainTextBalck"-->
+                    <!--android:textSize="13sp"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/yaoqingma"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="right"-->
+                    <!--android:paddingRight="25dp"-->
+                    <!--android:textColor="@color/mainTextHuise"-->
+                    <!--android:textSize="12sp"-->
+                    <!--tools:text="130495"-->
+                    <!--/>-->
+            <!--</LinearLayout>-->
+
+            <TextView
+                android:id="@+id/notice"
+                style="@style/setting_tvStyle"
+                android:text="网站公告"/>
+
+            <TextView
+                android:id="@+id/about"
+                style="@style/setting_tvStyle"
+                android:text="关于我们"/>
+
+            <Button
+                android:id="@+id/btnOutLogin"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/blue_btn_click_bg"
+                android:text="@string/setting_outLogin"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
