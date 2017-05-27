@@ -161,7 +161,8 @@
         <activity android:name=".view.shop.RegistShopActivity" />
         <activity android:name=".view.shfw.PostNoteActivity" />
         <activity android:name=".view.personal.PersonalSettingActivity" />
-        <activity android:name=".view.shop.ShopListActivity"></activity>
+        <activity android:name=".view.shop.ShopListActivity" />
+        <activity android:name=".view.personal.ModifyPasswordActivity"></activity>
     </application>
 
 </manifest>

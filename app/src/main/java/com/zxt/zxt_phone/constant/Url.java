@@ -11,7 +11,7 @@ public class Url {
 //    public static String BASE_URL = "http://192.168.1.125:8080/grid";
 
     //基本地址url   吕鹏
-//    public static final String BASE_L = "http://192.168.1.222:8099";
+    public static final String BASE_L = "http://192.168.1.222:8099";
     public static final String BASE_WG = "http://192.168.1.223:8099/";
 
 
@@ -21,7 +21,7 @@ public class Url {
 //    public static final String BASE_S = "http://192.168.1.194:8080/";
 //    http://192.168.1.194:8080/shopping/api/loadLevelOne.htm
     //-----------------------服务器地址链接---------------------
-    public static final String BASE_L = "http://oa.ybqtw.org.cn";
+//    public static final String BASE_L = "http://oa.ybqtw.org.cn";
 //    public static final String BASE_WG = "www.eollse.cn:8080/";
 
 

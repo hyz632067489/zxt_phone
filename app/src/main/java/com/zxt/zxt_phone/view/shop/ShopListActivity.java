@@ -82,6 +82,8 @@ public class ShopListActivity extends BaseActivity {
         tabName.setText(mIntent.getStringExtra("title"));
 
 
+        //仿美团功能选择
+        setPagerFunction();
 
         MLog.i(TAG,"========="+mDatas.get(0).getClassName());
     }
@@ -135,7 +137,7 @@ public class ShopListActivity extends BaseActivity {
         //设置适配器
         mViewPager.setAdapter(new ViewPagerAdapter(mPagerList));
         //设置圆点
-//        setOvalLayout();
+        setOvalLayout();
     }
 
     /**

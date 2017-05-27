@@ -77,6 +77,7 @@ public class ShopPagerAdapter extends BaseAdapter {
         holder.mTextView.setText(mDatas.get(position).getClassName());
 //        holder.mImageView.setImageResource(mDatas.get(position).getImage());
 
+
         /**
          * 在给View绑定显示的数据时，计算正确的position = position + curIndex * pageSize
          */

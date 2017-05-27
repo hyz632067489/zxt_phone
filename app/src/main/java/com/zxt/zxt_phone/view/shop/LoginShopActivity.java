@@ -149,8 +149,9 @@ public class LoginShopActivity extends BaseActivity {
             case registCode:
                 MLog.i(TAG, "regist===");
 
-//                intent.putExtra("userName",regName);
-//                intent.putExtra("password",rwgPwd);
+                getCode();
+                etLoginCode.setText("");
+
 
                 break;
             case forgetCode:
@@ -214,6 +215,10 @@ public class LoginShopActivity extends BaseActivity {
                         toast(e.getMessage());
                         closeProgressDialog();
                         //验证码过期，自动刷新验证码
+
+                        getCode();
+                        etLoginCode.setText("");
+
 //                        if("000046".equals(getCode())){
 //                            imageCodeLoader.loadImageCode();
 //                            mEtCode.setText("");

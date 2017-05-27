@@ -25,4 +25,5 @@ public class Common {
     public static final int RESULT_OK = 103;
 
     public static final int OUT_LOGIN_CODE = 104;
+    public static final int CHANGE_PWD_CODE = 105;
 }

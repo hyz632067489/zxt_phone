@@ -589,6 +589,16 @@ public class GovernmentFragment extends BaseFragment {
         startActivity(mIntent);
 
     }
+
+
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        //结束轮播
+//        bannerHolder.stopAutoPlay();
+//    }
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

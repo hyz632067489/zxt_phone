@@ -115,4 +115,8 @@
 
 
     <string name="setting_outLogin">退出登录</string>
+    <string name="new_password"> 新密码</string>
+    <string name="new_password_too">确认新密码</string>
+    <string name="old_password">原始密码</string>
+    <string name="sure_change">确认修改</string>
 </resources>
